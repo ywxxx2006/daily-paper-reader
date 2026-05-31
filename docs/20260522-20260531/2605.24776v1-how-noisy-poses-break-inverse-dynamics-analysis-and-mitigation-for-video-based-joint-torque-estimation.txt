@@ -1,0 +1,217 @@
+Title: How Noisy Poses Break Inverse Dynamics: Analysis and Mitigation for Video-Based Joint Torque Estimation
+
+URL Source: https://arxiv.org/pdf/2605.24776v1
+
+Published Time: Tue, 26 May 2026 00:58:24 GMT
+
+Number of Pages: 5
+
+Markdown Content:
+# How Noisy Poses Break Inverse Dynamics: Analysis and Mitigation for Video-Based Joint Torque Estimation 
+
+## Donghyun Kim 1, 2 Chanyoung Kim 1, 2 Eunseo Jeong 2 Youngjoong Kwon 1 Seong Jae Hwang 21Emory University 2Yonsei University    
+
+> {donghyun.kim, chanyoung.kim, youngjoong.kwon }@emory.edu
+> {eunseo8946, seongjae }@yonsei.ac.kr
+
+## Abstract 
+
+Recent advances in monocular 3D human pose estima-tion enable accurate body tracking from video. However, translating these kinematic estimates into physical quan-tities, such as joint torques, remains challenging due to noise amplification through inverse dynamics. In this work, we provide a systematic analysis of how pose estimation noise propagates through the inverse dynamics pipeline. We present three key findings: (i) pose noise is amplified by approximately 1,000 × when computing joint torques via numerical differentiation, (ii) proximal joints (spine, hips) are up to 10 × more sensitive to noise than distal joints (wrists, hands), and (iii) low-pass filtering before differen-tiation substantially reduces this amplification. To enable this analysis, we develop SMPL-Dynamics, a fully differen-tiable inverse dynamics module for the SMPL body model that requires no external physics simulators. Our module supports end-to-end gradient computation, and we demon-strate this through differentiable pose refinement, which re-duces torque error by 93% with negligible change in pose. 
+
+## 1. Introduction 
+
+Vision-based 3D human pose estimation has progressed rapidly [4, 6, 11], achieving impressive accuracy on stan-dard benchmarks. However, the computer vision commu-nity has largely approached human motion strictly as a problem of kinematics , focusing on measuring the spatial positions and joint angles of body parts. In doing so, it has neglected the dynamics , which calculates the underly-ing physical forces and joint torques that actually generate the observed movements. Joint torques, ground reaction forces (GRFs), and center-of-mass (CoM) dynamics are essential for biomechanical analysis in sports science [14], clinical rehabilitation, er-gonomics, and physics-based character animation [10]. The standard approach to obtain these quantities is inverse dy-namics : given joint kinematics ( e.g ., positions, velocities), compute the forces and torques required to produce the ob-served motion via Newton-Euler equations [5]. The critical problem is that inverse dynamics requires computing second-order time derivatives (i.e ., accelera-tions) of the estimated joint trajectories. Since video-based pose estimators provide only discrete joint angles per frame, velocities and accelerations must be obtained via numeri-cal differentiation. A position error ϵ grows to a velocity error ϵ/ ∆t after the first derivative and an acceleration er-ror ϵ/ ∆t2 after the second, where ∆t is the frame interval. This quadratic amplification means that even small pose es-timation errors, acceptable for kinematic tasks, can produce wildly inaccurate torque estimates (Fig. 1). While several works have noted this difficulty [7, 8, 13, 15], no work has deeply analyzed how and why video-based pose error de-grades torque estimates ( i.e ., inverse dynamics). In this paper, we provide the first systematic analysis of how video-based pose estimation noise propagates through inverse dynamics. We present a quantitative noise analy-sis of the video-to-torque pipeline, showing that pose er-ror is amplified by ∼1,000 × into torque error, that prox-imal joints ( e.g ., spine, hips) are up to 10 × more sensi-tive than distal joints ( e.g ., wrists, hands), and that But-terworth low-pass filtering before differentiation effectively mitigates this effect. To enable this analysis, we develop 
+
+SMPL-Dynamics , a fully differentiable inverse dynamics module for SMPL [9] that requires no external physics simulators [3, 12]. We further demonstrate the practical value of differentiability through pose refinement: optimiz-ing poses with a physics-based loss through our module re-duces torque error by 93% with negligible pose change. 
+
+## 2. Related Work 
+
+Physics-Based Pose Estimation and Torque Estimation. 
+
+Several works incorporate physics into monocular pose es-timation: PhysCap [10] adds real-time physics constraints, 1           
+
+> arXiv:2605.24776v1 [cs.CV] 23 May 2026 Clean
+> t = 0.37s t = 0.97s t = 1.53s t = 2.10s t = 2.70s
+> Noisy
+> 0
+> 20
+> 40
+> 60
+> 80
+> 100
+> 120
+> 140
+> Torque magnitude (Nm) Figure 1. Noise amplification in inverse dynamics. Joint torques visualized as color-coded spheres on the SMPL skeleton during walking (green = low, red = high torque magnitude). Top: Clean motion produces uniformly low, physically plausible torques. Bottom: Adding typical video-based pose noise ( σ=0 .05 rad) causes torques to explode at proximal joints (spine, hips), exceeding 150 Nm, while distal joints remain largely unaffected.
+
+PhysPT [15] refines any kinematic estimate using self-supervised Euler-Lagrange losses, and OSDCap [7] fuses kinematics with dynamics via a neural Kalman filter. On the torque estimation side, ImDy [8] builds a large-scale simu-lated torque benchmark and trains a data-driven solver for inverse dynamics prediction, OpenCap [14] bridges multi-view smartphone videos with OpenSim [3] for clinical joint moment estimation, and the VID dataset [1] provides the first benchmark for torque prediction from real monocular images. However, none of these works systematically an-alyze how and why pose noise degrades torque estimates, which is the focus of our work. 
+
+Inverse Dynamics and Body Segment Parameters. Clas-sical inverse dynamics uses the Recursive Newton-Euler Al-gorithm (RNEA) [5] to compute joint forces and torques from kinematics. Body segment parameters (BSPs), includ-ing segment masses, centers of mass, and moments of in-ertia, are typically sourced from anthropometric tables [2]. Tools like OpenSim [3] and MuJoCo [12] provide mature inverse dynamics implementations but use skeleton rep-resentations that are not directly compatible with SMPL, requiring non-trivial conversion. Our work bridges this gap by implementing differentiable RNEA directly on the SMPL [9] kinematic tree. 
+
+Uncertainty in Inverse Dynamics. The biomechanics community has long recognized the sensitivity of inverse dynamics to input errors. Uchida and Seth [13] quantified how static errors in marker registration and model scaling propagate through the OpenSim inverse dynamics pipeline, showing that small marker placement uncertainty can pro-duce clinically significant variation in joint moments. How-ever, their analysis addresses model calibration uncertainty (a constant bias per session) rather than the stochastic, frame-varying noise characteristic of video-based pose esti-mation. Our work complements theirs by analyzing a fun-damentally different error source: high-frequency pose es-timation noise whose spectral characteristics cause severe amplification through numerical differentiation. 
+
+## 3. SMPL-Dynamics Module 
+
+To analyze noise propagation, we need a differentiable in-verse dynamics implementation that operates directly on SMPL [9] pose parameters. We build such a module, which takes a sequence of SMPL parameters (root orientation 
+
+θ0 ∈ R3, body pose θ1:23 ∈ R23 ×3 in axis-angle, and root translation t ∈ R3) and produces joint torques through the following stages. 
+
+(i) Body Segment Parameterization. We assign physical properties to each of the 24 SMPL segments using the an-thropometric tables of de Leva [2]: segment mass as a frac-tion of total body mass, center-of-mass location along the segment, and moment of inertia from the radius of gyration. 
+
+(ii) Numerical Differentiation. Given the 3D position 
+
+pi(t) of joint i at frame t, we compute its velocity ˙pi and acceleration ¨pi via central finite differences:           
+
+> ˙pi(t) = pi(t+1) −pi(t−1) 2∆ t(1)
+> ¨pi(t) = pi(t+1) −2pi(t) + pi(t−1) ∆t2.(2)
+
+This step is the primary source of noise amplification, since second-order differences scale the input error by 1/∆t2.Angular velocities ωi and accelerations αi are similarly obtained from consecutive rotation matrices via the matrix logarithm [5], and are subject to the same amplification ef-fect. 20.0 0.1 0.2          
+
+> Pose noise (rad)
+> 0
+> 50
+> 100
+> 150
+> 200
+> 250
+> Torque error (Nm)
+> (a) Noise Amplification
+> Torque error
+> Video error range
+> 10 410 210 010 2
+> Mean torque error (Nm)
+> spine1
+> spine2
+> spine3
+> hip
+> collar
+> knee
+> shoulder
+> neck
+> elbow
+> ankle
+> wrist
+> head
+> foot
+> hand
+> (b) Per-Joint Sensitivity
+> 510
+> Cutoff frequency (Hz)
+> 0
+> 10
+> 20
+> 30
+> 40
+> 50
+> 60
+> Torque error (Nm)
+> (c) Low-Pass Filtering
+> With filter
+> No smoothing
+> 050 100
+> Mean torque error (Nm)
+> Uniform
+> Realistic
+> Uniform
+> (filtered)
+> Realistic
+> (filtered)
+> (d) Realistic Noise Simulation
+
+Figure 2. Noise amplification analysis. (a) Torque error grows approximately linearly with pose noise, with a ∼1,000 × amplification factor. The blue band indicates the typical video-based estimation error range ( σ ≈ 0.03 –0.08 rad). (b) Per-joint sensitivity ranking: proximal joints (spine, hips) are most sensitive due to subtree mass accumulation. (c) Low-pass filter cutoff trade-off: lower cutoffs remove more noise but distort fast motion. (d) Torque error under uniform and realistic noise, before and after low-pass filtering. 
+
+(iii) Recursive Newton-Euler Algorithm (RNEA). We ap-ply RNEA [5] to compute the net force fi and torque τ i at each joint i. RNEA traverses the kinematic tree from leaves to root, accumulating forces and torques from child joints: 
+
+fi = mi ¨pi − mig + P 
+
+> j∈ch (i)
+
+fj (3) 
+
+τ i = Iiαi + ωi × (Iiωi) + P
+
+> j∈ch (i)
+
+(τ j + rj × fj ), (4) 
+
+where mi is the segment mass, g is gravity, ch (i) denotes the children of joint i, Ii is the segment’s inertia tensor, and 
+
+rj is the position vector from joint i to child joint j. The en-tire pipeline is differentiable, so gradients flow from torque outputs back to pose inputs. 
+
+## 4. Noise Amplification in Inverse Dynamics 
+
+4.1. Noise Amplification 
+
+We evaluate our module on SMPL walking sequences (30 fps, 120 frames). We add isotropic Gaussian noise with varying standard deviation σ ∈ [0 , 0.2] radian to the SMPL axis-angle pose parameters of a clean walking se-quence, then compute torques via our RNEA implementa-tion. Fig. 2(a) shows the amplification curve. At σ = 0 .05 
+
+radian, a noise level typical of modern video-based pose estimators [6, 11], the mean torque error is ∼60 Nm. For context, the maximum hip torque during normal walking is 
+
+∼30 Nm [2], meaning the noise-induced error exceeds the actual signal . The amplification factor is approximately 
+
+1,000 ×, driven by the 1/∆t2 scaling of second-order fi-nite differences. This result explains why prior works on physics-based pose estimation [7, 10, 15] observe that raw kinematics from video are inadequate for downstream physics tasks. 
+
+4.2. Per-Joint Sensitivity 
+
+We inject noise into individual joints (one at a time, σ =0.05 radian) and measure the resulting total torque error across all joints. Fig. 2(b) reveals a clear hierarchy: • Spine joints are the most sensitive (spine1: 34.4 Nm, spine2: 26.0 Nm, spine3: 16.5 Nm), because rotation er-rors at the spine propagate to the entire upper body’s mass distribution through the kinematic chain. • Hip joints are moderately sensitive ( ∼8.6 Nm), as the lower limbs carry significant mass ( ∼14% of body weight per leg [2]). • Distal joints contribute minimally ( <1 Nm), since they control only small-mass end-effectors. The sensitivity ordering follows the subtree mass : joints controlling larger subtrees accumulate more force/torque er-rors. This finding has a direct practical implication: improv-ing trunk estimation accuracy yields the highest return on investment for downstream torque estimation quality. Cur-rent pose estimators are often evaluated primarily on limb accuracy [4, 6, 11], but our analysis suggests that trunk ac-curacy should be prioritized for physics-based applications. 
+
+4.3. Low-Pass Filtering 
+
+Before computing derivatives, we apply a zero-phase But-terworth low-pass filter to the SMPL pose parameters. Since second-order differentiation amplifies a frequency component at f Hz by f 2, high-frequency noise is ampli-fied far more severely than low-frequency motion. Human motion is concentrated below 10 Hz, while pose estima-tion noise is broadband, so filtering before differentiation selectively removes the components that would be ampli-fied most. We evaluate 4th-order zero-phase Butterworth low-pass filters with cutoff frequencies from 2–14 Hz on noisy pose sequences ( σ = 0 .05 radian). Fig. 2(c) shows the trade-off between noise removal and motion signal preser-vation. Very low cutoffs (2–4 Hz) remove almost all noise but also distort fast movements, since the fundamental fre-quency of walking is 1–2 Hz, but harmonics extend to 6– 8 Hz. We recommend 6 Hz as a general-purpose default for typical human activities. 3Table 1. Pose refinement results after 200 iterations of optimiza-tion. Torque error drops by 92% while pose changes negligibly. Torque Error (Nm) Pose Error (rad) Noisy 59.7 0.0795 Refined 4.7 0.0787 Reduction 92.2% 0.96% 
+
+4.4. Realistic Noise Simulation 
+
+Real video-based pose errors are not uniform across joints. We simulate a WHAM-like [11] noise profile with three characteristics: • joint-dependent noise levels : distal joints (ankles: σ =0.06 , wrists: σ = 0 .07 ) are noisier than proximal joints (pelvis: σ = 0 .02 , spine: σ = 0 .03 ), matching typical MPJPE distributions. • depth-axis amplification : 2× noise along the camera depth axis, reflecting monocular depth ambiguity. • temporal jitter : frame-to-frame inconsistency that causes flickering. Fig. 2(d) shows that realistic noise (95.9 Nm) produces higher torque error than uniform noise (88.4 Nm) of equiv-alent average magnitude. This is because realistic noise concentrates error on joints that happen to be in the high-sensitivity range (hips, knees), while also introducing depth-correlated errors that affect the root trajectory. Low-pass filtering (Sec. 4.3) at 6 Hz reduces both noise models to ∼42 Nm, a 55% reduction. The remaining error is domi-nated by low-frequency pose bias that filtering alone cannot remove, motivating the differentiable pose refinement we present in Sec. 5 
+
+## 5. Differentiable Pose Refinement 
+
+A key advantage of our module over non-differentiable al-ternatives such as OpenSim [3] is that gradients flow from torque outputs back to pose inputs via automatic differen-tiation. We demonstrate this by optimizing noisy poses (σ = 0 .05 radian) to minimize a physics-based loss: 
+
+L = λs∥¨τ ∥+λmReLU (∥τ ∥− τmax )+ λr ∥ˆθ −θnoisy ∥ (5) where ˆθ denotes the refined pose parameters, θnoisy the ini-tial noisy estimate, τ the joint torques computed by our module from ˆθ, and ¨τ the second time derivative of τ . Each term enforces a different physical prior: • Torque smoothness : λs∥¨τ ∥ penalizes rapid changes in torque over time, encouraging temporally smooth dynam-ics ( λs=10 ). • Physiological magnitude limit : λmReLU (∥τ ∥ − τmax )
+
+penalizes torques exceeding the physiological limit 
+
+τmax =100 Nm ( λm=1 ). 0 50 100 150 200        
+
+> Iteration
+> 0
+> 500
+> 1000
+> 1500
+> 2000
+> Total Loss
+> (a) Optimization Convergence
+> 010 20 30 40 50
+> Frame
+> 200
+> 150
+> 100
+> 50
+> 0
+> 50
+> 100
+> 150
+> Torque (Nm)
+> (b) Left Hip Torque (x-axis)
+> Clean
+> Noisy
+> Optimized
+> 0
+> 10
+> 20
+> 30
+> 40
+> 50
+> 60
+> Torque Error (Nm)
+> Figure 3. Left hip torque before and after refinement. The opti-mized trajectory (blue) closely tracks the clean reference (green), while the noisy input (red) oscillates wildly due to noise amplifi-cation through inverse dynamics.
+
+• Pose regularizer : λr ∥ˆθ − θnoisy ∥ keeps the refined pose close to the original estimate, preventing large kinematic deviations ( λr =5 ). Using Adam optimization for 200 iterations, torque error drops from 59.7 Nm to 4.7 Nm (92% reduction) while the pose changes negligibly (Table 1). Fig. 3 shows the effect on the left hip joint, where the optimized torque trajectory closely tracks the clean reference. This remarkable result shows that the solution space contains physically plausible poses very close to the noisy estimates, and that our differ-entiable inverse dynamics can efficiently find them. 
+
+## 6. Conclusion 
+
+We present a systematic analysis of how video-based pose estimation noise propagates through inverse dynamics on the SMPL body model. Our experiments reveal that pose noise is amplified by ∼1,000 × into torque error, that proxi-mal joints are up to 10 × more sensitive than distal joints, and that low-pass filtering and differentiable pose refine-ment can substantially reduce this amplification. These findings suggest that for downstream physics applications, trunk estimation accuracy matters far more than limb ac-curacy, and that future pose estimation benchmarks should incorporate physics-aware metrics alongside kinematic ac-curacy. The differentiable nature of our module opens a nat-ural path forward, as it can be directly integrated into exist-ing pose estimator training pipelines as a physics-informed loss, enabling end-to-end optimization for both kinematic accuracy and dynamic plausibility. 4References 
+
+[1] Chen Chen and Weifeng Su. Towards human inverse dy-namics from real images: A dataset and benchmark for joint torque estimation. bioRxiv preprint , 2025. [2] Paolo de Leva. Adjustments to Zatsiorsky-Seluyanov’s seg-ment inertia parameters. Journal of Biomechanics , 29(9): 1223–1230, 1996. [3] Scott L. Delp, Frank C. Anderson, Allison S. Arnold, Pe-ter Loan, Ayman Habib, Chand T. John, Eran Guendel-man, and Darryl G. Thelen. OpenSim: Open-source soft-ware to create and analyze dynamic simulations of move-ment. IEEE Transactions on Biomedical Engineering , 54 (11):1940–1950, 2007. [4] Sai Kumar Dwivedi, Yu Sun, Priyanka Patel, Yao Feng, and Michael J. Black. TokenHMR: Advancing human mesh re-covery with a tokenized pose representation. In CVPR , 2024. [5] Roy Featherstone. Rigid Body Dynamics Algorithms .Springer, 2008. [6] Shubham Goel, Georgios Pavlakos, Jathushan Rajasegaran, Angjoo Kanazawa, and Jitendra Malik. Humans in 4D: Reconstructing and tracking humans with transformers. In 
+
+ICLR , 2024. [7] Cuong Le, Viktor Johansson, Manon Kok, and Bastian Wandt. Optimal-state dynamics estimation for physics-based human motion capture from videos. In NeurIPS , 2024. [8] Xinpeng Liu, Junxuan Liang, Zili Lin, Haowen Hou, Yong-Lu Li, and Cewu Lu. ImDy: Human inverse dynamics from imitated observations. In ICLR , 2025. [9] Matthew Loper, Naureen Mahmood, Javier Romero, Gerard Pons-Moll, and Michael J. Black. SMPL: A skinned multi-person linear model. In ACM TOG (SIGGRAPH Asia) , 2015. [10] Soshi Shimada, Vladislav Golyanik, Weipeng Xu, Patrick P´ erez, and Christian Theobalt. PhysCap: Physically plau-sible monocular 3D motion capture in real time. In ACM TOG (SIGGRAPH Asia) , 2020. [11] Soyong Shin, Juyong Kim, Eni Halilaj, and Michael J. Black. WHAM: Reconstructing world-grounded humans with accu-rate 3d motion. In CVPR , 2024. [12] Emanuel Todorov, Tom Erez, and Yuval Tassa. MuJoCo: A physics engine for model-based control. IEEE/RSJ Interna-tional Conference on Intelligent Robots and Systems (IROS) ,2012. [13] Thomas K. Uchida and Ajay Seth. Conclusion or illusion: Quantifying uncertainty in inverse analyses from marker-based motion capture due to errors in marker registration and model scaling. Frontiers in Bioengineering and Biotechnol-ogy , 10:874725, 2022. [14] Scott D. Uhlrich, Antoine Falisse, Łukasz Kidzinski, Julie Muccini, Michael Ko, Akshay S. Chaudhari, Jennifer L. Hicks, and Scott L. Delp. OpenCap: Human movement dy-namics from smartphone videos. PLoS Computational Biol-ogy , 19(10), 2023. [15] Yufei Zhang, Jeffrey O. Kephart, Zijun Cui, and Qiang Ji. PhysPT: Physics-aware pretrained transformer for estimat-ing human dynamics from monocular videos. In CVPR ,2024. 
+
+5

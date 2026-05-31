@@ -1,0 +1,289 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-05-31T15:08:56.791770+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 5,
+    "deep_cap": 6,
+    "deep_selected": 5,
+    "quick_candidates": 2,
+    "quick_skim_target": 11,
+    "quick_selected": 2
+  },
+  "deep_dive": [
+    {
+      "id": "2605.24776v1",
+      "source": "arxiv",
+      "title": "How Noisy Poses Break Inverse Dynamics: Analysis and Mitigation for Video-Based Joint Torque Estimation",
+      "abstract": "Recent advances in monocular 3D human pose estimation enable accurate body tracking from video. However, translating these kinematic estimates into physical quantities, such as joint torques, remains challenging due to noise amplification through inverse dynamics. In this work, we provide a systematic analysis of how pose estimation noise propagates through the inverse dynamics pipeline. We present three key findings: (1) pose noise is amplified by approximately 1,000x when computing joint torques via numerical differentiation, (2) proximal joints (spine, hips) are up to 10x more sensitive to noise than distal joints (wrists, hands), and (3) low-pass filtering before differentiation substantially reduces this amplification. To enable this analysis, we develop SMPL-Dynamics, a fully differentiable inverse dynamics module for the SMPL body model that requires no external physics simulators. Our module supports end-to-end gradient computation, and we demonstrate this through differentiable pose refinement, which reduces torque error by 93% with negligible change in pose.",
+      "authors": [
+        "Donghyun Kim",
+        "Chanyoung Kim",
+        "Eunseo Jeong",
+        "Youngjoong Kwon",
+        "Seong Jae Hwang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-05-23T23:28:36+00:00",
+      "link": "https://arxiv.org/pdf/2605.24776v1",
+      "tags": [
+        "keyword:ds",
+        "query:ds"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "inverse dynamics for joint torque estimation from video, directly applicable to dance biomechanics",
+      "llm_evidence_cn": "基于视频的关节力矩估计的逆动力学分析，直接适用于舞蹈生物力学",
+      "llm_evidence": "基于视频的关节力矩估计的逆动力学分析，直接适用于舞蹈生物力学",
+      "canonical_evidence": "基于视频的关节力矩估计的逆动力学分析，直接适用于舞蹈生物力学",
+      "llm_tldr_en": "This paper systematically analyzes how pose estimation noise amplifies through inverse dynamics pipeline and shows that low-pass filtering mitigates the issue, enabling more accurate video-based joint torque estimation relevant to dance movement analysis.",
+      "llm_tldr_cn": "该论文系统分析了3D人体姿态估计噪声如何通过逆动力学被放大（约1000倍），并发现近端关节（脊柱、髋）对噪声更敏感。提出低通滤波可显著降低放大效应。该方法直接适用于舞蹈生物力学中从视频计算关节力矩，提高运动分析的准确性。",
+      "llm_tldr": "该论文系统分析了3D人体姿态估计噪声如何通过逆动力学被放大（约1000倍），并发现近端关节（脊柱、髋）对噪声更敏感。提出低通滤波可显著降低放大效应。该方法直接适用于舞蹈生物力学中从视频计算关节力矩，提高运动分析的准确性。",
+      "llm_tags": [
+        "query:ds"
+      ],
+      "matched_query_tag": "query:ds",
+      "matched_query_text": "biomechanical analysis of dance movements",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.24566v1",
+      "source": "arxiv",
+      "title": "EMA: Effort Metric Attention for Anatomical Effort-Guided Human Motion Diffusion",
+      "abstract": "Human motion diffusion models can synthesize action sequences from text, but controlling motion intensity remains challenging. Existing approaches rely on effort-related adverbs, which are ambiguous and fail to capture quantitative aspects such as pacing, often resulting in flat and monotonous dynamics. We propose an intensity-control framework based on Effort Metric Attention (EMA), a cross-attention module that conditions diffusion on numerical effort signals. Inspired by Laban Movement Analysis (LMA), the framework focuses on the Time and Weight effort factors. We approximate these factors using two kinematic metrics: peak joint positional change for pacing and collective joint positional change for motion amount. EMA enables fine-grained, region-wise control without costly post-hoc optimization. We introduce two evaluation tasks, metric-to-motion consistency and body-part-level effort modulation, to assess numerical fidelity and localized control. Experiments and a user study show near-monotonic alignment between specified effort levels, generated motion dynamics, and established LMA descriptors. These results indicate effective and interpretable control of effort dynamics in practice.",
+      "authors": [
+        "Joshua Siy",
+        "Huakun Liu",
+        "Yutaro Hirao",
+        "Monica Perusquia-Hernandez",
+        "Hideaki Uchiyama",
+        "Kiyoshi Kiyokawa"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.GR",
+        "cs.LG"
+      ],
+      "published": "2026-05-23T13:00:36+00:00",
+      "link": "https://arxiv.org/pdf/2605.24566v1",
+      "tags": [
+        "keyword:ds",
+        "query:ds"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "uses Laban Movement Analysis for motion intensity control",
+      "llm_evidence_cn": "利用拉班动作分析控制运动强度",
+      "llm_evidence": "利用拉班动作分析控制运动强度",
+      "canonical_evidence": "利用拉班动作分析控制运动强度",
+      "llm_tldr_en": "Proposes EMA, a cross-attention module for human motion diffusion that conditions on numerical effort signals inspired by Laban Movement Analysis, enabling fine-grained intensity control.",
+      "llm_tldr_cn": "该论文针对人体运动扩散模型难以控制运动强度的问题，提出基于努力度量注意力（EMA）的框架。受拉班动作分析（LMA）启发，EMA使用峰值关节位置变化和集体关节位置变化作为时间和重量努力因子的近似，从而实现对运动强度（如节奏和运动量）的精细控制。实验结果表明，该方法生成的运动具有更丰富的动态变化。该工作为舞蹈生物力学中的运动强度分析提供了定量工具。",
+      "llm_tldr": "该论文针对人体运动扩散模型难以控制运动强度的问题，提出基于努力度量注意力（EMA）的框架。受拉班动作分析（LMA）启发，EMA使用峰值关节位置变化和集体关节位置变化作为时间和重量努力因子的近似，从而实现对运动强度（如节奏和运动量）的精细控制。实验结果表明，该方法生成的运动具有更丰富的动态变化。该工作为舞蹈生物力学中的运动强度分析提供了定量工具。",
+      "llm_tags": [
+        "query:ds"
+      ],
+      "matched_query_tag": "query:ds",
+      "matched_query_text": "biomechanical analysis of dance movements",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.29219v1",
+      "source": "arxiv",
+      "title": "SalsaAgent: A multimodal embodied language model for interactive dance generation",
+      "abstract": "Interaction between humanoids involves bidirectional and nonverbal reactivity, coordination and synchrony. Toward socially aware robots and interactive virtual agents, we present SalsaAgent, a language model that generates expressive, full-body salsa dance motions in reaction to a human leader and against a contextual music backdrop. We formulate interaction as nonverbal motion token passing, extending the vocabulary of a large language model (LLM) to process discrete motion tokens, pairwise relation tokens, and audio. Our contributions include new tokens for full-body and motion relations, LLM fine-tuning using automatically derived text descriptions of skeleton dynamics for token grounding, and a two-stage token-to-diffusion pipeline. Subjective and objective evaluations demonstrate the effectiveness of our approach in terms of motion quality, music and partner coordination, and consistent two-person spatial behavior, with significant improvements over baselines.",
+      "authors": [
+        "Payam Jome Yazdian",
+        "Zoe Stanley",
+        "Angelica Lim"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-05-28T01:08:27+00:00",
+      "link": "https://arxiv.org/pdf/2605.29219v1",
+      "tags": [
+        "keyword:ds",
+        "query:ds"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "generates full-body salsa dance motions",
+      "llm_evidence_cn": "生成全身萨尔萨舞蹈动作",
+      "llm_evidence": "生成全身萨尔萨舞蹈动作",
+      "canonical_evidence": "生成全身萨尔萨舞蹈动作",
+      "llm_tldr_en": "Presents SalsaAgent, a multimodal LLM that generates expressive full-body salsa dance motions in reaction to human leader and music, using motion tokenization and diffusion.",
+      "llm_tldr_cn": "该论文针对机器人或虚拟代理的舞蹈交互问题，提出SalsaAgent多模态语言模型。将舞蹈交互公式化为非语言运动令牌传递，通过扩展LLM词表处理离散运动令牌、关系令牌和音频，并采用两阶段令牌到扩散流水线生成全身萨尔萨舞动作。实验表明模型能生成与人类领舞同步且富有表现力的舞蹈。该工作为舞蹈动作分析与生成提供了新的多模态框架。",
+      "llm_tldr": "该论文针对机器人或虚拟代理的舞蹈交互问题，提出SalsaAgent多模态语言模型。将舞蹈交互公式化为非语言运动令牌传递，通过扩展LLM词表处理离散运动令牌、关系令牌和音频，并采用两阶段令牌到扩散流水线生成全身萨尔萨舞动作。实验表明模型能生成与人类领舞同步且富有表现力的舞蹈。该工作为舞蹈动作分析与生成提供了新的多模态框架。",
+      "llm_tags": [
+        "query:ds"
+      ],
+      "matched_query_tag": "query:ds",
+      "matched_query_text": "biomechanical analysis of dance movements",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "biorxiv-10-1101-2025-09-27-678941-v2",
+      "source": "biorxiv",
+      "title": "DLC2Action: A Multimodal Deep Learning-based Toolbox for Automated Behavior Segmentation",
+      "abstract": "Behavioral analysis is fundamental to neuroscience, yet the manual annotation of actions remains a bottleneck that constrains both the scale and the reproducibility of experiment. Here, we present DLC2Action, an open-source Python toolbox that enables automatic behavior annotation from video, audio and estimated 2D/3D pose tracking data. DLC2Action integrates multiple state-of-the-art deep learning architectures optimized for action segmentation and supports self-supervised learning (SSL) to address annotation scarcity, boosting performance with limited labeled datasets. To enable model comparison, we establish fixed train/test partitions for nine diverse datasets comprising rodent experiments, human cooking studies, and wildlife observation. DLC2Action reached strong performance across those benchmarks. To further showcase the tool's versatility, we applied it to Atari gameplay data and found that, in certain games, the players' eye movements consistently predict their button presses across subjects. Because DLC2Action features an intuitive graphical user interface (GUI), users can streamline behavior annotation, perform active learning, and assess of model predictions. Diverse pose, video, and annotation formats are supported. Lastly, DLC2Action is modular and thus designed for extensibility, allowing users to integrate new models, dataset features, and methods. The code and benchmarks are available at: https://github.com/amathislab/DLC2action",
+      "authors": [
+        "Kozlova, E.",
+        "Bonnetto, A.",
+        "Mathis, A."
+      ],
+      "primary_category": "animal behavior and cognition",
+      "categories": [
+        "animal behavior and cognition"
+      ],
+      "published": "2026-05-30T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.1101/2025.09.27.678941v2.full.pdf",
+      "tags": [
+        "keyword:ds",
+        "query:ds"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Toolbox for automated behavior/action segmentation from video and pose data, applicable to dance movement analysis",
+      "llm_evidence_cn": "从视频和姿态数据自动分割行为的工具箱，可用于舞蹈动作分析",
+      "llm_evidence": "从视频和姿态数据自动分割行为的工具箱，可用于舞蹈动作分析",
+      "canonical_evidence": "从视频和姿态数据自动分割行为的工具箱，可用于舞蹈动作分析",
+      "llm_tldr_en": "DLC2Action is an open-source toolbox integrating deep learning for automatic action segmentation from video, audio, and pose data, enabling scalable behavior analysis across domains including dance.",
+      "llm_tldr_cn": "DLC2Action是一个开源的Python工具箱，解决了行为分析中手动标注效率低、可重复性差的问题。它集成了多种最先进的深度学习模型，支持从视频、音频和2D/3D姿态数据中自动分割动作。通过自监督学习，它能在标注数据有限的情况下提升性能。该工具箱可直接应用于舞蹈动作分析，为舞蹈生物力学和动作分析提供自动化工具，具有重要的方法学价值。",
+      "llm_tldr": "DLC2Action是一个开源的Python工具箱，解决了行为分析中手动标注效率低、可重复性差的问题。它集成了多种最先进的深度学习模型，支持从视频、音频和2D/3D姿态数据中自动分割动作。通过自监督学习，它能在标注数据有限的情况下提升性能。该工具箱可直接应用于舞蹈动作分析，为舞蹈生物力学和动作分析提供自动化工具，具有重要的方法学价值。",
+      "llm_tags": [
+        "query:ds"
+      ],
+      "matched_query_tag": "query:ds",
+      "matched_query_text": "dance science research across all subfields including injury, biomechanics, physiology, psychology, neuroaesthetics, health promotion, therapy, movement analysis, training adaptation, and fitness",
+      "matched_requirement_id": "req-9",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "biorxiv-10-64898-2026-05-28-728089-v1",
+      "source": "biorxiv",
+      "title": "Co-contraction index improves estimates of knee joint contact forces: A musculoskeletal modelling study",
+      "abstract": "Healthy individuals are hypothesized to adopt muscle coordination strategies that minimize energy expenditure. However, under pathological conditions, these patterns often change, as patients adopt alternative strategies to enhance stability. In musculoskeletal modeling, such changes in muscle coordination are often not accounted for when estimating internal quantities such as knee joint contact forces. To address this, we adapted the objective function of a muscle redundancy solver to inform muscle activations from electromyography measurements, minimizing errors in both muscle activations and co-contraction levels. The resulting estimates of knee joint contact force were compared with in vivo measurements across three activities. The co-contraction index-informed approach achieved the lowest root-mean-square-error of 0.31 body weight, averaged across all subjects and activities, improving the results of the minimum activation solver by 7% body weight. Notably, root-mean-squared- error increased with the level of co-contraction with the minimum activation approach ({beta} = 1.55, 95% confidence interval [0.79, 2.30]), whereas the co-contraction index-informed approach remained less sensitive ({beta} = 0.78, 95% confidence interval [0.14, 1.43]). These findings suggest that objective functions based on minimum muscle activation may be insufficient to accurately estimate knee joint forces in individuals with altered muscle coordination. Incorporating co-contraction information is therefore essential to capture subject-specific adaptations.",
+      "authors": [
+        "Hoermann, S.",
+        "Tumer, N.",
+        "Zadpoor, A. A.",
+        "Seth, A."
+      ],
+      "primary_category": "bioengineering",
+      "categories": [
+        "bioengineering"
+      ],
+      "published": "2026-05-29T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.64898/2026.05.28.728089v1.full.pdf",
+      "tags": [
+        "keyword:ds",
+        "query:ds"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "knee joint contact force estimation for dance biomechanics",
+      "llm_evidence_cn": "膝关节接触力估计方法适用于舞蹈生物力学",
+      "llm_evidence": "膝关节接触力估计方法适用于舞蹈生物力学",
+      "canonical_evidence": "膝关节接触力估计方法适用于舞蹈生物力学",
+      "llm_tldr_en": "This study incorporates EMG-derived co-contraction into musculoskeletal modeling to improve knee joint contact force estimation. The optimized solver reduces activation and co-contraction errors, achieving close match with in vivo measurements. This method enhances biomechanical analysis of dance movements, supporting injury prevention and rehabilitation in dancers.",
+      "llm_tldr_cn": "针对现有模型忽略病理共收缩导致膝关节力预测偏差的局限，本研究将肌电图驱动的共收缩指数融入肌肉骨骼建模，优化目标函数以最小化激活和共收缩误差。实验表明，改进后的模型与体内测量值高度吻合。该方法可精准评估舞蹈动作中的膝关节受力，为舞蹈损伤预防和康复提供可靠工具。",
+      "llm_tldr": "针对现有模型忽略病理共收缩导致膝关节力预测偏差的局限，本研究将肌电图驱动的共收缩指数融入肌肉骨骼建模，优化目标函数以最小化激活和共收缩误差。实验表明，改进后的模型与体内测量值高度吻合。该方法可精准评估舞蹈动作中的膝关节受力，为舞蹈损伤预防和康复提供可靠工具。",
+      "llm_tags": [
+        "query:ds"
+      ],
+      "matched_query_tag": "query:ds",
+      "matched_query_text": "biomechanical analysis of dance movements",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2605.28344v1",
+      "source": "arxiv",
+      "title": "Capturing the Curve: Functional Data Analysis for Validated Digital Outcome Measures",
+      "abstract": "Digital health technologies enable high-frequency collection of data in near-continuous time and capture rich information about the health of individuals. The raw data collected by these devices often have a hierarchical functional structure: repeated physiological functions are observed over time and on multiple time scales (seconds, days, weeks). While many summaries can be derived from digital data, typically, only a small subset of pre-defined scalars is validated as outcome measures in clinical trials. We explore data-driven summaries based on between-subject scores from Multilevel Functional Principal Component Analysis (MFPCA), which are low-dimensional representations of functional data with robust statistical properties. Specifically, we compute MFPCA projection scores with respect to a reference population, summarising how individuals differ from the dominant directions of variation at each hierarchical level. Through a simulation study based on smartwatch electrocardiogram (ECG) signals, we compare MFPCA scores with pre-specified summaries in terms of validation criteria, including test-retest reliability and known-groups discrimination. We demonstrate that MFPCA scores generally have high reliability and can discriminate between groups across simulated scenarios of change. This offers an advantage when digital tools enable the measurement of novel physiological signals and the characteristics of the change are not yet defined. Finally, using knee flexion-extension data from individuals living with Parkinson's disease, we demonstrate that one of the MFPCA scores more strongly correlates with established gold-standard metrics and can detect clinical change, compared to a pre-specified scalar. We conclude that MFPCA-derived scores retain more information than typical outcome measures and open the door to using learning representation strategies in clinical trial settings.",
+      "authors": [
+        "Mia S. Tackney",
+        "Marcos Matabuena",
+        "Marco Palma",
+        "Michael Wester",
+        "Claire Maassen",
+        "Thomas Krammer",
+        "Julian Mustroph",
+        "Peter H. Charlton",
+        "James Carpenter",
+        "Sofia S. Villar"
+      ],
+      "primary_category": "stat.AP",
+      "categories": [
+        "stat.AP"
+      ],
+      "published": "2026-05-27T11:48:45+00:00",
+      "link": "https://arxiv.org/pdf/2605.28344v1",
+      "tags": [
+        "keyword:ds",
+        "query:ds"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "functional data analysis method applicable to dancer physiological signals",
+      "llm_evidence_cn": "功能数据分析方法可应用于舞者生理信号",
+      "llm_evidence": "功能数据分析方法可应用于舞者生理信号",
+      "canonical_evidence": "功能数据分析方法可应用于舞者生理信号",
+      "llm_tldr_en": "This paper introduces Multilevel Functional Principal Component Analysis (MFPCA) for deriving data-driven summaries from digital health data, offering a robust statistical framework that can be applied to analyze physiological responses in dancers.",
+      "llm_tldr_cn": "该论文提出多层功能主成分分析（MFPCA）方法，从数字健康数据中提取数据驱动的低维摘要，具有稳健统计特性。该方法可直接应用于舞者的生理信号（如心率、肌电）分析，支持舞蹈生理学研究中高维时序数据的降维和模式发现。",
+      "llm_tldr": "该论文提出多层功能主成分分析（MFPCA）方法，从数字健康数据中提取数据驱动的低维摘要，具有稳健统计特性。该方法可直接应用于舞者的生理信号（如心率、肌电）分析，支持舞蹈生理学研究中高维时序数据的降维和模式发现。",
+      "llm_tags": [
+        "query:ds"
+      ],
+      "matched_query_tag": "query:ds",
+      "matched_query_text": "physiological responses and adaptations in dancers",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "biorxiv-10-64898-2026-05-27-726846-v1",
+      "source": "biorxiv",
+      "title": "Creativity drives performer-listener emotional and physiological alignment in live music improvisation",
+      "abstract": "Music is a fundamental medium for human communication, yet it remains unclear whether it enables genuine alignment of internally felt emotions beyond mere emotion perception. Creative expression may be central to this process: when performers improvise with creative intent, they engage in self-expression that could draw listeners into closer emotional and physiological resonance. Here, dual-electrocardiography was recorded across 37 performer-listener dyads while performers generated live improvisations under conventional, unconventional, or creative instructions. We show that creative improvisation enhances dyadic emotional alignment for both valence and arousal, and increases cardiac synchronization. Performer-listener alignment was strongest when performers' felt and expressed emotions were themselves aligned, and when listeners showed a gradual arousal buildup. Creativity also elicited higher sublimity, lower unease and vitality, and greater diversity of selected emotional labels. These findings establish creativity as a mechanism through which music achieves one of its most celebrated functions: the creation of shared human experience.",
+      "authors": [
+        "Zioga, I.",
+        "Guichet, C.",
+        "Di Bernardi Luft, C.",
+        "Papageorgiou, C.",
+        "Anagnostopoulou, C."
+      ],
+      "primary_category": "neuroscience",
+      "categories": [
+        "neuroscience"
+      ],
+      "published": "2026-05-29T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.64898/2026.05.27.726846v1.full.pdf",
+      "tags": [
+        "keyword:ds",
+        "query:ds"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "performer-listener emotional and physiological alignment transferable to dance",
+      "llm_evidence_cn": "表演者-听众情感与生理对齐方法可迁移至舞蹈研究",
+      "llm_evidence": "表演者-听众情感与生理对齐方法可迁移至舞蹈研究",
+      "canonical_evidence": "表演者-听众情感与生理对齐方法可迁移至舞蹈研究",
+      "llm_tldr_en": "This study uses dual-electrocardiography to show that creative music improvisation enhances emotional alignment and cardiac synchronization between performers and listeners. The findings demonstrate that creative intent drives genuine physiological and emotional resonance, offering a methodological framework applicable to studying dance performance and dancer-audience interaction.",
+      "llm_tldr_cn": "针对音乐表演能否引发真实情感同步的疑问，本研究采用双人心电图技术记录37对表演者-听众在不同即兴指令下的生理反应。结果表明创造性即兴显著增强情感效价和唤醒对齐并提高心跳同步性。该发现证实创造性表达是驱动深层共鸣的关键，其双人生理记录方法可直接迁移至舞蹈研究，用于探索舞者与观众的情感传递与生理协同。",
+      "llm_tldr": "针对音乐表演能否引发真实情感同步的疑问，本研究采用双人心电图技术记录37对表演者-听众在不同即兴指令下的生理反应。结果表明创造性即兴显著增强情感效价和唤醒对齐并提高心跳同步性。该发现证实创造性表达是驱动深层共鸣的关键，其双人生理记录方法可直接迁移至舞蹈研究，用于探索舞者与观众的情感传递与生理协同。",
+      "llm_tags": [
+        "query:ds"
+      ],
+      "matched_query_tag": "query:ds",
+      "matched_query_text": "physiological responses and adaptations in dancers",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
