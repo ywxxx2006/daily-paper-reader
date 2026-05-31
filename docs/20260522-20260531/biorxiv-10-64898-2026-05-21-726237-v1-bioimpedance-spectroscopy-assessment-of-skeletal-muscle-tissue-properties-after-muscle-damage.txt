@@ -1,0 +1,1900 @@
+Title: Bioimpedance spectroscopy assessment of skeletal muscle tissue properties after muscle damage
+
+URL Source: https://www.biorxiv.org/content/10.64898/2026.05.21.726237v1.full.pdf
+
+Number of Pages: 19
+
+Markdown Content:
+Abbreviations BIS: Bioimpedance spectroscopy ; CM: Membrane capacitance ; D0, D1, D2, D3: day of the eccentric 
+
+exercise, o ne, two and three days after ; EIMD: Exercise -induced muscle damage ; fc : Characteristic frequency ; iMVC: 
+
+Isometric maximal voluntary contraction ; phA: Phase angle ; POST: Immediately after eccentric exercise ; PRE: before 
+
+eccentric exercise ; QF: Quadriceps femoris ; R: Resistance ; Re: Extracellular resistance ; Ri: Intracellular resistance ;
+
+Rinf : resistance of the combined extracellular and intracellular compartments ; SWE: Shear wave elastography ; SWV: 
+
+Shear wave velocity ; XC: Reactance ; Z: Bioimpedance 
+
+1
+
+# Bioimpedance  spectroscopy  assessment of  skeletal 
+
+# muscle  tissue properties  after  muscle damage 
+
+Jérémie Bouvier 1† , Silvère De Freitas 1† , Alain Letourneur 2, Etienne Gouraud 2* , Alexandre 
+
+Fouré 1* 
+
+1Universit é Lyon 1, LIBM, UR 7424, UFR STAPS de Lyon, Villeurbanne, France .
+
+2Aminogram SAS, La Ciotat, France. 
+
+†Jérémie Bouvier and Silvère De Freitas should be considered joint first author. 
+
+*Alexandre Fouré and Etienne Gouraud should be considered joint senior author. 
+
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. The copyright holder for this preprint this version posted May 26, 2026. ;https://doi.org/10.64898/2026.05.21.726237 doi: bioRxiv preprint 2
+
+# Abstract 
+
+High intensity and unaccustomed physical activity can  induce  skeletal muscle damage , while even 
+
+routine movements can cause similar  alterations  in patients with neuromuscular disease . However, 
+
+reliable assessment of muscle damage  using  indirect markers such as  muscle function  evaluation ,
+
+invasive measurements , or imaging  techniques  is  diff ic ult to  implement in  routine clinical follow -up 
+
+and  sport  field  setting s. Bioimpedance  spectroscopy  appears as a promising  non -invasive , easy -to -
+
+use and  transportable  tool to assess indirect markers of muscle  damage . The aim of th is  study was to 
+
+determine whether bioimpedance spectroscopy data are  sensitive  to eccentric exercise -induced 
+
+muscle damage  and if these potential changes mirror  responses  in  muscle  function and  tissue 
+
+mechanical properties.  Changes in knee extensors maximal isometric contraction torque, muscle 
+
+soreness, resting rigidity of the  quadriceps femoris  muscle tissue, and bioimpedance parameters at 
+
+rest and during maximal isometric contraction were assessed in n ine healthy males  before, 
+
+immediately after and in the t hree days following 120  maximal  isokinetic  eccentric  contractions. 
+
+Maximal contraction torque was significantly reduced during the  three  days following the eccentric 
+
+exercise ( up to  -24.2% ) while muscle soreness  and rigidity of the  quadriceps  femoris  were  elevated 
+
+until  the second day  (+494.4% and +7.6% ). Changes in  bioimpedance spectroscopy  parameters  were 
+
+transiently observed  at rest  immediately after  the damaging  exercise , but not in the  days  that followed .
+
+Although the  changes in  bioimpedance parameters  correlated with that of the  indirect markers of 
+
+muscle damage,  they had already  returned to baseline while functional and mechanical impairments 
+
+persisted. Therefore,  bioimpedance spectroscopy measurements  may represent a  suitable  and  cost -
+
+effective means  of  monitor ing  muscle fatigue .
+
+Keywords: isometric maximal torque, ultrasound elastography, bioelectrical impedance analysis, 
+
+fatigue , quadriceps femoris .
+
+> (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. The copyright holder for this preprint this version posted May 26, 2026. ;https://doi.org/10.64898/2026.05.21.726237 doi: bioRxiv preprint
+
+3
+
+# Introduction 
+
+Bioimpedance  analysis  is  widely  used to 
+
+estimate body composition by assessing the 
+
+resistive properties of biological tissues to the 
+
+propagation of an alternating electrical current ,
+
+particularly in athletic  and clinical 
+
+populations 1,2 . The biological impedance (Z) ,
+
+used in the predictive equation to evaluate body 
+
+compartments,  is derived from the resistance 
+
+(R) and reactance (X C) of the system under 
+
+investigation 3. R primarily reflects the amount 
+
+of water through which the current passes, 
+
+thereby serving as an indirect marker of tissue 
+
+hydration 4. XC, in contrast, depends on the 
+
+capacitive resistance of cells, which is 
+
+determined by the structure of membrane 
+
+phospholipids and proteins, making it an 
+
+indirect indicator of cell integrity 4.
+
+Furthermore , bioimpedance measurements  in 
+
+biological tissue  are characterized by a phase 
+
+shift between voltage and current signals. The 
+
+angular difference between these signals, 
+
+known as the phase angle (phA), is widely 
+
+considered  as an index of cellular health 5.
+
+Considering their relationship with cellular 
+
+integrity, t hese parameters  may  be influenced 
+
+by  muscle damage . Bioimpedance  could 
+
+therefore represent  a useful and easy -to -use tool 
+
+for  monitor ing  skeletal  muscle  integrity in 
+
+neuromuscular disorders such as  muscular 
+
+dystrophies and inflammatory myopathies 6, or 
+
+to  follow recovery after strenuous  physical 
+
+exercise . This would  be particularly relevant as 
+
+commonly used indirect markers of muscle 
+
+damage , such as maximal voluntary force 7 or 
+
+muscle mechanical properties 8, are harder to 
+
+implement in  routine clinical follow -up and 
+
+sport  field settings.  Local  decreases in both R 
+
+and XC have been reported in the days 
+
+following  muscle damage induced by  biceps 
+
+brachii  eccentric contraction s9. Moreover, 
+
+injured muscles have been shown to display 
+
+lower R, X C, and phA compared with their 
+
+healthy contralateral counterparts 10 . However, 
+
+using bioimpedance parameters to monitor 
+
+muscle damage would require their temporal 
+
+dynamics to align with those of conventional 
+
+indirect markers of muscle damage.  To date, 
+
+only one study has investigated the relationship 
+
+between  these markers  and bioimpedance 
+
+measurements, reporting no significant 
+
+associations between maximal voluntary force 
+
+and phA, R, Z, or X C of the exercised arm 11 .
+
+The authors attributed this lack of correlation  to 
+
+the narrow range of frequencies employed ( i.e. ,
+
+5, 50, and 250 kHz) , despite the sensitivity of 
+
+bioimpedance  parameters  to muscle damage 11 .
+
+Bioimpedance  spectroscopy  (BIS) , which relies 
+
+on the application of multiple currents across a 
+
+wide frequency spectrum (1 –1000 kHz), may 
+
+therefore represent a more relevant tool for 
+
+monitoring the muscular consequences of 
+
+muscle  structural alterations  in ambulatory 
+
+settings 12 . This method  enables  the 
+
+characterization of parameters related to the 
+
+resistance of the extracellular  (R e) and 
+
+intracellular (R i) compartment s, estimated from 
+
+> (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. The copyright holder for this preprint this version posted May 26, 2026. ;https://doi.org/10.64898/2026.05.21.726237 doi: bioRxiv preprint
+
+4
+
+the Cole modeling 5. Consequently, f luid shifts 
+
+between these compartments can be estimated 
+
+using the R e/R i ratio. BIS also enables the 
+
+assessment of membrane capacitance (C M), 
+
+reflecting the membrane’s substrate transport 
+
+capacity 13 , as well as the characteristic 
+
+frequency (fc ), which corresponds to the 
+
+frequency at peak X C5 and provides insight into 
+
+the relative density of muscle tissue 14 . In  only 
+
+one  study, BIS  assessments  were performed 
+
+following  eccentric exercise  of the  bicep s
+
+brachii , revealing  a local  decrease in  Re, but not 
+
+in  Ri, between  one  and  four  days post -
+
+exercise 15 . However, th is  study only assessed 
+
+Re and R i and did not  investigate  how these 
+
+changes related to  other indirect markers of 
+
+muscle damage .
+
+The aim of  the present  study was to determine 
+
+whether  local  BIS  data are altered in response 
+
+to  exercise -induced muscle damage ( EIMD )
+
+and  if  these potential changes mirror 
+
+adaptations in  muscle  functional ( i.e. , maximal 
+
+voluntary force) and mechanical ( i.e. , muscle 
+
+rigidity ) properties. This would provide insight 
+
+into the potential of  BIS  as a portable tool  for 
+
+tracking  muscle tissue alterations related to 
+
+muscle damage .
+
+# Materials and Methods 
+
+Participants 
+
+An  a priori  power analysis was performed 
+
+using G*Power (v.3.1.9.7, Kiel University, 
+
+Germany).  We conservatively computed partial 
+
+eta -squared from the available summary 
+
+statistics of  a previous study 15 , for the effect of 
+
+EIMD on R e (the  main BIS  parameter affected 
+
+by EIMD) , yielding a value of 0.195.  The 
+
+power analysis indicated that a sample of seven 
+
+participants would be sufficient to detect such 
+
+large effects in the present study, with an  α of 
+
+0.05 and a power of 0.80.  Thus, n ine healthy 
+
+recreationally active  male  participant s (24.9 ± 
+
+3.3 years, 1.77 ± 0.05 m, 73.3 ± 7.3 kg)  were 
+
+recruited . None of them were engaged in 
+
+regular resistance training, and they were 
+
+instructed to refrain from any unfamiliar or 
+
+strenuous physical activity throughout  the 
+
+protocol. The use of medications that could 
+
+influence the experimental outcomes was 
+
+prohibited, and participants were asked to 
+
+maintain their usual diet while avoiding alcohol 
+
+and  caffeine. All participants were fully 
+
+informed about the procedures and provided 
+
+written consent. The study complied with the 
+
+latest revision of the Declaration of Helsinki 
+
+and received approval from the local ethics 
+
+committee (CER -UDL_2023 -09 -21 -007). 
+
+Experimental design 
+
+On the first day, baseline assessments (PRE)  of 
+
+anthropometric  characteristics , isometric 
+
+maximal  voluntary  contraction  (iMVC)  torque, 
+
+muscle soreness, resting rigidity, and  BIS 
+
+parameters  were performed  (Figure 1) . On the 
+
+same day, participants completed an eccentric 
+
+exercise protocol , and the  assessment session 
+
+was then repeated immediately after exercise 
+
+(POST), as well as one (D1), two (D2), and 
+
+> (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. The copyright holder for this preprint this version posted May 26, 2026. ;https://doi.org/10.64898/2026.05.21.726237 doi: bioRxiv preprint
+
+5
+
+three (D3) days later, always at the same time 
+
+of day. 
+
+Test  sessions (PRE, POST, D1, D2 & D3) 
+
+Muscle soreness.  Muscle soreness was 
+
+evaluated  during a passive knee extension  using 
+
+a visual analogue scale, ranging from ‘‘no pain’’ 
+
+to ‘‘extremely painful’’. 
+
+Thigh circumference.  Thigh circumference was 
+
+measured with a tape at the midpoint of the 
+
+thigh, defined as the distance between the 
+
+lateral femoral condyle and the greater 
+
+trochanter 16 .
+
+Shear wave elastography.  Muscle rigidity was 
+
+assessed  at rest within the  quadriceps femoris 
+
+Figure 1  Experimental protocol and timeline of assessments.  Participants  were evaluated during the  baseline 
+
+assessmen t (D0), before  (PRE)  and  immediately after (POST)  an eccentric exercise , and in the three following days 
+
+(from D1 to D3) . At each time point, muscle soreness (SOR), thigh circumference (CIRC),  resting  shear wave velocity 
+
+(SWV) of the vastus intermedius (VI), vastus lateralis (VL), rectus femoris (RF) and vastus medialis (VM),  thigh 
+
+bioimpedance parameters (BI A), and isometric maximal voluntary contraction (iMVC) torque were assessed, in this 
+
+order, except for the POST session. The bioimpedance measurements were performed both at r est and during the 
+
+iMVC, between two sets of emitting and receiving electrodes.  Resting state was controlled by surface 
+
+electromyography (sEMG).  Copyrights of the photographs belong to the authors. 
+
+> (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. The copyright holder for this preprint this version posted May 26, 2026. ;https://doi.org/10.64898/2026.05.21.726237 doi: bioRxiv preprint
+
+6
+
+(QF ) using an Aixplorer ultrasound system 
+
+(MACH30, v.2.1.0.3395, Supersonic Imagine, 
+
+Aix -en -Provence, France) equipped with a
+
+linear transducer array (5 –18 MHz, 
+
+SuperLinear 15 -8, Vermon, Tours, France). 
+
+Resting muscle shear wave velocity (SWV) 
+
+measurements were  performed on  an  isokinetic 
+
+dynamometer  (Contrex MJ, Physiomed AG, 
+
+Germany)  with the hip at 70°  (0° = full 
+
+extension)  and the knee at 100°  (0° = full 
+
+extension) . SWV  measurements were 
+
+conducted  on  both proximal an d distal sites 
+
+within each head of the  righ t QF 17 . The 
+
+proximal  and distal  site s were  defined as the 5 
+
+cm segment proximal  or distal  to the reference 
+
+point, which was set at 50% of the thigh length 
+
+for the  vastus  lateralis , rectus femoris  and 
+
+vastus intermedius  and at 30% for the  vastus 
+
+medialis . The probe was carefully positioned 
+
+along the muscle axis  and  aligned with fascicle 
+
+orientation,  perpendicular to the skin,  while 
+
+applying minimal pressure  and  controlling the 
+
+muscle resting state through real -time visual 
+
+monitoring of surface electromyography 
+
+activity . Finally, the proximal and distal 
+
+measurements of each QF head were averaged 
+
+to produce a single representative value for the 
+
+entire muscle group for each participant. 
+
+Bioimpedance  measurements . Local ( i.e. , thigh) 
+
+bioimpedance measurements  (R, X C, Z and phA 
+
+at 5, 50 and 200 kHz) and specific BIS 
+
+parameters (C M, fc , R e, R i and the R e/R i ratio) 
+
+were obtained using a BIS device 
+
+(BiodyXpert ZM 3, Aminogram SAS, La Ciotat, 
+
+France) at rest  and  during iMVC s. Data  were 
+
+collected using two pairs of Ag/AgCl adhesive 
+
+electrodes (Lessa Foam ECG, Lessa, 
+
+Barcelona, Spain) placed on the  shaved and 
+
+alcohol -cleaned  proximal and distal regions of 
+
+the  right  QF. For the proximal region, the 
+
+emitting electrode was positioned on the iliac 
+
+crest and the receiving electrode at the level of 
+
+the femoral head. For the distal region, the 
+
+receiving  and  emitting  electrodes were placed 
+
+over the quadricipital and patellar tendons, 
+
+respectively. Measurements were standardized 
+
+by positioning participants on the isokinetic 
+
+ergometer with the hip at 70° and the knee at 
+
+100°. For measurements during  maximal 
+
+contraction, participants performed an iMVC 
+
+for approximately 5–6 seco nds, while 
+
+maintaining the same hip and knee angles. 
+
+Isometric maximal voluntary contractions. 
+
+Following a warm -up that included twenty 
+
+submaximal isometric knee extensions at a
+
+knee angle of 60°, iMVC torque was assessed 
+
+at 100° using the right thigh (hip angle: 70°). At 
+
+least two unilateral iMVC trials were 
+
+performed, separated by a minimum rest  period 
+
+of 30 seconds. The highest torque value across 
+
+the trials was considered for analysis. 
+
+Surface electromyography.  The skin was 
+
+shaved and cleaned with alcohol before placing 
+
+pairs of Ag/AgCl surface electrodes (Foam 
+
+Electrode Solid Gel 40×36 mm, Medico 
+
+Electrodes, Uttar Pradesh, India) on each 
+
+superficial head of the  QF  (i.e. , vastus lateralis ,
+
+vastus medialis , rectus femoris ), according to 
+
+> (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. The copyright holder for this preprint this version posted May 26, 2026. ;https://doi.org/10.64898/2026.05.21.726237 doi: bioRxiv preprint
+
+7
+
+the SENIAM  recommendations 18 . Raw signals 
+
+were recorded at 2 kHz using a PowerLab 
+
+system  (16/35, ADInstruments, Oxford, UK) 
+
+and amplifier (FE234 Quad BioAmp, 
+
+ADInstruments, Oxford, UK ) and  were notch -
+
+and band -pass filtered at 50 Hz and 20 –400 Hz, 
+
+respectively.  The  root mean square  of surface 
+
+electromyographic signals  was calculated over 
+
+a 150 ms moving window during resting 
+
+elastography and bioimpedance measurements 
+
+and normalized to the maximal value obtained 
+
+during the iMVC. Recordings with a
+
+normalized  root mean square  above 5% were 
+
+excluded from analys es to ensure passive 
+
+conditions  but none of the measurements 
+
+exceeded  this threshold .
+
+Eccentric exercise 
+
+Participants were seated on the isokinetic 
+
+dynamometer with the hip flexed at 70° and the 
+
+knee range of motion set between 20° and 100° 
+
+of flexion. A brief familiarization with eccentric 
+
+contractions was performed, consisting of one 
+
+submaximal and two maxi mal efforts. 
+
+Participants completed eight sets of fifteen 
+
+maximal eccentric contractions at 60°/s. 
+
+Between sets, participants underwent a one -
+
+minute passive recovery period.  Surface 
+
+electromyographic  activity of QF superficial 
+
+heads was also evaluated. Tor que and knee 
+
+angle were synchronously recorded with the 
+
+PowerLab system at 2 kHz. Knee joint torque 
+
+was low -pass filtered at 10 Hz and corrected for 
+
+gravity. Total work was calculated for each 
+
+contraction and subsequently summed for each 
+
+set. 
+
+Statistics 
+
+The reproducibility data for these 
+
+measurements have already been published, 
+
+with coefficients of variation ranging from 2.8 
+
+to 11.3% for  bioimpedance  measurements at 
+
+rest, from 3.0 to 22.2% for bioimpedance 
+
+measurements during iMVC, 1.4% for thigh 
+
+circumference, 4.2% for iMVC torque 19  and 
+
+2.2% for SWV 17 .
+
+Statistical analyses were performed using R 
+
+(version 4.1. 1, The R Foundation for Statistical 
+
+Computing). Linear mixed -effect s analyses 
+
+were conducted using the  lme4  R package with 
+
+intercepts for participants as random effects. 
+
+Visual inspection of residual plots revealed no 
+
+deviations from homoscedasticity or normality, 
+
+nor any violation of  the  linearity assumption. 
+
+Absence of collinearity and influential data 
+
+points was carefully checked. Bonferroni 
+
+correction for multiple comparisons was 
+
+applied to the po st  hoc analyses  and associated 
+
+effect sizes were computed using Cohen’s  d.
+
+Total work was  analysed  with  set  as  a fixed 
+
+effect. iMVC torque, score of muscle soreness, 
+
+thigh circumference, SWV, bioimpedance 
+
+parameters (Z, phA, R and X C at 5, 50 and 200 
+
+kHz as well as Re, Ri, C M, fc  and R e/R i),
+
+assessed at rest and during contraction were 
+
+analysed  with  time  as  a fixed effect. 
+
+Repeated -measures correlation was used to 
+
+assess the intra -individual association between 
+
+> (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. The copyright holder for this preprint this version posted May 26, 2026. ;https://doi.org/10.64898/2026.05.21.726237 doi: bioRxiv preprint
+
+8
+
+the bioimpedance parameters identified by the 
+
+linear mixed models as sensitive to EIMD and 
+
+other functional outcomes affected by the 
+
+exercise, using  the R package  rmcorr  that 
+
+accounts for the non -independence of repeated 
+
+observations within subjects 20 . Data are 
+
+presented as mean ± standard deviation and the 
+
+significance level was set at  P < 0.05. 
+
+# Results 
+
+The total work performed during the  eccentric 
+
+exercise, iMVC torque, muscle soreness and 
+
+SWV  values were already reported in a
+
+previous  article 17 .
+
+Functional responses to the eccentric 
+
+exercise 
+
+The total work performed during the  eccentric 
+
+exercise  decreased  across sets  (P = 0.003 ,
+
+Figure  2A), with  significantly lower  values  in 
+
+set 7  compared with  set 1  (-12.7 ± 14.5 %, P = 
+
+0.020,  d = 0.726), and  in  set 8  compared with 
+
+sets 1 and 2  (-13. 4 ± 16.3 %, P = 0.013,  d = 0.718 
+
+and  -12. 5 ± 15.3 %, P = 0.038,  d = 0.654, 
+
+respectively). 
+
+iMVC torque was significantly  reduced in the 
+
+days  following the eccentric exercise (P < 
+
+0.001 , Figure  2B), with  decreases of  -20.9 ± 
+
+9.6 % at POST (P < 0.001,  d = 1.22),  -24. 6 ± 
+
+13.7 % at D1 (P < 0.001,  d = 1.28),  -20.2 ± 
+
+14.5 % at D2 (P < 0.001,  d = 1.01) , and  -16.2 ± 
+
+15.1 % at D3 (P < 0.001,  d = 0.80). 
+
+Muscle soreness was significantly affected by 
+
+the eccentric exercise  (P < 0.001 , Figure  2C),
+
+increasing  at POST  (P = 0. 025 , d = 1.6 1), D1 (P 
+
+< 0.001,  d = 2.3 3) and  D2  (P < 0.001,  d = 2.08) ,
+
+and  then decreased at D3  (P = 0.03 9, d = 0.83 ,
+
+compared with D2 ), returning to baseline ( P = 
+
+0.104, compared with PRE ).
+
+The eccentric exercise significantly increased 
+
+thigh  circumference  (P  = 0.017 , Figure  2D),
+
+with a  1. 6 ± 1.8 % rise  from  PRE  to D1  (P =
+
+0.027 , d = 0.27). 
+
+Figure 2  A- Total work performed during the eight 
+
+sets of the eccentric exercise,  B- isometric maximal 
+
+voluntary contraction (iMVC) torque,  C- muscle 
+
+soreness assessed from a visual analog scale (VAS) 
+
+and  D- thigh circumference before (PRE), 
+
+immediately after (POST), one (D1), two (D2) and 
+
+three (D3) days after the eccentric exercise. Data are 
+
+presented as mean  ± standard deviation. a: 
+
+significantly different from Set 1, b: significantly 
+
+different from Set 2, †: significantly different from 
+
+PRE, &: significantly diffe rent from D2. 
+
+> (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. The copyright holder for this preprint this version posted May 26, 2026. ;https://doi.org/10.64898/2026.05.21.726237 doi: bioRxiv preprint
+
+9
+
+Shear wave  elastography 
+
+The  SWV  of the whole  QF  was altered by the 
+
+eccentric exercise (P < 0.001 , Figure  3) with 
+
+significant increases observed at POST ( +18. 5
+
+± 11.9 %,  P < 0.001 , d = 0.97 ), D1 ( +8. 7 ± 9.3 %, 
+
+P = 0.001 , d = 0.56 ) and  D2 ( +7. 6 ± 8.4 %,  P =
+
+0.005 , d = 0.48 ). The  SWV  at POST  was 
+
+significantly  higher than at D1  (-7.7 ± 9.8 %,  P
+
+< 0.001 , d = 0.53 ), D2  (-9.0 ± 4.1 %,  P < 0.001 ,
+
+d = 0.55 ) and  D3 ( -12.0 ± 5.8 %,  P < 0.001 , d =
+
+0.77 ).
+
+Bioimpedance assessment 
+
+Thigh  bioimpedance at rest.  Z and R were not 
+
+significantly affected by the eccentric exercise, 
+
+regardless of the measurement frequency , while 
+
+phA  and X C were altered at 5 kHz only ( Table 
+
+1).  phA  at  5 kHz  was  decreased at POST 
+
+compared with PRE ( -16. 3 ± 9.2 %, P < 0.001, 
+
+d = 1.10), D1 ( -18 .0  ± 11.4 %, P < 0.001, d = 
+
+1.28), D2 ( -14.6 ± 12.0 %,  P = 0.001,  d = 0.95) 
+
+and D3 ( -11. 3 ± 12.9 %,  P = 0.035,  d = 0.81 ,
+
+Figure  4A).  Similarly,  XC at 5 kHz  was reduced 
+
+at POST compared with PRE ( -20.2 ± 8.7 %,  P
+
+< 0.001,  d = 0.92), D1 ( -21.1 ± 12.6 %,  P < 
+
+0.001, d = 1.06), D2 ( -17.3 ± 12.2 %,  P = 0.002, 
+
+d = 0.81) and D3 ( -14.5 ± 16.6 %,  P = 0.027,  d
+
+= 0.72 , Figure  4B). 
+
+Regarding the  thigh  BIS  parameters measured 
+
+at rest, only C M and  fc were modified after the 
+
+eccentric exercise ( Table 1 ). C M was reduced at 
+
+POST compared with PRE ( -15.1 ± 11.7 %, P = 
+
+0.049,  d = 0.73 , Figure  4C) while  fc was  higher 
+
+at POST compared with PRE (+ 21. 4 ± 11.7 %, 
+
+P < 0.001 , d = 1.45) , D1 ( +16.1 ± 17.2 %, P  =
+
+0.006 , d = 1.06)  and D2  (+16.7 ± 19.9 %, P  =
+
+0.007 , d = 0.91 , Figure  4D).
+
+Thigh  bioimpedance during contraction.  None 
+
+of the bioimpedance parameters  (i.e.  Z, R, X C
+
+and phA ) measured during contraction were 
+
+affected by the eccentric exercise 
+
+(Supplementary table 1 ).  Similarly, the  BIS 
+
+parameters  (i.e.  Re, Ri, CM, fc  and Re/R i)
+
+measured during  the iMVC  remained 
+
+unchanged ( Supplementary table 1 ). 
+
+Figure 3  Shear wave velocity (SWV) of the 
+
+quadriceps femoris before (PRE), 
+
+immediately after (POST), one (D1), two 
+
+(D2) and three (D3) days after the eccentric 
+
+exercise. Data are presented as mean  ±
+
+standard deviation. †: significantly different 
+
+from PRE, §: significantly different from 
+
+POST. The shear wave velocity was 
+
+measured in two regions of the four 
+
+quadriceps femoris heads and then 
+
+averaged to obtain a representative value 
+
+for the entire muscl e group. 
+
+> (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. The copyright holder for this preprint this version posted May 26, 2026. ;https://doi.org/10.64898/2026.05.21.726237 doi: bioRxiv preprint
+
+10 
+
+Table 1  Thigh bioimpedance measured at rest before (PRE), immediately after (POST), one (D1), two (D2), and three 
+
+(D3) days after the eccentric exercise. 
+
+Frequency  PRE  POST  D1  D2  D3  P
+
+Z ( Ω) 
+
+5 66.9 ± 9.9 
+
+[60.4  – 73.4] 
+
+64.0 ± 10.7 
+
+[57.0  – 71.0] 
+
+66.2 ± 7.6 
+
+[61.2  – 71.2] 
+
+65.7 ± 7.8 
+
+[60.6  – 70.8] 
+
+66.7 ± 9.9 
+
+[60.2  – 73.2]  0.355 
+
+50  53.2 ± 7.4 
+
+[48.4  – 58.0] 
+
+51.3 ± 8.1 
+
+[46.0  – 56.6] 
+
+52.4 ± 6.2 
+
+[48.3  – 56.5] 
+
+52.2 ± 5.9 
+
+[48.3  – 56.1] 
+
+52.9 ± 8.2 
+
+[47.5  – 58.3]  0.594 
+
+200  47.0 ± 6.7 
+
+[42.6  – 51.4] 
+
+44.8 ± 7.0 
+
+[40.2  – 49.4] 
+
+45.9 ± 5.6 
+
+[42.2  – 49.6] 
+
+45.8 ± 5.2 
+
+[42.4  – 49.2] 
+
+46.4 ± 7.3 
+
+[41.6  – 51.2]  0.268 
+
+phA (°) 
+
+5 6.3 ± 0.9 
+
+[5.7  – 6.9] 
+
+5.3 ± 1.0 †
+
+[4.6  – 6.0] 
+
+6.4 ± 0.8 §
+
+[5.9  – 6.9] 
+
+6.2 ± 1.0 §
+
+[5.5  – 6.9] 
+
+5.9 ± 0.6 §
+
+[5.5  – 6.3]  <0.001 
+
+50  8.9 ± 1.1 
+
+[8.2  – 9.6] 
+
+8.6 ± 1.1 
+
+[7.9  – 9.3] 
+
+9.0 ± 0.5 
+
+[8.7  – 9.3] 
+
+9.0 ± 0.8 
+
+[8.5  – 9.5] 
+
+9.0 ± 0.6 
+
+[8.6  – 9.4]  0.102 
+
+200  5.0 ± 0.9 
+
+[4.4  – 5.6] 
+
+4.9 ± 1.0 
+
+[4.2  – 5.6] 
+
+5.0 ± 0.6 
+
+[4.6  – 5.4] 
+
+5.0 ± 0.4 
+
+[4.7  – 5.3] 
+
+5.1 ± 0.5 
+
+[4.8  – 5.4]  0.932 
+
+R ( Ω) 
+
+5 66.5 ± 9.8 
+
+[60.1  – 72.9] 
+
+63.7 ± 10.6 
+
+[56.8  – 70.6] 
+
+65.8 ± 7.6 
+
+[60.8  – 70.8] 
+
+65.3 ± 7.7 
+
+[60.3  – 70.3] 
+
+66.4 ± 9.8 
+
+[60.0  – 72.8]  0.389 
+
+50  52.5 ± 7.2 
+
+[47.8  – 57.2] 
+
+50.8 ± 8.0 
+
+[45.6  – 56.0] 
+
+51.8 ± 6.1 
+
+[47.8  – 55.8] 
+
+51.6 ± 5.8 
+
+[47.8  – 55.4] 
+
+52.2 ± 8.2 
+
+[46.8  – 57.6]  0.608 
+
+200  46.8 ± 6.7 
+
+[42.4  – 51.2] 
+
+44.7 ± 7.0 
+
+[40.1  – 49.3] 
+
+45.7 ± 5.6 
+
+[42.0  – 49.4] 
+
+45.7 ± 5.2 
+
+[42.3  – 49.1] 
+
+46.2 ± 7.3 
+
+[41.4  – 51.0]  0.267 
+
+XC (Ω) 
+
+5 7.4 ± 1.5 
+
+[6.4  – 8.4] 
+
+5.9 ± 1.6 †
+
+[4.9  – 6.9] 
+
+7.4 ± 1.2 §
+
+[6.6  – 8.2] 
+
+7.1 ± 1.4 §
+
+[6.2  – 8.0] 
+
+6.9 ± 0.9 §
+
+[6.3  – 7.5]  <0.001 
+
+50  8.3 ± 1.7 
+
+[7.2  – 9.4] 
+
+7.7 ± 1.7 
+
+[6.6  – 8.8] 
+
+8.2 ± 1.1 
+
+[7.5  – 8.9] 
+
+8.1 ± 1.2 
+
+[7.4  – 9.0] 
+
+8.3 ± 1.3 
+
+[7.5  – 9.1]  0.273 
+
+200  4.1 ± 1.1 
+
+[3.4  – 4.8] 
+
+3.8 ± 1.1 
+
+[3.1  – 4.5] 
+
+4.0 ± 0.7 
+
+[3.5  – 4.5] 
+
+4.0 ± 0.6 
+
+[3.6  – 4.4] 
+
+4.1 ± 0.8 
+
+[3.6  – 4.6]  0.732 
+
+> BIS parameters
+
+Re (Ω)  72.1 ± 11.1 
+
+[64.8  – 79.4] 
+
+67.4 ± 11.6 
+
+[59.8  – 75.0] 
+
+71.0 ± 8.3 
+
+[65.6  – 76.4] 
+
+70.3 ± 8.7 
+
+[64.6  – 76.0] 
+
+70.8 ± 10.2 
+
+[64.1  – 77.5]  0.119 
+
+Ri (Ω)  125.8 ± 21.8 
+
+[111.6  – 140.0] 
+
+126.4 ± 24.7 
+
+[110.3  – 142.5] 
+
+122.5 ± 19.9 
+
+[109.5  – 135.5] 
+
+124.6 ± 18.4 
+
+[112.6  – 136.6] 
+
+126.8 ± 26.7 
+
+[109.4  – 144.2]  0.716 
+
+CM (nF)  42.4 ± 8.0 
+
+[37.2  – 47.6] 
+
+36.1 ± 9.1 †
+
+[30.2  – 42] 
+
+40.1 ± 7.6 
+
+[35.1  – 45.1] 
+
+41.1 ± 10.5 
+
+[34.2  – 48.0] 
+
+38.1 ± 8.2 
+
+[32.7  – 43.5]  0.031 
+
+fc  (kHz)  19.7 ± 2.3 
+
+[18.2  – 21.2] 
+
+23.8 ± 3.4 †
+
+[21.6  – 26.0] 
+
+20.7 ± 2.5 §
+
+[19.1  – 22.3] 
+
+20.8 ± 3.4 §
+
+[18.6  – 23.0] 
+
+22.0 ± 2.2 
+
+[20.6  – 23.4]  <0.001 
+
+Re/Ri (Ω)  0.58 ± 0.10 
+
+[0.51  – 0.65] 
+
+0.54 ± 0.11 
+
+[0.47  – 0.61] 
+
+0.59 ± 0.08 
+
+[0.54  – 0.64] 
+
+0.57 ± 0.09 
+
+[0.51  – 0.63] 
+
+0.57 ± 0.06 
+
+[0.53  – 0.61]  0.331 
+
+Values are presented as mean ± standard deviation [confidence interval 95%]. Each p -value corresponds to the main 
+
+effect of time on the associated variable. Significant differences are indicated by bold p -values. †: significantly different 
+
+from PRE, §: sig nificantly different from POST. Z: bioimpedance, phA: phase angle, R: resistance, X C: reactance, BIS: 
+
+bioimpedance spectroscopy, R e: extracellular resistance, R i: intracellular resistance, C M: membrane capacitance and fc: 
+
+characteristic frequency. 
+
+> (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. The copyright holder for this preprint this version posted May 26, 2026. ;https://doi.org/10.64898/2026.05.21.726237 doi: bioRxiv preprint
+
+11 
+
+Correlation analyses 
+
+Repeated -measures correlation s revealed 
+
+significant  negative  association s across time 
+
+points  between  SWV  and  Xc  at  5 kHz  (P = 
+
+0.004, r =  -0.461 , Figure 5F ), phA  at  5 kHz  (P 
+
+= 0.002, r =  -0.503 , Figure 5E ) and C M (P = 
+
+0.017, r = -0.391, Figure 5C), as we ll as 
+
+between iMVC  and  fc  (P = 0.028, r =  -0.362 ,
+
+Figure 5B ). SWV  also displayed a positive 
+
+correlation with  fc  (P = 0.002, r = 0.487 , Figure 
+
+5D ). 
+
+# Discussion 
+
+The aim of the present study was  to determine 
+
+whether BIS data are altered  following 
+
+eccentric  EIMD  and  whether any such  changes 
+
+reflect  adaptations in functional and mechanical 
+
+properties.  Our results  show that classical 
+
+bioimpedance  and  spectroscopic  outcomes  are 
+
+altered  directly  after  eccentric exercise . In 
+
+addition,  BIS parameters correlated with 
+
+indirect markers of EIMD  dur in g the period 
+
+following eccentric exercise .
+
+Indirect markers  of  muscle damage  including 
+
+soreness , iMVC  and SWV  followed the typical 
+
+kinetics reported in  previous  EIMD 
+
+studies 7,8,21,22 . A decrease in phA and X C (5 kHz 
+
+only)  was observed  at POST compared with all 
+
+other time points.  Because  current is  less likely 
+
+to travel through the cell membrane  at this 
+
+frequency, these decreases  may  mainly  reflect 
+
+modifications  in  the extracellular 
+
+compartments 23 . The  lower  phA and XC at 
+
+POST  also  suggest  a decrease  in  sarcolemma l
+
+excitability 24  and /or  sarcolemma  disruption s
+
+induced by the eccentric exercise 25 . A similar 
+
+reduction was reported immediately after 
+
+eccentric elbow flexors exercise 11 , but in that 
+
+Figure 4  A- Phase angle (phA) at 5 kHz,  B-
+
+reactance (X C) at 5 kHz,  C- membrane 
+
+capacitance (C M) and  D- characteristic 
+
+frequency (fc) measured  before (PRE), 
+
+immediately after (POST), one (D1), two (D2) 
+
+and three (D3) days after the eccentric 
+
+exercise . Data are presented as mean  ±
+
+standard deviation. †: significantly different 
+
+from PRE, §: significantly different from 
+
+POST. 
+
+> (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. The copyright holder for this preprint this version posted May 26, 2026. ;https://doi.org/10.64898/2026.05.21.726237 doi: bioRxiv preprint
+
+12 
+
+Figure 5  Correlations between bioimpedance measurements and indirect markers of muscle damage. Only the 
+
+bioimpedance parameters identified by the linear mixed models as sensitive to eccentric exercise were compared with 
+
+other functional outcomes affected by the exe rcise. Panel  A depicts all the correlations tested while the correlations 
+
+concerning the characteristic frequency were represented in panels  B and  D, membrane capacitance  in panel  C, phase 
+
+angle in panel  E and reactance in panel  F. In panel  A, correlation  coefficients are only presented for the significant 
+
+correlations. C M: membrane capacitance, fc: characteristic frequency, phA: phase angle, X C: reactance, iMVC: isometric 
+
+maximal voluntary contraction, VAS: visual analogue scale and SWV: shear wave velocity. 
+
+> (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. The copyright holder for this preprint this version posted May 26, 2026. ;https://doi.org/10.64898/2026.05.21.726237 doi: bioRxiv preprint
+
+13 
+
+study the decrease persisted up to 7 days, 
+
+whereas we observed a return to baseline by 
+
+D1. Other studies also reported inconsistent 
+
+findings, with decreases in  phA  and  XC
+
+appearing only from D1 10  or D3 9 while it was 
+
+unaffected  over this time frame  in our study .
+
+Such discrepancies likely reflect 
+
+methodological differences, including 
+
+measurement frequencies (10 –100 kHz in 
+
+Freeborn et al. 6, 50 kHz in  Nescolarde et al. 10 ,
+
+5–250 kHz in  Yamaguchi et al. 10 ) and 
+
+measurement sites (local ized on the arm  in 
+
+Freeborn et al. 6 and in Yamaguchi et al. 10  and 
+
+on the thigh in Nescolarde et al. 10 ), preventing 
+
+a clear characterization of eccentric  EIMD  from 
+
+bioimpedance assessments. 
+
+To address such variability  in measurement 
+
+frequency , BIS enables concurrent assessment 
+
+across multiple frequencies. R i was unchanged 
+
+in our study , as for  the study from  Shiose et 
+
+al. 15 , the only previous BIS study  performed 
+
+after eccentric exercise. However,  Shiose et al. 
+
+reported a  27 % decrease in R e that was not 
+
+observed in the present study . This discrepancy 
+
+may stem from  the muscles investigated, as 
+
+upper -limb muscles are generally more 
+
+susceptible to EIMD than lower -limb muscles 
+
+and  BIS  measurements may differ between 
+
+limbs 26 . Moreover,  CM decreased and  fc 
+
+increased at POST  in our study , both being BIS 
+
+outcomes not evaluated by Shiose et al. 15 .
+
+Decreases in C M and  fc  may reflect a reduction 
+
+in cell membrane integrity and/or capacity to 
+
+store electrical charges 3. However, the cell -
+
+membrane integrity disruptions caused by 
+
+EIMD are particularly apparent two to four 
+
+days after the exercise 27 . Therefore, it seems 
+
+unlikely that the modification in C M and  fc  at 
+
+POST reflect alterations in cell membrane 
+
+integrity.  These  changes  might  rather  reflect 
+
+acute fatigue  after the eccentric contractions ,
+
+given  that  the ir  time course  is  very similar to  the 
+
+modulation of  neuromuscular  parameters 
+
+related to fatigue  and  measured from twitch 
+
+interpolation during the acute phase of  EIMD 28 .
+
+Notably , exercise is  known to induce  transient 
+
+changes in  sarcolemmal excitability 24  and/or 
+
+structural  disruption 25 , which could explain the 
+
+decrease in C M and increase  in  fc  at POST, 
+
+suggesting BIS may provide fatigue -related 
+
+information 29 . Any m echanistic interpretation 
+
+remains  however  speculative, as no previous 
+
+study assessed  BIS  outcomes in conjunction 
+
+with fatigue  parameters immediately after 
+
+exercise .
+
+Contrary to our hypothesis, C M and  fc  returned 
+
+to baseline by D1. Based on their link to cellular 
+
+integrity, we expected more prolonged changes, 
+
+similar to the time course of EIMD recovery. 
+
+Ultimately , fc  was correlated with changes in 
+
+iMVC, the most reliable indirect marker of 
+
+EIMD 7. Additionally, the four bioimpedance 
+
+parameters that showed sensitivity to the 
+
+eccentric exercise were correlated with SWV, 
+
+exhibiting changes similar to that of muscle 
+
+mechanical properties in response to EIMD. 
+
+However, the correlation between  fc  and iMVC 
+
+was weak (r =  -0.362), and all bioimpedance 
+
+> (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. The copyright holder for this preprint this version posted May 26, 2026. ;https://doi.org/10.64898/2026.05.21.726237 doi: bioRxiv preprint
+
+14 
+
+parameters were associated with SWV as they, 
+
+like SWV,  changed  markedly at POST (without 
+
+showing sensitivity to EIMD from D1 to D3). 
+
+Taken together  with  complementary linear 
+
+regression analyses (Supplementary  Figure  1) ,
+
+our results indicate that BIS  sensitivity may not 
+
+be sufficient to  accurately evaluate EIMD ,
+
+when measurement is performed at the whole 
+
+muscle  level .
+
+On  the opposite to  the  rest  condition, 
+
+bioelectrical impedance  measurements during 
+
+contraction were  unaffected  by EIMD. This 
+
+may reflect their slightly lower reproducibility 
+
+compared with resting measurements 19  and /or  a
+
+reduced sensitivity to EIMD confined to the 
+
+thigh. 
+
+Although the sample size was relatively small, 
+
+the  a priori  power analysis indicated sufficient 
+
+power to detect  the large magnitude of changes 
+
+in bioimpedance parameters expected in 
+
+response to EIMD . However, smaller effects 
+
+may have remained undetected.  Another 
+
+limitation of this study is the absence of a 
+
+control condition. Nevertheless, the high 
+
+reproducibility of our measurements 19  provides 
+
+confidence that such changes could not have 
+
+occurred in the absence of tissue alterations. 
+
+Another limitation  could be the electrode 
+
+placement  used in our study  which may lower 
+
+the sensitivity of  BIS parameters to  EIMD by 
+
+evaluating the whole thigh , unlike other studies 
+
+which focused on the injury location 10  or 
+
+smaller muscle s, like the elbow flexors 9,11 .
+
+Practical applications 
+
+Our results indicate that BIS parameters  (C M
+
+and  fc ) are altered immediately following 
+
+eccentric exercise . However, they return to 
+
+baseline by the next day, while changes in 
+
+indirect markers of EIMD persist , highlighting 
+
+the  moderate  sensitivity of BIS to  detect  muscle 
+
+damage  when using the select ed electrode 
+
+configuration  to  assess  the whole  thigh .
+
+Consequently,  further  study should focus on  the 
+
+standardization of electrodes placement  to 
+
+improve the use of electrical impedance 
+
+myography in field setting s or clinical routine 
+
+follow -up . Nevertheless, the observed 
+
+alterations in BIS parameters  immediately  after 
+
+eccentric  contractions  underscore the potential 
+
+of this tool as a cost -effective means to quantify 
+
+muscle  fatigue, provided that a direct 
+
+relationship between post -exercise BIS changes 
+
+and the determinants of fatigue can be 
+
+established . Future studies using graded fatigue 
+
+protocols may help clarify the relationship 
+
+between  acute post -exercise  force loss and 
+
+changes in bioimpedance and  BIS  parameters, 
+
+which  may contribute to the identification of 
+
+bioimpedance -based biomarkers of fatigue ,
+
+especially in patients with  neuromuscular 
+
+disease .
+
+> (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. The copyright holder for this preprint this version posted May 26, 2026. ;https://doi.org/10.64898/2026.05.21.726237 doi: bioRxiv preprint
+
+15 
+
+Conclusions 
+
+Although some variations in  BIS  parameters 
+
+were  weakly  correlated to  changes in muscle 
+
+mechanical properties assessed by  shear wave 
+
+elastography, the present study , based on the 
+
+parallel assessment of these parameters 
+
+alongside classical markers of  EIMD , indicates 
+
+that  BIS  could  be a suitable tool for field -based 
+
+and routine clinical  evaluation s of  muscle 
+
+fatigue .
+
+> (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. The copyright holder for this preprint this version posted May 26, 2026. ;https://doi.org/10.64898/2026.05.21.726237 doi: bioRxiv preprint
+
+16 
+
+# Acknowledgments 
+
+The authors would like to express their gratitude to all volunteers for their participation in this 
+
+study. 
+
+Conflicts of interest disclosure.  The bioimpedance device  used in this study was made 
+
+available by the company at no cost . The company  had no role in the data collection, analysis 
+
+or  interpretation . The authors declare that they have no competing financial interests or personal 
+
+relationships that could have appeared to influence the work reported in this paper. 
+
+Data availability statement.  The data that supports the findings of this study are available 
+
+from the corresponding author upon reasonable request. 
+
+Funding statement . This research received no external funding. 
+
+Ethics approval statement.  The study complied with the latest revision of the Declaration of 
+
+Helsinki and received approval from the local ethics committee (CER -UDL_2023 -09 -21 -007). 
+
+Patient consent statement.  All participants were fully informed about the procedures and 
+
+provided written consent. 
+
+> (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. The copyright holder for this preprint this version posted May 26, 2026. ;https://doi.org/10.64898/2026.05.21.726237 doi: bioRxiv preprint
+
+17 
+
+# Bibliography 
+
+1.  Campa F, Toselli S, Mazzilli M, Gobbo LA, Coratella G. Assessment of Body 
+
+Composition in Athletes: A Narrative Review of Available Methods with Special 
+
+Reference to Quantitative and Qualitative Bioimpedance Analysis.  Nutrients .
+
+2021;13(5):1620. doi:10.3390/nu13051620 
+
+2.  Kyle UG, Bosaeus I, De Lorenzo AD, et al. Bioelectrical impedance analysis -part II: 
+
+utilization in clinical practice.  Clin Nutr . 2004;23(6):1430 -1453. 
+
+doi:10.1016/j.clnu.2004.09.012 
+
+3.  Khalil SF, Mohktar MS, Ibrahim F. The Theory and Fundamentals of Bioimpedance 
+
+Analysis in Clinical Status Monitoring and Diagnosis of Diseases.  Sensors (Basel) .
+
+2014;14(6):10895 -10928. doi:10.3390/s140610895 
+
+4.  Kyle UG, Bosaeus I, Lorenzo ADD, et al. Bioelectrical impedance analysis —part I: 
+
+review of principles and methods.  Clinical Nutrition . 2004;23(5):1226 -1243. 
+
+doi:10.1016/j.clnu.2004.06.004 
+
+5.  Ward LC, Brantlov S. Bioimpedance basics and phase angle fundamentals.  Rev Endocr 
+
+Metab Disord . 2023;24(3):381 -391. doi:10.1007/s11154 -022 -09780 -3
+
+6.  Stemmerik MG, Tasca G, Gilhus NE, et al. Biological biomarkers in muscle diseases 
+
+relevant for follow -up and evaluation of treatment.  Brain . 2025;148(2):363 -375. 
+
+doi:10.1093/brain/awae323 
+
+7.  Warren GL, Lowe DA, Armstrong RB. Measurement Tools Used in the Study of 
+
+Eccentric Contraction -Induced Injury.  Sports Medicine . 1999;27(1):43 -59. 
+
+doi:10.2165/00007256 -199927010 -00004 
+
+8.  Ličen U, Kozinc Ž. Using Shear -Wave Elastography to Assess Exercise -Induced Muscle 
+
+Damage: A Review.  Sensors . 2022;22(19):7574. doi:10.3390/s22197574 
+
+9.  Freeborn TJ, Regard G, Fu B. Localized Bicep Tissue Bioimpedance Alterations 
+
+Following Eccentric Exercise in Healthy Young Adults.  IEEE Access . 2020;8:23100 -
+
+23109. doi:10.1109/ACCESS.2020.2970314 
+
+10.  Nescolarde L, Terricabras J, Mechó S, Rodas G, Yanguas J. Differentiation Between 
+
+Tendinous, Myotendinous and Myofascial Injuries by L -BIA in Professional Football 
+
+Players.  Front Physiol . 2020;11:574124. doi:10.3389/fphys.2020.574124 
+
+11.  Yamaguchi S, Inami T, Ishida H, et al. Bioimpedance analysis for identifying new 
+
+indicators of exercise -induced muscle damage.  Sci Rep . 2024;14(1):15299. 
+
+doi:10.1038/s41598 -024 -66089 -8
+
+12.  Mohamed M, Matthie J, Fan SL. Bioimpedance spectroscopy: Is a picture worth a 
+
+thousand words?  Semin Dial . 2025;38(1):71 -81. doi:10.1111/sdi.13084 
+
+13.  Barry VG, Peterson CM, Gower BA. Membrane Capacitance from A Bioimpedance 
+
+Approach: Associations with Insulin Resistance in Relatively Healthy Adults.  Obesity 
+
+(Silver Spring) . 2020;28(11):2184 -2191. doi:10.1002/oby.22977 
+
+> (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. The copyright holder for this preprint this version posted May 26, 2026. ;https://doi.org/10.64898/2026.05.21.726237 doi: bioRxiv preprint
+
+18 
+
+14.  Bartels EM, Sørensen ER, Harrison AP. Multi -frequency bioimpedance in human muscle 
+
+assessment.  Physiol Rep . 2015;3(4):e12354. doi:10.14814/phy2.12354 
+
+15.  Shiose K, Tanabe Y, Ohnishi T, Takahashi H. Effect of regional muscle damage and 
+
+inflammation following eccentric exercise on electrical resistance and the body 
+
+composition assessment using bioimpedance spectroscopy.  The Journal of Physiological 
+
+Sciences . 2019;69(6):895 -901. doi:10.1007/s12576 -019 -00702 -8
+
+16.  Coombes BK, Ziegenfuss B, David M, et al. Heterogeneity of passive elastic properties 
+
+within the quadriceps femoris muscle –tendon unit.  Eur J Appl Physiol . 2018;118(1):213 -
+
+221. doi:10.1007/s00421 -017 -3763 -1
+
+17.  De Freitas S, Bouvier J, Letourneur A, Gouraud E, Fouré A. Heterogenous quadriceps 
+
+femoris inter -head but consistent intra -head rigidity changes after voluntary eccentric 
+
+exercise -induced muscle damage.  Eur J Appl Physiol . Published online December 4, 
+
+2025. doi:10.1007/s00421 -025 -06075 -8
+
+18.  Hermens HJ, Freriks B, Disselhorst -Klug C, Rau G. Development of recommendations 
+
+for SEMG sensors and sensor placement procedures.  J Electromyogr Kinesiol .
+
+2000;10(5):361 -374. 
+
+19.  De Freitas S, Letourneur A, Bouvier J, Fouré A, Gouraud E. Reproducibility of 
+
+bioimpedance spectroscopy parameters to evaluate skeletal muscle properties.  Journal of 
+
+Electromyography and Kinesiology . 2026;86:103107. doi:10.1016/j.jelekin.2026.103107 
+
+20.  Bakdash JZ, Marusich LR. Repeated Measures Correlation.  Front Psychol . 2017;8. 
+
+doi:10.3389/fpsyg.2017.00456 
+
+21.  Paulsen G, Mikkelsen UR, Raastad T, Peake JM. Leucocytes, cytokines and satellite cells: 
+
+what role do they play in muscle damage and regeneration following eccentric exercise? 
+
+Published online 2012. 
+
+22.  Lacourpaille L, Nordez A, Hug F, Doguet V, Andrade R, Guilhem G. Early detection of 
+
+exercise -induced muscle damage using elastography.  Eur J Appl Physiol .
+
+2017;117(10):2047 -2056. doi:10.1007/s00421 -017 -3695 -9
+
+23.  Moonen HPFX, Van Zanten ARH. Bioelectric impedance analysis for body composition 
+
+measurement and other potential clinical applications in critical illness.  Curr Opin Crit 
+
+Care . 2021;27(4):344 -353. doi:10.1097/MCC.0000000000000840 
+
+24.  Lowery M, Nolan P, O’Malley M. Electromyogram median frequency, spectral 
+
+compression and muscle fibre conduction velocity during sustained sub -maximal 
+
+contraction of the brachioradialis muscle.  Journal of Electromyography and Kinesiology .
+
+2002;12(2):111 -118. doi:10.1016/S1050 -6411(02)00004 -4
+
+25.  Lovering RM, De Deyne PG. Contractile function, sarcolemma integrity, and the loss of 
+
+dystrophin after skeletal muscle eccentric contraction -induced injury.  American Journal 
+
+of Physiology -Cell Physiology . 2004;286(2):C230 -C238. doi:10.1152/ajpcell.00199.2003 
+
+26.  Jamurtas AZ, Theocharis V, Tofas T, et al. Comparison between leg and arm eccentric 
+
+exercises of the same relative intensity on indices of muscle damage.  Eur J Appl Physiol .
+
+2005;95(2 -3):179 -185. doi:10.1007/s00421 -005 -1345 -0
+
+> (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. The copyright holder for this preprint this version posted May 26, 2026. ;https://doi.org/10.64898/2026.05.21.726237 doi: bioRxiv preprint
+
+19 
+
+27.  Chazaud B. Inflammation during skeletal muscle regeneration and tissue remodeling: 
+
+application to exercise -induced muscle damage management.  Immunol Cell Biol .
+
+2016;94(2):140 -145. doi:10.1038/icb.2015.97 
+
+28.  Martin V, Millet GY, Lattier G, Perrod L. Effects of Recovery Modes after Knee Extensor 
+
+Muscles Eccentric Contractions:  Medicine & Science in Sports & Exercise .
+
+2004;36(11):1907 -1915. doi:10.1249/01.MSS.0000145526.43208.08 
+
+29.  Ozmen GC, Mabrouk S, Nichols C, et al. Mid -activity and at -home wearable 
+
+bioimpedance elucidates an interpretable digital biomarker of muscle fatigue.  IEEE Trans 
+
+Biomed Eng . 2023;70(12):3513 -3524. doi:10.1109/TBME.2023.3290530
