@@ -1,0 +1,369 @@
+Title: SalsaAgent: A multimodal embodied language model for interactive dance generation
+
+URL Source: https://arxiv.org/pdf/2605.29219v1
+
+Published Time: Fri, 29 May 2026 00:25:22 GMT
+
+Number of Pages: 9
+
+Markdown Content:
+# SalsaAgent: A multimodal embodied language model for interactive dance generation 
+
+Payam Jome Yazdian, Zoe Stanley, and Angelica Lim 
+
+Abstract — Interaction between humanoids involves bidirec-tional and nonverbal reactivity, coordination and synchrony. Toward socially aware robots and interactive virtual agents, we present SalsaAgent, a language model that generates expressive, full-body salsa dance motions in reaction to a human leader and against a contextual music backdrop. We formulate interaction as nonverbal motion token passing, extending the vocabulary of a large language model (LLM) to process discrete motion tokens, pairwise relation tokens, and audio. Our contribu-tions include new tokens for full-body and motion relations, LLM fine-tuning using automatically derived text descriptions of skeleton dynamics for token grounding, and a two-stage token-to-diffusion pipeline. Subjective and objective evaluations demonstrate the effectiveness of our approach in terms of motion quality, music and partner coordination, and consistent two-person spatial behavior, with significant improvements over baselines. 
+
+I. I NTRODUCTION 
+
+A long-standing goal in robotics is to deploy humanoid agents that share physical spaces with people, where natural interaction extends beyond speech and requires reacting to nonverbal communication [1]. Social dance interactions [2], [3], such as salsa [4], provide an excellent yet challenging setting to study this problem. In social dance, two dancers perform to music under an explicit lead–follow dynamic, where the leader gives nonverbal cues, and the follower responds. Accordingly, we study reactive dance generation, which takes a leader’s motion and background music as contextual input and generates the follower’s dance with coordinated and appropriate motion. Current methods for reactive dance generation only par-tially address the challenges in this task. Existing meth-ods [5]–[7] fail to effectively model close interaction dynam-ics, often producing followers that face the wrong direction, lose spatial connection with their partner and exhibit foot-skating artifacts due to the inherent limitations of their motion representations. A promising direction is fine-tuning large language models (LLMs) to interact using motions instead of text, but current dance datasets lack the fine-grained language annotations needed to train them in non-verbal bodily communication [2]. We introduce SalsaAgent, a multimodal embodied LLM that formulates human-human interaction as an embodied language and extends the language model vocabulary to incorporate motion, pairwise relational tokens, and audio as context [8], [9]. To fine-tune a large language model to          
+
+> All authors are associated with Simon Fraser University, Burnaby, Canada
+
+{payam jome-yazdian, zoe stanley, angelica }@sfu.ca 
+
+process motion tokens, we provide large-scale text–motion supervision by grounding a duet dance dataset [10] with 300,000 fine-grained body-part movement descriptions using an automatic rule-based algorithm [11]. We devise two new VQ-VAE codebooks: one for single-person full body mo-tion, and another for pairwise relations representing partner geometry. Moreover, we train a motion diffusion prior model as a refinement stage in shared joint-trajectory space to further improve inter-dancer positioning, timing, and contact detail. Objective and subjective evaluation shows our method improves on existing leader-to-follower methods in realism, partner coordination, and beat alignment. Our contributions are as follows:  
+
+> •
+
+We introduce SalsaAgent, a multimodal embodied LLM that formulates interaction as nonverbal motion token passing, resulting in a significant improvement in fol-lower dance motion generation over prior methods.  
+
+> •
+
+We propose new VQ-VAEs for single-person full-body motion and pairwise relations  
+
+> •
+
+We show that a major driver of improvement is the automatic creation of fine-grained body-part movement descriptions to fine-tune the base language model.  
+
+> •
+
+We show that a diffusion-based refinement stage in shared joint-trajectory space further improves inter-dancer positioning, timing, and contact details. II. R ELATED WORK 
+
+We summarize prior work on multimodal language models for motion, and human motion datasets, human motion generation and understanding, and human–human interaction modeling. 
+
+A. Human Motion Generation and Understanding 
+
+Human motion understanding and generation are fun-damental challenges in animation and robotics [1], [12]. Recent work has investigated motion generation conditioned on a range of inputs, including natural language [13], [14], 
+
+audio and speech [15], [16], music (including dance) [17]– [20], and structured signals such as action labels [21], [22]. Methods such as diffusion-based motion synthesis [23]–[25] and vector-quantized motion representation [14], [26] with masked prediction [27] are commonly used for single-person motion generation. Existing multi-person dance generation methods, such as group choreography [19], [20] and duet dance approaches [5], [7], have shown promising results. However, limited motion representations prevent these meth-ods from effectively capturing close interactions between two dancers. 
+
+> arXiv:2605.29219v1 [cs.CV] 28 May 2026
+
+B. Human-Human Interaction Modeling 
+
+Human interaction presents several challenges, including semantic consistency, interpersonal coordination, and local interaction [28]. Prior work in human-human interaction modeling includes reaction synthesis that generates reac-tive motion conditioned on observed motion [29]–[31] and 
+
+joint generation that generates multiple motions simulta-neously [6], [32], [33]. Discrete-token methods such as Duolando [5] and InterMask [32] quantize motion into compact tokens, enabling high-level motion representations but losing fine-grained details due to discretization and mode averaging. In contrast, diffusion-based methods such as InterDance [7], ReMoS [30], and ReGenNet [31] operate in continuous space, achieving realistic motion generation while limiting long-range semantic dependencies. Overall, a gap persists in generating fine-grained motion that is also contextually appropriate over long sequences. 
+
+C. Multimodal Language Models 
+
+Large language models (LLMs), such as LLaMA [34], Vicuna [35], and Gemma 2 [36], have shown strong per-formance in text understanding and generation [37]. These models are increasingly extended with images [38], [39], video [40], [41], audio [42], [43], and other modalities [44], [45]. For motion-language modeling, MotionGPT [8], [46] represents motion as a sequence of discrete tokens to align with language, Motion-Agent [47] introduces conversational control, and M 3GPT [48] unifies multi-task motion com-prehension and generation. Furthermore, MotionScript [11] and FineMoGen [49] introduce fine-grained alignment be-tween language and motion. Recent efforts extend motion-language modeling to multi-human social interaction. Social Agent [50], and SOLAMI [51] focus on dyadic interaction settings, while SocialGen [9] scales to multi-human scenarios within an LLM framework. In summary, existing work tar-gets conversational or generic social scenarios, where speech or language is used to condition interactions with LLMs for motion generation. To the best of our knowledge, no LLM yet uses only nonverbal motion tokens for both input and output. 
+
+D. Human Motion Datasets 
+
+Prior work has developed a range of datasets to sup-port motion synthesis and understanding research. Single-human motion–language datasets such as KIT [52] and HumanML3D [13] have been widely used for text-to-motion tasks, with InterGen [6], Inter-X [53], and ReMoCap [30] further extending this paradigm to human–human interac-tion. Music-to-dance datasets such as AIST++ [54], AIOZ-GDANCE [19], and FineDance [55] provide synchronized music and motion at scale, but depict either solo danc-ing or group choreography without close-contact partner interaction. In duet settings, DD100 [5] and InterDance [7] introduce duet dance datasets with paired motion and mu-sic. Across these resources, annotations are typically action labels or generic captions, and lack move-level labels and dense textual descriptions to bridge interactive motion and language. In summary, generated dyadic interactions lack realism due to poor relative motion generation, as well as trade-offs between fine-grained details and long-sequence coherence. Multimodal language models show promise for addressing this task, yet current models require text as input, rather than solely motions tokens useful for nonverbal interactions. Indeed, human motion datasets that would be needed to train large language models lack annotation data for large-scale fine-tuning. To address these gaps, we propose SalsaAgent, which is a multimodal embodied LLM that uses motion to-kens as input and output, enabled by (1) the addition of full-body and relative motion tokens, (2) the use of MotionScript [11], an automatic method for annotating human motions for LLM training, and (3) a two-phase token-to-diffusion approach for improved generation of follower dance. III. M ETHOD 
+
+We study reactive leader-to-follower social dance gen-eration. Given an audio sequence a = {ai}Ta−1 
+
+> i=0
+
+and an observed leader motion sequence xL = {xiL}T −1 
+
+> i=0
+
+, our goal is to generate the corresponding follower motion sequence 
+
+xF = {xiF }T −1 
+
+> i=0
+
+by modeling pθ (xF | a, xL). To achieve this objective, our method consists of three components: (1) a full-body and pair-wise relation tokenizers that discretize motion and interaction trajectories into compact tokens [9]; (2) a multimodal interactive motion–language model with an extended vocabulary that aligns motion, relation, audio, and text tokens [8], trained with instruction tuning; and (3) a diffusion-based refinement stage that improves geometric consistency and interaction realism in a shared two-person motion space [6]. Figure 1 summarizes the overall pipeline; the following details each component. 
+
+A. Human interaction representation 
+
+We denote a two-person sequence by x = {xL, xF },where L and F indicate leader and follower, and xh =
+
+{xih}T −1 
+
+> i=0
+
+is the frame sequence for human h ∈ { L, F }.This subsection defines per-frame motion states and pair-wise relation features used by the tokenizer in the next subsection. 
+
+Human motion representation. Root-centered canonical formats (e.g., HumanML3D []) are effective for solo motion but lose explicit inter-person geometry. For interaction, we adopt a non-canonical representation in the shared world-frame [6]: for each human h ∈ { L, F } and frame i,
+
+xih =  jp,h g , jv,h g , jr,h , cf,h , (1) where jp,h g ∈ R3Nj and jv,h g ∈ R3Nj are global joint 
+
+positions and velocities in the world frame, jr,h ∈ R6Nj
+
+are local joint rotations in root space (6D representation), 
+
+cf,h ∈ R4 denotes binary foot–ground contacts from heel and toe velocities, and Nj is the number of joints. 
+
+Pair-wise root relation. From this shared world-frame geometry, we define the relative placement of the two dancers Motion 
+
+> Tokenizer
+> Text
+> Tokenizer
+> Given salsa leader motion and
+> relationship, predict salsa
+> follower motion.
+> Audio
+> Tokenizer
+> Relation
+> Tokenizer
+> …
+> Relation Tokens
+> 0
+> 1
+> 2
+> …
+> Motion Tokens
+> 0
+> 1
+> 2
+> …
+> Audio Tokens
+> 0
+> 1
+> 2
+> Multimodal Vocabulary
+
+Input Mixed Tokens          
+
+> Tokenizers Mixed Token Space
+> …Given salsa leader motion
+> <Audio>
+> <Audio/>
+> …
+> <Leader>
+> <Leader/>
+> …
+> Input :###
+> <Relation/>
+> Response :###
+> <Relation>
+> …
+> …
+> <Follower>
+> <Follower/>
+
+Next Token Prediction 
+
+Stage I: 
+
+Representation 
+
+Alignment 
+
+Stage II: 
+
+Task -Specific 
+
+Fine -Tuning 
+
+Target Tokens 
+
+LLM 
+
+LoRA  Adapter Adapter Adapter  
+
+> Conditions & Instructions
+> …
+> Text Tokens
+> 0
+> 1
+> 2
+> Multimodal Interactive Motion Language Model
+
+Fig. 1: Overview of the SalsaAgent training pipeline: multimodal inputs (text, audio, leader/follower motion, and pair-wise relation) are tokenized and fused in a autoregressive LLM with an extended vocabulary; decoded motion passes through optional interaction-space diffusion refinement. During leader-to-follower inference, the model receives as input the instruction, initial relation tokens, a leader token sequence and audio token sequence. After token generation, diffusion-based refinement is applied. over time: at frame i, the leader–follower root displacement on the ground plane and relative yaw are 
+
+ri =  rx, r z , r θ  . (2) where (rx, r z ) ∈ R2 denote XZ-plane root offsets and 
+
+rθ ∈ [−π, π ] is the relative yaw about the Y-axis. We thus represent a two-person interaction with {xiL}T −1 
+
+> i=0
+
+, {xiF }T −1 
+
+> i=0
+
+,and {ri}T −1 
+
+> i=0
+
+, which are discretized into motion and relation tokens in the next subsection. 
+
+B. Full-body and pair-wise relation tokenization 
+
+To interface with LLMs, we convert full-body motion and pair-wise relation trajectories into discrete tokens using vector-quantized variational autoencoders (VQ-VAEs) [26]. In contrast to frame-level quantization [8], [16], [46], we tokenize short temporal windows to capture dynamic motion patterns [9], [56]. First, we split motion and relation trajectories into fixed-length windows of τ frames (we use τ = 20 ). For each leader/follower motion window Xwh ∈ Rτ ×Dx , we apply a rigid canonicalization transform such that the first frame is centered at the XZ origin and faces forward. The corre-sponding relation window rw ∈ Rτ ×Dr preserves the relative spatial configuration and enables inverse rigid transforms to recover trajectories in the shared world-frame. Next, each VQ-VAE consists of an encoder E, a decoder 
+
+D, and a learnable codebook C = {ck}Kk=1 [8], [26]. For an input window (either Xwh or rw), we compute the encoded feature z and select the nearest codebook entry: 
+
+k∗ = arg min 
+
+> k∈{ 1,...,K }
+
+∥z − ck∥2, ˆz = ck∗ . (3) The index k∗ serves as the discrete token for the language model, while D reconstructs the input window from ˆz.Following prior motion tokenization approaches [8], [14], [46], both encoders and decoders are implemented with GRU-based recurrent networks [56]. Each tokenizer is op-timized with a combination of reconstruction, and com-mitment loss [14]; codebook embeddings are updated via exponential moving average EMA [57], while inactive codes are reset [14]. We instantiate two such VQ-VAEs for full-body motion and pair-wise relation windows, with separate codebooks Cm
+
+and Cr of sizes Km and Kr , resulting in token sequences 
+
+km and kr , respectively. After pretraining, both tokenizers are frozen during LLM training. 
+
+C. Multimodal Interactive Motion Language Model 
+
+Multimodal vocabulary and prompts. We adapt apretrained autoregressive LLM to the multimodal setting by extending its vocabulary to integrate motion, relation, audio, and text tokens within a single sequence. Motion and relation indices kmh and kr are produced by the frozen VQ-VAEs, and audio tokens by a pretrained wave tokenizer [58] to indices ka ∈ { 1, . . . , K a}. We map codebook indices in correspondence with LLM token types, defining motion, relation, and audio vocabularies as Vm = {⟨ Mi⟩} Km 
+
+> i=1
+
+,
+
+Vr = {⟨ Ri⟩} Kr
+
+> i=1
+
+, and Va = {⟨ Ai⟩} Ka
+
+> i=1
+
+, where ⟨Mi⟩ is equivalent to kmh = i, and similarly for relation and audio. We also introduce special tokens including role markers (e.g., <Follower> , </Follower> ) and paired tokens that explicitly indicate the start and end of each modality. Base text tokens use the original tokenizer unchanged. A typical training input follows the layout: <SYS> <Audio> <A *> </Audio> <Leader> <M *> </Leader> <Relation> <R *> </Relation> <Follower> <M *> </Follower> . The model thus conditions on audio, leader motion, and relation to predict output indices. 
+
+Training objective. We represent each training example as a single interleaved token sequence y1: N containing task instructions, multimodal conditioning tokens, and supervised target output tokens. We train the autoregressive LLM with next-token prediction pθ (yt | y<t ), where all information required to predict yt is contained in prior tokens y<t . Train-ing minimizes the negative log-likelihood on the supervised target outputs: 
+
+LLLM = −
+
+> N
+
+X
+
+> t=1
+
+log pθ (yt | y<t ). (4) Here, non-target positions are masked out during loss com-putation. 
+
+LoRA Training. We use Low-Rank Adaptation (LoRA) [59] for multimodal interactive motion–language learning, preserving general language priors while introducing only a small set of trainable parameters. During training, we fix the original text tokenizer, text-token embeddings, and output head, and train only the newly introduced multimodal token embeddings together with LoRA adapters in the LLM. 
+
+Two-stage fine-tuning. We use a two-stage training strat-egy for multimodal interactive motion–language learning. In Stage I (representation alignment), we optimize LLLM on a diverse set of supervised tasks including role-conditioned generation, motion completion, cross-role prediction, and text–motion tasks to align newly introduced multimodal tokens with the pretrained language space. For each task, prompts combine task instructions, metadata such as style captions and move labels when available, and fine-grained MotionScript [11] captions for text–motion related tasks, fol-lowed by multimodal input and output tokens. In this stage, both LoRA adapters and multimodal token embeddings are trainable. In Stage II (task-specific fine-tuning), we freeze multimodal token embeddings and continue optimizing only LoRA adapters for the target motion–language task (i.e., leader-to-follower generation) with the same objective LLLM .
+
+Inference. At test time, we follow the same prompt layout as in Stage II training: observed audio, leader motion, and initial relation tokens as input. The model then autoregres-sively generates the target motion token sequence until the end token (e.g., </Follower> ). We decode the generated follower tokens into short motion windows, and concatenate them in temporal order. Trajectories are then mapped back to the shared world-frame using the corresponding inverse transform. 
+
+D. Diffusion-Based Refinement Stage 
+
+Although LLM-generated and VQ-decoded outputs are semantically coherent, geometric artifacts can remain (e.g., partner-distance drift, contact mismatch, and local footstep artifacts). To improve interaction-level precision, we apply a diffusion-based refinement prior in shared world-frame motion [6], [23]. We represent a two-person trajectory as 
+
+X = [ xL, xF ]. (5) Let ˜X(t) denote the noisy state at diffusion step t ∈{1, . . . , N step } with noise level σt. We train a denoiser network Dθ with the objective 
+
+Ldiff = EX,t,ϵ 
+
+h
+
+λt ∥X − Dθ (X + σtϵ, t, c)∥22
+
+i
+
+, (6) where ϵ ∼ N (0 , I), λt is a timestep-dependent weight, and 
+
+c is conditioning context (e.g., style metadata). At inference, given observed leader motion xL and LLM output ˆxF , we initialize ˆX = [ xL, ˆxF ]. Then, we add noise only to the follower branch up to step tr , then run reverse denoising from t = tr to t = 0 while fixing the leader branch: 
+
+˜X(t) = [ xL, ˜x(t) 
+
+> F
+
+]. (7) The refined follower motion is ˜x(0)  
+
+> F
+
+. In practice, we use a short refinement schedule (e.g., tr = 10 with Nstep = 50 ), which improves geometric consistency while preserving the generated motion semantics. IV. E XPERIMENTS 
+
+We evaluate SalsaAgent on the CoMPAS3D [10] dataset to answer three questions: (i) whether SalsaAgent improves objective duet-generation performance over strong baselines, (ii) how each proposed component contributes to those gains, and (iii) whether humans prefer SalsaAgent outputs in blind comparisons. 
+
+A. Dataset 
+
+We evaluate on CoMPAS3D [10], a motion-captured cor-pus of improvised partner salsa with 72 salsa duet recordings (about 2.5 minutes each), close leader–follower interac-tion, synchronized music, and high-fidelity 3D motion. The dataset consists of over three hours from nine pairs (18 dancers) and three proficiency levels, and includes frame-level expert annotations of salsa move types, stylistic varia-tion, and execution errors aligned with the captured motion. We focus on leader-to-follower generation conditioned on observed leader motion and music, and report test-set metrics in aggregate and by proficiency. All models are trained and evaluated under the same official train/validation/test split as in the dataset release, with shared preprocessing and windowing as Sec. III. 
+
+B. Baselines 
+
+We compare SalsaAgent against Duolando , InterGen ,and Groundtruth . At the time of writing, Duolando and InterGen were the only methods with available, reproducible code for the follower generation task. Baseline implemen-tations were retrained under the same training setup with matched conditioning signals as applicable; as InterGen does not accept music as input, follower motion was generated using leader motion input only. Groundtruth is reported as reference. C. Objective evaluation 
+
+Following prior duet-dance evaluation [5], we assess three aspects. For individual follower quality , we use Fr´ echet In-ception Distance (FID) [60] and diversity (Div) in two feature spaces, where subscripts k and g denote kinematic [61] and graphical [62] features, respectively. FID measures the distribution gap between generated and reference motions, and Div measures variability across generated samples. For 
+
+interaction quality , we follow [5] and compute cross-distance features between leader and follower joints, then evaluate them with FID cd and Div cd . For rhythmic consistency , we report BED for leader–follower beat synchrony [5] and BAS for motion–music alignment [17]. Metric directionality is shown in all tables using ↑/↓ notation. 
+
+D. Subjective evaluation 
+
+Following university ethics board approval, we recruited participants from Prolific for the subjective evaluation. Par-ticipants first reviewed a consent form, confirmed prior dance experience, and completed a headphone check. In each trial, participants evaluated four methods side-by-side (Groundtruth, Duolando, InterGen, and SalsaAgent) pre-sented in anonymized and randomized order. They rated each method on a 1–5 Likert scale (1: very low, 5: very high) for each of six competitive salsa evaluation dimen-sions comprising timing, musicality, technique, difficulty, partner coordination, and originality [63]. Participants then ranked the four methods from best (1st) to worst (4th). Definitions for each rating dimension were provided during evaluation and reflect dimensions of evaluation used in salsa competition [63]. In accordance with ethical review board policies, participation was restricted to individuals located in [redacted for anonymity] .
+
+E. Implementation details 
+
+We tokenize with 20-frame segments (1 s at 20 fps) and train separate VQ-VAEs [14], [26] for motion and relation, then freeze both for LLM tuning. Similar to Ges-ture2Vec [56], we use two-layer bidirectional GRU encoder and directional GRU decoder networks for sequence-level encoding and reconstruction. The motion tokenizer uses latent size 512 and 512 codes, trained for 2000 epochs (batch 2048, lr 10 −4); the relation tokenizer uses latent size 32 with the 512 codebook size, same batch size and learning rate, trained for 200 epochs. Both use EMA-reset quantization ( μ = 0 .95 ), commitment weight 0.02, velocity loss weight 0.1, 5 warmup epochs, and scheduler gamma 0.05. We adopt Gemma2-2B-it [36] as the LLM backbone and apply LoRA for parameter-efficient tuning [59] (rank 64, alpha 64, dropout 0.1): Stage I trains multimodal embeddings and LoRA on multi-task data with learning rate 2×10 −5, and Stage II freezes added embeddings and fine-tunes only LoRA for 100 epochs (batch size 4) with learning rate 1 × 10 −5.We train a conditional diffusion-based denoiser for motion refinement using a frozen CLIP ViT-L/14 text encoder [64], with style provided as a text caption for conditioning. The model is optimized with 1000 diffusion training steps and employs DDIM sampling [65] with 50 inference steps ( η =0). A cosine noise schedule is adopted [25], and classifier-free guidance is applied with a 10% conditioning dropout rate and a guidance scale of 3.5. All models are trained using the AdamW optimizer [66], and experiments are run on a single NVIDIA RTX A6000 GPU. V. R ESULTS AND DISCUSSION 
+
+Table I presents Sec. IV-C metrics on CoMPAS3D, in-cluding F ID and Div in kinematic and graphical spaces and in the cross-distance interaction space, together with 
+
+BED (dancer–dancer rhythm alignment) and BAS (motion– music beat alignment). Rows show ground truth, InterGen, Duolando, four ablations, and the full SalsaAgent model. We analyze the benchmark rows in two steps: com-parison with InterGen [6] and Duolando [5], followed by component-wise ablations (Sec. V-C). Overall, SalsaAgent is strongest on partner-consistency and follower-kinematics metrics, while not maximizing every diversity or music-alignment metric. In follower quality, SalsaAgent achieves F ID k=4 .96 and 
+
+F ID g =12 .19 . Compared with Duolando, this is a 53% 
+
+reduction in F ID k and a lower F ID g ; compared with InterGen, F ID k drops by 79% and F ID g is slightly lower. Since F ID k and F ID g are computed from kinematic and trajectory-based motion features [61], [62], these reductions indicate closer matching to reference follower dynamics and global motion patterns. SalsaAgent does not lead Div k/Div g ,likely because unified whole-body tokenization concentrates generation more than Duolando’s part-wise codebook com-position and InterGen’s raw-space diffusion, and as noted in prior work, higher diversity primarily reflects spread rather than guaranteed coverage or quality [67]. For interaction quality, SalsaAgent has the lowest F ID cd 
+
+(5.06 ), versus 15 .99 for InterGen and 21 .27 for Duolando. Because cd features summarize leader–follower pairwise ge-ometry [5], this indicates closer matching of partner-relative spacing to the reference distribution. InterGen records the highest Div cd ; we interpret this as somewhat wider variation in cross-distance patterns across samples; however, diversity appears to comes at the expense of FID. SalsaAgent also improves BED , suggesting stronger leader–follower motion alignment and beat synchrony. For motion–music alignment, Duolando and InterGen re-sult in higher BAS than SalsaAgent. While prior work sug-gest that beat alignment should be maximized, we notice that higher beat alignment may not be optimal depending on the dance type. Indeed, salsa uses syncopated (off-beat) rhythms. Considering that groundtruth BAS is 0.155 , SalsaAgent (0.190 ) is closer to groundtruth BAS than InterGen ( 0.197 )and Duolando ( 0.220 ). Together, these results indicate that SalsaAgent’s main gains concentrate on partner geometry and kinematic fidelity, with a BAS closer to groundtruth. 
+
+A. Qualitative Results 
+
+Figure 2 shows qualitative comparisons of generated fol-lower motion conditioned on a given leader, across Sal-saAgent and baseline methods. In SalsaAgent, the follower TABLE I: Quantitative comparison on CoMPAS3D. We include ground truth as reference, baselines, ablations, and full SalsaAgent. We present solo, interactive, and motion–music alignment metrics. Arrows indicate whether higher ( ↑) or lower (↓) is better. Among generative methods (excluding ground truth), the best and second-best value in each column is shown in bold and underlined, respectively. 
+
+Solo Metrics Interactive Metrics Rhythmic Method FID k (↓) FID g (↓) Div k (↑) Div g (↑) FID cd (↓) Div cd (↑) BED( ↑) BAS( ↑)Groundtruth 0.00 0.00 8.741 0.809 0.00 2.0111 0.4206 0.1552 
+
+InterGen 23 .23 12 .47 8.594 0.720 15 .99 2.07 0.3163 0.1970 
+
+Duolando 10 .47 13 .95 7.964 0.782 21 .27 1.93 0.3045 0.2201 
+
+SalsaAgent w/o Audio 5.58 12 .96 6.089 0.761 5.47 1.81 0.3605 0.1840 
+
+SalsaAgent w/o MotionScript 6.32 18 .06 6.318 0.734 5.62 1.88 0.3592 0.1942 
+
+SalsaAgent w/o Relation 5.93 14 .87 6.562 0.716 7.65 1.91 0.3528 0.1855 
+
+SalsaAgent w/o Refinement 4.67 11 .74 4.951 0.692 8.12 1.78 0.2386 0.1765 
+
+SalsaAgent (ours) 4.96 12 .19 6.241 0.728 5.06 1.84 0.3567 0.1904 SalsaAgent 
+
+> InterGen
+> Duolando
+
+Fig. 2: Qualitative comparison against baseline methods. Given the same leader motion (red), we compare generated follower motion (blue) from SalsaAgent, Duolando, and InterGen. SalsaAgent maintains correct orientation (top), while InterGen and Duolando lose hand contact (middle, bottom). Duolando also suffers from foot-skating artifacts (bottom left). maintains a more consistent relative orientation to the leader and a more stable dance “frame,” aligned with the stronger interaction metrics in Table I (notably F ID cd and BED ). Compared to Duolando, we observe fewer foot-skating ar-tifacts, likely due to its separate body-part tokenization with independent root translation and stitching of them [5], while SalsaAgent adopts a single whole-body tokenization approach. Compared to InterGen diffusion model over raw motion [6], we observe a looser duet frame and less con-sistent interactions, suggesting the importance of explicit relation tokens in our pipeline. Failure cases occur under abrupt changes in orientation and distance, where relative-orientation drifts may appear. Refinement layer reduces this effect but does not fully remove it. Aggregated error from imperfect motion VQ re-construction may occasionally lead to misalignment between decoded trajectories and relation-token guidance. 
+
+B. Human study results 
+
+We further obtain subjective ratings of samples generated using each method from 31 participants with a minimum of one year past experience with dance. Participants compared methods across 12 trials of four-way stimulus comparisons, providing 372 evaluations per method. Stimuli for each method were presented as a balanced Latin Square to eliminate ordering effects. Figure 3 summarizes subjective results for each of six Likert criteria defined in Sec. IV across Groundtruth (GT), SalsaAgent (SA), Duolando (SD), and InterGen (SI); bars show mean ±SD for readability. Significance brackets are computed using pairwise Wilcoxon signed-rank tests. As expected, GT achieved the highest scores, with all six Likert criteria revealing statistically sig-nificant differences between GT and each generated method (p < 0.05 ). In terms of ranking, we observe a significant preference for SalsaAgent. SA achieved the best average rank among trainable methods (2.505 vs. 2.866/2.892, lower is better) Fig. 3: User study results. Each column shows descriptive mean on a 1–5 scale for Groundtruth (GT), SalsaAgent (SA), Duolando (SD), and InterGen (SI). Significance brackets show pairwise Wilcoxon signed-rank tests against GT (* 
+
+p < 0.05 , ** p < 0.01 , *** p < 0.001 ). Overall, SalsaAgent received the highest subjective ratings among trainable methods. and was selected as top-1 in 21.5% of trials, compared with 13.7% for Duolando and 10.8% for InterGen. We completed a Chi-square goodness-of-fit test on top-choice counts and found a significant preference difference among methods (χ2(3 , N = 372) = 176 .41 , p < 0.001 ), consistent with par-ticipants favoring SalsaAgent over Duolando and InterGen. Overall, these results align with trends in Table I, where SalsaAgent tends to be rated higher than other baselines across all factors. 
+
+C. Ablation studies 
+
+To understand the contribution of each component to objective duet-generation performance, we conducted an ablation study. Table I lists four configurations above the full SalsaAgent row, each removing one conditioning path or the diffusion refinement stage while keeping all other training settings matched (Sec. IV). 
+
+Removing audio. Removing audio worsened F ID k,
+
+F ID g , and F ID cd and also lowered BAS , supporting the contribution of audio conditioning to both distribution match-ing and motion–music alignment. Interestingly, SalsaAgent w/o audio recorded the highest BED in the grid. This can be explained by the follower better aligning to leader timing when not coupled to strict music–beat tracking. 
+
+Removing MotionScript. Removing textual MotionScript yielded the largest spike in F ID g . Since the MotionScript captions were generated deterministically from skeleton mo-tions, this suggests that strongly coupled language grounding to motion is an important factor for training. 
+
+Removing relation features. Without relation tokens, 
+
+F ID cd rises from 5.06 to 7.65 (+51% ), the largest interaction-space degradation among ablations. Since cd fea-tures are built from leader–follower joint distances [5], this pattern supports the role of explicit relation conditioning in preserving partner geometry. F ID k and F ID g also worsen, suggesting that follower quality depends on interaction con-text. 
+
+Removing refinement. Without diffusion refinement, in-teraction quality degrades most strongly: F ID cd increases (5.06 →8.12 ), and BED drops ( 0.3567 →0.2386 ), indicating weaker leader–follower coordination. Solo metrics slightly improve showing a trade-off between solo precision and interaction quality. In summary, each ablation reveals a distinct failure mode, while the full model achieves the most balanced trade-off across follower fidelity, partner consistency, and rhythm-related metrics. 
+
+D. Discussion and limitations 
+
+Subjective and objective evidence together support Sal-saAgent as a strong nonverbal follower motion generator on CoMPAS3D. Objectively, it improves solo follower fi-delity ( F ID k and F ID g ) and interactive partner geom-etry (F ID cd ) relative to Duolando and InterGen, while achieving stronger leader–follower synchrony ( BED ), re-flecting a fidelity–diversity trade-off in which several Div columns remain higher for the baselines. Ablations further show that relation tokens, MotionScript, audio, and diffu-sion refinement each address complementary failure modes (Table I). The human study in Sec. IV aligns with these findings. Participants substantially favor SalsaAgent over the baselines, yet aggregate scores remain below ground truth across criteria, indicating room for perceptual realism beyond what distribution metrics alone capture. Several limitations remain, including that no generative configuration achieves the best score in every metric. Upon close inspection of generated samples, we also noted that whole-body motion tokenization can lose fine-grained limb and footwork detail, and that longer generated sequences more often reveal ag-gregated misalignment between motion-token reconstruction and relation-token guidance. Future work includes conditioning the diffusion prior on audio to capture high-frequency timing cues and to narrow the BAS gap, hierarchical or body-part VQ tokenization to reduce whole-body quantization loss to preserve fine-grained motion detail, and joint optimization of the motion and relation VQ-VAEs under cross-modal consistency losses to improve the alignment between decoded trajectories and the predicted interaction geometry. Additional directions include physics-aware decoding and articulated mesh representations to improve modeling of contact and weight transfer during fast movements. VI. C ONCLUSION 
+
+We introduce SalsaAgent, a multimodal embodied lan-guage model for interactive dance generation that improves upon baseline methods in objective and subjective metrics in a salsa dance dataset. We use separate vector-quantized tokenizers for single-person motion and interaction relations, alongside audio tokens, and ground the motion tokens in natural language. Training follows a two-stage strategy: mul-timodal representation alignment followed by task-specific fine-tuning for leader-to-follower generation, followed by a lightweight diffusion-based refinement stage that improves fine-grained details such as contact and orientation. Quantitative evaluation shows that our method achieves consistent improvements in objective metrics of follower realism and partner-consistent behavior, reflecting stronger kinematic plausibility and interaction coherence. Subjective evaluations further indicate a clear preference for our gen-erated motions over competing approaches, while a gap remains compared to real reference performances. REFERENCES [1] C. Bartneck et al. Human-robot interaction: An introduction . Cam-bridge University Press, 2024. [2] J. L. Hanna. To dance is human: A theory of nonverbal communication .University of Chicago Press, 1987. [3] K. E. Raheb et al. Dance interactive learning systems: A study on interaction workflow and teaching approaches. ACM Comput. Surv. ,2019. [4] J. McMains. Salsa steps toward intercultural education. J. Dance Educ. , 2016. [5] L. Siyao et al. Duolando: Follower gpt with off-policy reinforcement learning for dance accompaniment. In ICLR , 2024. [6] H. Liang et al. InterGen: Diffusion-based multi-human motion generation under complex interactions. IJCV , 2024. [7] R. Li et al. Interdance: Reactive 3d dance generation with realistic duet interactions. In ICLR , 2025. [8] B. Jiang et al. MotionGPT: Human motion as a foreign language. 
+
+NeurIPS , 2023. [9] H. Yu et al. SocialGen: Modeling multi-human social interaction with language models. In 3DV , 2026. [10] B. Burkanova et al. CoMPAS3D: A dataset and benchmark for interactive motion. arXiv , 2025. [11] P. J. Yazdian et al. MotionScript: Natural language descriptions for expressive 3D human motions. In IROS , 2025. [12] C. Zhang et al. React to this! how humans challenge interactive agents using nonverbal behaviors. In IROS . IEEE, 2024. [13] C. Guo et al. Generating diverse and natural 3D human motions from text. In CVPR , June 2022. [14] J. Zhang et al. T2M-GPT: Generating human motion from textual descriptions with discrete representations. In CVPR , 2023. [15] R. Dabral et al. MoFusion: A framework for denoising-diffusion-based motion synthesis. In CVPR , 2023. [16] Z. Zhou and B. Wang. UDE: A unified driving engine for human motion generation. In CVPR , 2023. [17] L. Siyao et al. Bailando: 3d dance generation by actor-critic gpt with choreographic memory. In CVPR , 2022. [18] J. Tseng et al. EDGE: Editable dance generation from music. In 
+
+CVPR , 2023. [19] N. Le et al. Music-driven group choreography. In CVPR , 2023. [20] N. Le et al. Controllable group choreography using contrastive diffusion. TOG , 2023. [21] M. Petrovich et al. Action-conditioned 3D human motion synthesis with transformer VAE. In ICCV , 2021. [22] C. Guo et al. Action2Motion: Conditioned generation of 3D human motions. In ACM MM , 2020. [23] G. Tevet et al. Human motion diffusion model. In ICLR , 2023. [24] Y. Shafir et al. Human motion diffusion as a generative prior. In ICLR ,2024. [25] A. Q. Nichol and P. Dhariwal. Improved denoising diffusion proba-bilistic models. In ICML . PMLR, 2021. [26] A. van den Oord et al. Neural discrete representation learning. 
+
+NeurIPS , 2017. [27] C. Guo et al. MoMask: Generative masked modeling of 3D human motions. In CVPR , 2024. [28] K. Sui et al. A survey on human interaction motion generation. IJCV ,2026. [29] Y. Liu et al. Interactive humanoid: Online full-body motion reaction synthesis with social affordance canonicalization and forecasting. In 
+
+3DV , 2025. [30] A. Ghosh et al. ReMoS: 3D motion-conditioned reaction synthesis for two-person interactions. In ECCV . Springer, 2024. [31] L. Xu et al. ReGenNet: Towards human action-reaction synthesis. In 
+
+CVPR , 2024. [32] M. G. Javed et al. InterMask: 3D human interaction generation via collaborative masked modelling. In ICLR , 2025. [33] K. Fan et al. FreeMotion: A unified framework for number-free text-to-motion synthesis. In ECCV . Springer, 2024. [34] H. Touvron et al. LLaMA: Open and efficient foundation language models. arXiv , 2023. [35] W. L. Chiang et al. Vicuna: An open-source chatbot impressing gpt-4 with 90%* chatgpt quality. https://lmsys.org/blog/2023-03-30-vicuna/, 2023. Accessed: 2025-05-06. [36] G. Team et al. Gemma 2: Improving open language models at a practical size. arXiv , 2024. [37] T. Brown et al. Language models are few-shot learners. NeurIPS ,2020. [38] R. Girdhar et al. ImageBind: One embedding space to bind them all. In CVPR , 2023. [39] J. Li et al. Blip: Bootstrapping language-image pre-training for unified vision-language understanding and generation. In ICML , 2022. [40] H. Zhang et al. Video-LLaMA: An instruction-tuned audio-visual language model for video understanding. In EMNLP Demo , 2023. [41] Wan Team. Wan: Open and advanced large-scale video generative models. arXiv , 2025. [42] S. Deshmukh et al. Pengi: An audio language model for audio tasks. In NeurIPS , 2023. [43] Z. Deng et al. Musilingo: Bridging music and text with pre-trained language models for music captioning and query response. In NAACL Findings , 2024. [44] J. Han et al. OneLLM: One framework to align all modalities with language. In CVPR , 2024. [45] S. Wu et al. NExT-GPT: Any-to-any multimodal LLM. In ICML ,2024. [46] Y. Zhang et al. MotionGPT: Finetuned LLMs are general-purpose motion generators. In AAAI , 2024. [47] Q. Wu et al. Motion-Agent: A conversational framework for human motion generation with LLMs. In ICLR , 2025. [48] M. Luo et al. M 3GPT: An advanced multimodal, multitask framework for motion comprehension and generation. In NeurIPS , 2024. [49] M. Zhang et al. FineMoGen: Fine-grained spatio-temporal motion generation and editing. In NeurIPS , 2023. [50] Z. Zhang et al. Social agent: Mastering dyadic nonverbal behavior generation via conversational llm agents. In SIGGRAPH Asia , 2025. [51] J. Jiang et al. Solami: Social vision-language-action modeling for immersive interaction with 3d autonomous characters. In CVPR , 2025. [52] M. Plappert et al. The KIT motion-language dataset. Big Data , 2016. [53] L. Xu et al. Inter-x: Towards versatile human-human interaction analysis. In CVPR , 2024. [54] R. Li et al. Ai choreographer: Music conditioned 3d dance generation with AIST++. In ICCV , 2021. [55] R. Li et al. Finedance: A fine-grained choreography dataset for 3d full body dance generation. In ICCV , 2023. [56] P. J. Yazdian et al. Gesture2vec: Clustering gestures using represen-tation learning methods for co-speech gesture generation. In IROS .IEEE, 2022. [57] A. Razavi et al. Generating diverse high-fidelity images with VQ-VAE-2. In NeurIPS , 2019. [58] S. Ji et al. Wavtokenizer: an efficient acoustic discrete codec tokenizer for audio language modeling. In ICLR , 2025. [59] E. J. Hu et al. Lora: Low-rank adaptation of large language models. In ICLR , 2022. [60] M. Heusel et al. Gans trained by a two time-scale update rule converge to a local nash equilibrium. NeurIPS , 2017. [61] K. Onuma et al. FMDistance: A fast and effective distance function for motion capture data. In Eurographics , 2008. [62] M. M¨ uller et al. Efficient content-based retrieval of motion capture data. In SCA . 2005. [63] Canada Salsa and Bachata Congress. Rules, definitions and judging criteria 2024. https://www.canadasalsacongress.com/rules, 2024. Accessed: 2025-05-06. [64] A. Radford et al. Learning transferable visual models from natural language supervision. In ICML , 2021. [65] J. Song et al. Denoising diffusion implicit models. In ICLR , 2021. [66] I. Loshchilov and F. Hutter. Decoupled weight decay regularization. In ICLR , 2019. [67] M. F. Naeem et al. Reliable fidelity and diversity metrics for generative models. In ICML . PMLR, 2020.

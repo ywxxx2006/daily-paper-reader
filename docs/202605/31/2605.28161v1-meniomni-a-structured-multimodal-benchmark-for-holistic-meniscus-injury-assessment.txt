@@ -1,0 +1,450 @@
+Title: MeniOmni: A Structured Multimodal Benchmark for Holistic Meniscus Injury Assessment
+
+URL Source: https://arxiv.org/pdf/2605.28161v1
+
+Published Time: Thu, 28 May 2026 00:56:26 GMT
+
+Number of Pages: 6
+
+Markdown Content:
+# MeniOmni: A Structured Multimodal Benchmark for Holistic Meniscus Injury Assessment 
+
+Shurui Xu 1,3,* , Siqi Yang 2,* , Weiping Ding 3,4,† , Hui Wang 1, Mengzhen Fan 5, Yuyu Sun 6 and Shuyan Li 1,7, † 
+
+1School of Electronics, Electrical Engineering and Computer Science, Queen’s University Belfast, Belfast, UK 
+
+2Radiology Department, Affiliated Nantong Clinical College of Nantong University, Nantong First People’s Hospital, School of Clinical Medicine, Nantong University, Nantong, Jiangsu, China 
+
+3School of Artificial Intelligence and Computer Science, Nantong University, Nantong, China 
+
+4Faculty of Data Science, City University of Macau, Macau, China 
+
+5Department of Chemistry, University of Oxford, Oxford, UK 
+
+6Orthopedics Department, Nantong First People’s Hospital, Southeast University, Nantong, Jiangsu, China 
+
+7Institution for Ocean Engineering, Tsinghua SIGS, Shenzhen, China 
+
+Abstract —Clinical diagnosis of meniscus injuries requires radi-ologists to integrate volumetric MRI evidence with patient context (e.g., sex, age, BMI) and to produce structured diagnostic reports. Existing knee MRI benchmarks are typically unimodal and rely on coarse labels, limiting their ability to evaluate holistic clinical reasoning. We introduce MeniOmni, a structured multimodal benchmark for meniscus injury assessment, consisting of 746 multi-center MRI studies with tri-planar volumetric inputs, Clinical Priors, and expert-annotated clinical text. MeniOmni supports two tasks: (1) fine-grained Stoller severity grading and (2) diagnostic report generation. We further propose risk-aware ordinal evaluation and a semantic consistency metric (Meni-Score) to better reflect clinical relevance. Baseline experiments show that incorporating Clinical Priors improves grading per-formance and reduces severe errors, highlighting the value of multimodal context for safer assessment. Code and data are available at https://github.com/ShuruiXu/MeniOmni. 
+
+Index Terms —Medical Image Analysis, Meniscus Injury, Benchmark, Multimodal Fusion. 
+
+I. I NTRODUCTION 
+
+The knee meniscus is a critical biomechanical stabilizer, and meniscal tears account for one-third of knee arthroscopies an-nually [1], [2]. While MRI is the diagnostic gold standard [3], clinical interpretation goes beyond pixel-level perception: ra-diologists synthesize volumetric visual cues, integrate patient-specific Clinical Priors, and formulate semantic reports. The shortage of expert radiologists motivates automated systems capable of emulating this multimodal workflow [4]. However, progress toward multimodal diagnostic AI is hindered by two bottlenecks. In terms of data, existing public datasets are task-specific and limited to the visual modality. As detailed in Table I, standard benchmarks such as MRNet [5] rely on coarse binary labels and lack the fine-grained severity grading (0–3) that is essential for surgical planning. Although recent initiatives such as MeniMV [9] have advanced the field with multi-view analysis, they remain restricted to uni-modal visual inputs, systematically omitting structured patient context and diagnostic semantics. Equally critical, existing 
+
+* These authors contributed equally to this work. †Corresponding authors. Contact emails: dwp9988@163.com (W. Ding), shuyan.li@qub.ac.uk (S. Li) The MeniOmni 
+
+Benchmark 
+
+The MeniOmni 
+
+Benchmark 
+
+> Task 2:
+> Report Generation
+
++ 
+
+> Visual Textual
+
++ 
+
+> Visual Textual
+> Task 2:
+> Report Generation
+
++ 
+
+> Visual Textual
+> Task 2:
+> Report Generation
+
++  
+
+> Visual Textual
+> Task 1:
+> Severity Grading
+> Visual Tabular
+
++ 
+
+> Visual Tabular
+
++ 
+
+> Task 1:
+> Severity Grading
+> Visual Tabular
+
++ 
+
+> Task 1:
+> Severity Grading
+> Visual Tabular
+
++
+
+> Task 2:
+> Report Generation
+
++  
+
+> Visual Textual
+> Task 1:
+> Severity Grading
+> Visual Tabular
+
++                                        
+
+> Clinical Priors
+> Data
+> Indicator Value
+> Age: 57
+> Sex: Female
+> BMI: 20
+> Weight: 50 kg
+> Height: 158 cm
+> Indicator Value
+> Age: 57
+> Sex: Female
+> BMI: 20
+> Weight: 50 kg
+> Height: 158 cm
+> Clinical Priors
+> Data
+> Indicator Value
+> Age: 57
+> Sex: Female
+> BMI: 20
+> Weight: 50 kg
+> Height: 158 cm
+> Morphological Description:
+> “Linear high signal intensity in
+> posterior horn... ”
+> Diagnostic Conclusion :
+> “Grade 2 injury to lateral meniscus ”
+> Clinical Text
+> Morphological Description:
+> “Linear high signal intensity in
+> posterior horn... ”
+> Diagnostic Conclusion :
+> “Grade 2 injury to lateral meniscus ”
+> Clinical Text
+> Volumetric Vision (Knee MRI Sequences)
+> Sagittal (PD -FS) Coronal (T2) Axial (PD) Sagittal (PD -FS) Coronal (T2) Axial (PD)
+> Volumetric Vision (Knee MRI Sequences)
+> Sagittal (PD -FS) Coronal (T2) Axial (PD)
+> Content -Adaptive Sampling applied to raw video sequences.
+> Volumetric Vision (Knee MRI Sequences)
+> Sagittal (PD -FS) Coronal (T2) Axial (PD)
+> Content -Adaptive Sampling applied to raw video sequences.
+> Clinical Priors
+> Data
+> Indicator Value
+> Age: 57
+> Sex: Female
+> BMI: 20
+> Weight: 50 kg
+> Height: 158 cm
+> Morphological Description:
+> “Linear high signal intensity in
+> posterior horn... ”
+> Diagnostic Conclusion :
+> “Grade 2 injury to lateral meniscus ”
+> Clinical Text
+> Volumetric Vision (Knee MRI Sequences)
+> Sagittal (PD -FS) Coronal (T2) Axial (PD)
+> Content -Adaptive Sampling applied to raw video sequences.
+> Data
+> Composition
+> Support
+> Task
+
+Fig. 1. Overview of the MeniOmni Benchmark construction and supported dual-task. 
+
+evaluation protocols rely on generic metrics (e.g., accuracy, n-gram overlap) that treat all errors equally, ignoring ordinal severity and rewarding fluency over factual correctness. The field thus lacks both the multimodal data and clinically aligned metrics necessary for reliable diagnostic agents. To bridge this gap, we present MeniOmni, a structured multimodal benchmark supporting (1) Fine-Grained Sever-ity Grading and (2) Diagnostic Report Generation. It com-bines three modalities: Volumetric Vision (content-adaptive tri-planar MRI sequences), Clinical Priors (tabular patient metadata), and Clinical Text (expert-annotated findings and conclusions). Recognizing that generic evaluation metrics fail to capture the clinical validity of diagnostic reports and the ordinal nature of severity grading, we further introduce a set of task-specific evaluation functions. These metrics are meticulously designed to align model performance with clinical relevance, ensuring a rigorous assessment beyond superficial linguistic or classification accuracy. Extensive experimental results on MeniOmni validate that this multimodal integration is crucial for achieving both high accuracy and clinical safety. The primary contributions of this work are: 
+
+• We introduce MeniOmni , a multi-center benchmark that uniquely integrates volumetric MRI, structured Clinical                                                 
+
+> arXiv:2605.28161v1 [cs.CV] 27 May 2026 TABLE I FUNCTIONAL COMPARISON OF MENI OMNI AGAINST EXISTING KNEE MRI BENCHMARKS .
+> Benchmark Input Modalities Label Supported Core Vision Tabular Text Granularity Tasks Focus
+> MRNet [5] ✓××Binary (0/1) Classification Abnormality fastMRI [6] ✓××None Reconstruction Image Quality FastMRI+ [7] ✓××Bounding Box Detection Localization KneeMRI [8] ✓××Slice-level Segmentation Pixel-wise MeniMV [9] ✓××4-Grade Grading Visual Severity
+> MeniOmni (Ours) ✓✓✓4-Grade Grading & Gen. Holistic Reasoning
+
+Priors, and diagnostic text, addressing the scarcity of multimodal orthopedic datasets.  
+
+> •
+
+We propose a Dual-Task Evaluation Protocol support-ing both Fine-Grained Grading and Diagnostic Report Generation, enabling a rigorous assessment of MLLM capabilities.  
+
+> •
+
+We establish comprehensive multimodal baselines by benchmarking state-of-the-art models on MeniOmni. This work defines the task landscape and quantifies the per-formance gain from multimodal integration. II. R ELATED WORK 
+
+A. Deep Learning for Knee MRI Analysis 
+
+Automated knee MRI analysis has evolved from 2D CNN segmentation [5], [10] to 3D volumetric frameworks with attention mechanisms and Transformers [11], [12]. However, these methods process MRI as a unimodal visual signal, neglecting structured patient metadata (age, BMI) that are clinically indispensable for distinguishing degeneration from acute tears [1]. 
+
+B. Multi-Modal Large Language Models in Medicine 
+
+Generalist biomedical MLLMs such as LLaVA-Med [13] and RadFM [14] have advanced radiology via instruction tuning but struggle in specialized orthopedics, failing to cap-ture the spatiotemporal depth of 3D MRI and frequently hallucinating due to scarce expert-annotated musculoskeletal data [15]. 
+
+C. Benchmarks for Musculoskeletal Radiology 
+
+Existing musculoskeletal benchmarks such as MRNet [5] and FastMRI+ [7] rely on coarse binary labels or detection tasks insufficient for fine-grained severity grading. Although MeniMV [9] introduced ordinal grading (0–3), it remains confined to unimodal visual classification. MeniOmni bridges these gaps as the first benchmark integrating volumetric vision, tabular priors, and diagnostic text. III. T HE MENI OMNI BENCHMARK 
+
+A. Data Acquisition and Standardization 
+
+We present MeniOmni, the first structured multimodal benchmark specifically curated to support holistic orthopedic diagnostics. As illustrated in Figure 1, the dataset is en-gineered to facilitate two complementary clinical tasks: (1) Fine-Grained Severity Grading (a multi-class classification problem) and (2) Diagnostic Report Generation (a multimodal text generation problem). To emulate the complete cognitive workflow of radiologists, MeniOmni aggregates 746 cases from three clinical centers using three standard sequences (Sagittal PD-FS, Coronal T2, Axial PD). Each meniscus was independently graded by two musculoskeletal radiologists. The dataset is partitioned at the patient level in a 7:2:1 ratio (train/validation/test) to prevent data leakage. Each case is rigorously standardized into a triad of modalities:  
+
+> •
+
+Volumetric Vision: Content-adaptive MRI video se-quences from three anatomical planes (Sagittal, Coronal, Axial).  
+
+> •
+
+Clinical Priors: Key patient demographics (Age, Sex, BMI) that function as physiological risk factors.  
+
+> •
+
+Clinical Text: Expert-annotated diagnostic reports com-prising both morphological findings and conclusions. Distinct from previous binary benchmarks, MeniOmni pro-vides fine-grained severity supervision based on the Stoller grading system. Each meniscus (Medial and Lateral) is in-dependently annotated on an ordinal scale: Grade 0 (Intact), Grade 1 & 2 (Degeneration), and Grade 3 (Tear). This hier-archical schema ensures that models are evaluated not just on detecting abnormalities, but on quantifying pathological severity with clinical precision. 
+
+B. Visual Modality: Content-Adaptive Volumetric Sampling 
+
+To optimize visual inputs, we minimize redundancy within the MRI volume via a content-adaptive sampling algorithm. For a slice I, we quantify its value based on two dimensions: Image Quality ( SIQ ) and Anatomical Complexity ( SAC ). The scoring function is formulated as: 
+
+SIQ = wcσ(I) + wsVar (∇2I) + weH(I),SAC = X
+
+> c∈C
+
+ℓ(c) + λ max  
+
+> c∈C
+
+ℓ(c). (1) where σ(I) denotes the standard deviation representing local contrast; Var (∇2I) is the variance of the Laplacian opera-tor, capturing edge sharpness; and H(I) represents Shannon entropy, quantifying overall information content. wc, w s, w e
+
+are hyperparameters balancing these factors. For anatomical complexity, ℓ(c) represents the confidence logits of meniscal regions detected by SAM-Med2D [16]. By leveraging SAM-Med2D’s promptable segmentation capabilities, we ensure the Fig. 2. Schematic illustration of the proposed content-adaptive MRI slice selection and optimization process. 
+
+selected slices contain relevant anatomy rather than back-ground noise. To define the final selection score Sfinal , we explicitly combine these metrics with a spatial prior. As meniscal tears are centrally located, we apply a Gaussian spatial weighting G(d) [17], where d is the slice distance from the volume center. The unified formulation is defined as: 
+
+Sfinal (I) = G(d) · (αS IQ + (1 − α)SAC ) (2) where α controls the trade-off between image quality and anatomical relevance. We set K=16 slices per view and 
+
+α=0 .6. SAM-Med2D (ViT-B) serves only to compute SAC ;
+
+SIQ and G(d) ensure robust ranking when SAM-Med2D confidence is low. As visualized in Figure 2, the top-K slices with the highest Sfinal are extracted and concatenated into a video sequence, constituting the optimized input for the visual encoder. 
+
+C. Non-Visual Modalities: Clinical Priors and Clinical Text 
+
+While visual data provides the morphological basis for diagnosis, clinical reasoning relies heavily on patient context and semantic interpretation. MeniOmni integrates these non-visual modalities to support holistic assessment: 
+
+1) Structured Clinical Priors: The health of the meniscus is inextricably linked to biomechanics and patient demographics. We explicitly structure key metadata for each case—age, sex, and BMI—to provide clinically relevant physiological constraints that facilitate model learning. These tabular priors are essential for the Severity Grading task, enabling the model to calibrate degeneration risks and mitigate spurious visual correlations. 
+
+2) Clinical Text Annotations: For the Report Generation task, the radiologists annotated each case with paired struc-tured texts, providing dense semantic supervision beyond simple classification labels:  
+
+> •
+
+Morphological Description: Detailed findings describ-ing signal intensity and shape anomalies (e.g., “Linear high signal intensity in the posterior horn not extending to the articular surface.” ).  
+
+> •
+
+Diagnostic Conclusion: The final clinical assessment derived from the findings (e.g., “Grade 2 injury to the lateral meniscus.” ). IV. P ROPOSED BENCHMARKING FRAMEWORK 
+
+We present the MeniOmni benchmarking framework, tai-lored to address the unique challenges of holistic meniscal assessment: the heterogeneity of multimodal inputs and the necessity for compartment-specific anatomical diagnosis. 
+
+A. Benchmarking Pipeline Setup 
+
+Clinical assessment of the knee necessitates the independent evaluation of the Medial and Lateral menisci, as they often exhibit divergent pathologies. Consequently, we formulate the severity grading task as a Dual-Compartment Prediction problem. The goal is to map the multimodal inputs—tri-planar MRI sequences V and tabular Clinical Priors T —to a pair of compartment-wise Stoller grades (ymed , y lat ), where 
+
+y ∈ { 0, 1, 2, 3}.
+
+1) Clinical Prior Serialization: Rather than employing spe-cialized tabular encoders, we define a serialization function 
+
+Φ : T → L that transforms Clinical Priors (Age, Sex, BMI) into a linguistic embedding space. A patient record is serialized into a natural language prompt Tprior :
+
+Tprior = “A tage -year-old tsex patient with a BMI of tbmi ”.
+
+(3) This unification enables the model to interpret risk factors as semantic context rather than isolated numerical features. 
+
+2) Tri-Stream Visual Perception: To preserve the anatomi-cal geometry of orthogonal MRI planes, we propose a Siamese Multi-Stream Encoding strategy. Let V = {Vsag , V cor , V axi }
+
+denote the input volumetric slice sequences. We employ a weight-shared Video Encoder Evid to process each view inde-pendently, interpreting the z-axis depth as a pseudo-temporal dimension: 
+
+Hp = Evid (Vp), ∀p ∈ { sag, cor, axi }, (4) where Hp ∈ RT ×D represents the spatiotemporal tokens. To facilitate explicit anatomical correlation, we construct an interleaved visual sequence Xvisual with view-specific textual identifiers: 
+
+Xvisual = [ <VID> , Hsag , </VID> , “Sagittal View” ,
+
+<VID> , Hcor , </VID> , “Coronal View” ,
+
+<VID> , Haxi , </VID> , “Axial View” ].
+
+(5) where <VID> and </VID> denote special modality tokens that demarcate the boundaries of visual embeddings. The utilisation of these tokens facilitates the LLM’s capacity to discern continuous visual representations from discrete textual tokens. This process effectively employs the LLM’s positional encoding, thereby binding anatomical semantics with their respective visual features. B. Task Formulation 
+
+Task 1: Fine-Grained Severity Grading. This task emulates holistic clinical decision-making. We construct the input XI
+
+by concatenating the visual stream with serialized priors: 
+
+XI = [ Xvisual , T prior , Igrade ]. (6) Including Tprior allows the model to calibrate pre-test prob-abilities using physiological risks. We use a Structured In-struction Igrade :“Analyze the multi-view MRI sequences and the patient’s background information. Determine the Stoller severity grade (0-3) for both the Medial Meniscus (MM) and Lateral Meniscus (LM).” to direct the model to output structured predictions. 
+
+Task 2: Visual Report Generation. To evaluate the trans-lation of pixel-level information into semantic findings, we restrict the input strictly to the visual stream to mitigate reliance on demographic shortcuts: 
+
+XII = [ Xvisual , Igen ]. (7) Using a Role-Playing Prompt Igen :“Serve as a senior radi-ologist. Focus strictly on the visual evidence. Describe the imaging features observed in the MRI sequences, specifi-cally detailing signal intensity, morphology, and tear patterns. Conclude with a final impression.” , we guide the model to generate grounded radiological descriptions rather than unsubstantiated hallucinations. V. T ASK -S PECIFIC EVALUATION PROTOCOLS 
+
+Standard metrics often treat all errors uniformly or focus solely on linguistic fluency. To ensure clinical relevance, we propose two domain-specific protocols. 
+
+A. Protocol I: Risk-Aware Ordinal Evaluation 
+
+The conventional classification metrics (e.g., accuracy, F1-score) are inadequate for meniscal grading due to their as-sumption of categorical independence, which fails to account for the ordinal progression of degeneration ( 0 → 1 → 2 → 3). From a clinical perspective, the magnitude of error dictates patient safety. The radiological distinction between Grade 1 and 2 is of minor significance, as both conditions are typically managed with a conservative approach. However, misclassifying Grade 0 (Intact) as Grade 3 (Complete Tear) or vice versa constitutes a catastrophic failure that has the potential to result in the need for unnecessary arthroscopy or the failure to capitalise on surgical opportunities. Generic metrics inadequately equate these scenarios, poten-tially validating models that are statistically performant but clinically reckless. In order to align evaluation with clinical risk stratification, a composite protocol is proposed, balancing correlation and safety: 
+
+1. Ordinal Consistency: Average Quadratic Weighted Kappa (Avg-QWK). We employ QWK as the primary metric to capture the semantic proximity between grades. Unlike linear metrics, QWK imposes a non-linear penalty wi,j = ( i−
+
+j)2/(C − 1) 2 on disagreements. This quadratically penalizes substantial deviations while tolerating minor discrepancies, aligning with the continuous nature of cartilage degeneration. We compute the macro-average of medial and lateral compart-ments to mitigate class imbalance: Avg-QWK = 12 (κmed + κlat ). (8) 
+
+2. Clinical Safety: Global Severe Error Rate (SER). While QWK aggregates average performance, it may mask critical misclassifications. SER acts as a hard safety constraint to explicitly track outliers. We define a ”Severe Error” as a deviation of ≥ 2 grades. The metric enforces a strict case-level tolerance: a diagnosis is deemed unsafe if either compartment exceeds the error threshold: SER = 1
+
+N
+
+> N
+
+X
+
+> k=1
+
+I
+
+
+
+max( |∆y(k)
+
+> med
+
+|, |∆y(k) 
+
+> lat
+
+|) ≥ 2
+
+
+
+, (9) where I(·) is the indicator function. Lower SER implies the model makes fewer clinically hazardous errors. 
+
+B. Protocol II: The Meni-Score (Semantic Factual Consis-tency) 
+
+Standard n-gram metrics quantify surface-level lexical over-lap but fail to capture factual consistency. In medical reporting, a ”horizontal tear” and a ”vertical tear” have high n-gram overlap but represent contradictory diagnoses. To quantify semantic precision, we introduce the Meni-Score, an entity-centric metric grounded in a structured clinical ontology. 
+
+1. Structured Clinical Vocabulary Construction. Diverging from unstructured text matching, we define a discrete patho-logical vocabulary set Vmeni = Vloc ∪V morph ∪V sig , compris-ing three disjoint semantic subsets distilled from radiological standards:  
+
+> •
+
+Location Subspace ( Vloc ): ”posterior horn”, ”anterior root”, ”body” . 
+
+> •
+
+Morphology Subspace (Vmorph ): ”horizontal”, ”ra-dial”, ”bucket-handle”, ”complex” . 
+
+> •
+
+Signal Subspace ( Vsig ): ”linear high signal”, ”globu-lar”, ”maceration” .We implement a Canonicalization Function Φnorm (·) that maps synonymous variations to unique tokens in Vmeni , en-suring robustness against linguistic variations. For example, 
+
+Φnorm maps “high signal” → “linear high signal” and “menis-cal tear” → the corresponding morphology token in Vmorph .The complete entity extraction rules, synonym mappings, and clinical ontology will be released as part of our open source evaluation toolkit. 
+
+2. Set-Theoretic Calculation. Let Rgen be the generated re-port and Rgt be the ground truth. We employ an entity extrac-tor Extract (.) to map both texts into the entity space: Sgen =Φnorm (Extract (Rgen )) and Sgt = Φ norm (Extract (Rgt )) ,where S ⊂ Vmeni . The Meni-Score is formulated as the F1-score of the clinical precision and recall based on set intersection: Meni-Score = 2 · Pclin · Rclin 
+
+Pclin + Rclin 
+
+, (10) where Pclin = |Sgen ∩Sgt ||Sgen | serves as a proxy for hallucination control, and Rclin = |Sgen ∩Sgt ||Sgt | measures the information coverage. VI. E XPERIMENTAL RESULTS ANALYSIS 
+
+We evaluate the proposed benchmarks across two distinct tasks: Severity Grading (Task 1) and Report Generation (Task 2). This section analyzes the quantitative performance of supervised visual specialists and state-of-the-art MLLMs. 
+
+A. Task 1: Fine-Grained Severity Grading 
+
+Table II presents the comparison on meniscal severity grading. We compare supervised specialists, which are fine-tuned on the training set to learn a direct mapping from voxels to labels, against generalist MLLMs evaluated in a zero-shot setting using the serialized prior T and interleaved visual sequence Xvisual . Zero-shot MLLMs use a temperature of 0 for grading (deterministic) and 0.3 for report generation (controlled diversity).                                                      
+
+> TABLE II TASK 1 P ERFORMANCE : M ENISCAL SEVERITY GRADING .
+> Model Acc F1 QWK SER ↓
+> Supervised Specialists (Visual-Only, Fine-tuned)
+> Inception-3D 56.5% 53.8% 0.495 16.2% ResNet3D-50 58.7% 56.3% 0.525 14.5% X3D-L [18] 61.2% 58.9% 0.558 12.8% ViViT-B [19] 62.9% 60.5% 0.592 11.0%
+> Video Swin-B [20] 63.8% 61.2% 0.605 10.2%
+> Open-Source MLLMs (Zero-shot)
+> Video-LLaVA [21] 38.5% 34.2% 0.215 35.4% InternVL2 [22] 51.2% 48.1% 0.448 20.5% Qwen2-VL-72B [23] 55.4% 52.6% 0.492 17.8%
+> Proprietary MLLMs (Zero-shot)
+> Gemini 1.5 Pro 58.4% 55.1% 0.518 15.2% Claude 3.5 Sonnet 60.2% 57.5% 0.562 13.8%
+> GPT-4o 62.5% 59.8% 0.585 12.4%
+
+As hypothesised, supervised specialists currently dominate the leaderboard, with the Video Swin-B model achieving state-of-the-art accuracy (63.8%) and QWK (0.605). This validates the efficacy of hierarchical attention mechanisms in modelling the anisotropic 3D nature of meniscal tears and in captur-ing fine-grained morphological discontinuities that are often missed by generic encoders. However, GPT-4o’s performance is also impressive, with an accuracy of 62.5%, trailing by only 1.3% in a zero-shot setting. This implicitly validates our Tri-Stream Visual Perception and Clinical Prior Serialisation strategies, demonstrating that MLLMs can successfully per-form ’cognitive registration’ of orthogonal planes and leverage Clinical Priors to calibrate diagnostic probabilities. Neverthe-less, a critical divergence remains in terms of reliability: while specialists maintain a robust severe error rate (SER) of 10.2% due to their constrained classification manifold, open-source MLLMs exhibit prohibitive volatility (e.g. Video-LLaVA at 35.4%). This confirms that, although generalist MLLMs have high potential, they currently lack the robustness of fine-tuned specialists, highlighting the importance of the SER metric in identifying catastrophic clinical errors. 
+
+B. Task 2: Visual Report Generation 
+
+Table III assesses the ability to translate pixel-level evidence into well-grounded radiological reports. This task is unique to MLLMs.                         
+
+> TABLE III TASK 2 P ERFORMANCE : D IAGNOSTIC REPORT GENERATION .
+> Model BLEU-4 ROUGE-L Meni-Score
+> Open-Source MLLMs
+> Video-LLaVA [21] 15.2 28.5 32.4 InternVL2 [22] 20.1 36.5 44.2 Qwen2-VL-72B [23] 22.5 39.8 46.5
+> Proprietary MLLMs
+> Gemini 1.5 Pro 24.5 41.2 48.5 Claude 3.5 Sonnet 27.2 43.8 51.0
+> GPT-4o 26.8 44.5 52.4
+
+Our evaluation reveals a steep performance scaling law in diagnostic report generation. The ability to interpret complex visual features and translate them into precise medical ter-minology is a distinct property of model scale. While smaller models such as Video-LLaVA struggle with entity recall, large-scale foundation models such as Qwen2-VL-72B and GPT-4o demonstrate significantly higher alignment with the clinical vocabulary Vmeni . Crucially, however, the results reveal a discrepancy between linguistic fluency and clinical accuracy: although Claude 3.5 Sonnet achieves the highest BLEU-4 score (27.2) thanks to its superior fluency, GPT-4o surpasses it with a Meni-Score of 52.4. This discrepancy highlights the limitations of standard n-gram metrics and confirms that top-tier proprietary models excel specifically in semantically factual consistency, minimising radiological hallucinations, as verified by our rigorous, ontology-grounded benchmarking protocol. VII. A BLATION STUDY : E FFECTIVENESS OF CLINICAL 
+
+PRIORS 
+
+A core hypothesis of MeniOmni is that accurate diagnosis requires holistic patient profiling. To validate this, we conduct an inference-time ablation with GPT-4o, comparing a (A) Vision Only baseline against our (B) Multimodal formulation (Vision + Age/Sex/BMI). 
+
+Experimental Settings.  
+
+> •
+
+(A) Vision Only: The model receives only the tri-stream video sequence without any textual metadata.  
+
+> •
+
+(B) Vision + Clinical Priors (Ours): We integrate the visual input with basic patient demographics and clinical indicators (Age, Sex, BMI). 
+
+Demographics as Bayesian Filters. As shown in Table IV, integrating clinical priors substantially improves performance, increasing accuracy by 4.1% and average QWK by 0.073. This confirms that demographics function as effective ’Bayesian priors’, enabling the model to calibrate decision boundaries based on epidemiological norms. For example, the model TABLE IV ABLATION STUDY ON CLINICAL PRIORS .
+
+Input Configuration Consistency (↑) Safety (↓)
+
+Acc Avg-QWK SER 
+
+(A) Vision Only 58.4% 0.512 16.8% 
+
+(B) Vision + Priors 62.5% 0.585 12.4% (a)Vision Only Baseline  (b)Vision + Clinical Priors           
+
+> GPT -4o
+> Grade 1lateral meniscus injury Grade 0 lateral meniscus injury
+> High signal in
+> posterior horn
+> detected.
+> Pattern matches
+> degenerative tear.
+> GPT -4o
+> Patient Profile
+> Age: 24
+> BMI: 23.4
+> Sex: Female
+> Patient Profile
+> Age: 24
+> BMI: 23.4
+> Sex: Female
+> BUT Patient is young implies
+> degeneration is rare.
+> Re -evaluating as Artifact.
+> High signal detected...
+> BUT Patient is young implies
+> degeneration is rare.
+> Re -evaluating as Artifact.
+> High signal detected...
+> Ground Truth: Grade 0 lateral meniscus injury +
+
+Fig. 3. Qualitative Analysis. The integration of clinical priors (Age: 26) corrects a visual hallucination, downgrading a false Grade 2 diagnosis to Grade 0. 
+
+learns to reduce the probability assigned to degenerative tears in younger patients, even when visual signals are ambiguous. 
+
+Safety Mechanism and Qualitative Correction. Crucially, priors act as a safety regulariser, causing a significant decrease in the Severe Error Rate (SER) from 16.8% to 12.4%. As shown in Figure 3, the Vision-Only model falls into a ’Visual Ambiguity Trap’, misinterpreting a hyperintense signal in the posterior horn as a degenerative tear (Grade 2). However, when the prior ’Age: 26’ is integrated, the Multimodal model performs a Bayesian update. Recognising that primary degen-eration is uncommon in young adults, it suppresses the visual hallucination and correctly reclassifies the signal as a benign artefact (grade 0). This demonstrates how MeniOmni aligns diagnostic reasoning with clinical plausibility, effectively fil-tering out catastrophic false positives. VIII. C ONCLUSION 
+
+We presented MeniOmni, a structured multimodal bench-mark shifting meniscus injury assessment from isolated visual perception to holistic clinical reasoning by integrating multi-view MRI, Clinical Priors, and diagnostic text. Our bench-marking reveals that while proprietary models outperform open-source alternatives, they remain susceptible to halluci-nations with visual-only inputs. The integration of clinical priors functions as an effective Bayesian filter, substantially reducing the Severe Error Rate. MeniOmni serves as both a comprehensive testbed and a step towards safer, clinically aligned AI for orthopedic diagnostics. REFERENCES [1] Kavyansh Bhan, “Meniscal tears: current understanding, diagnosis, and management,” Cureus , vol. 12, no. 6, pp. e8590, 2020. [2] Geoffrey D Abrams, Rachel M Frank, et al., “Trends in meniscus repair and meniscectomy in the United States, 2005-2011,” The American Journal of Sports Medicine , vol. 41, no. 10, pp. 2333–2339, 2013. [3] Ruth Crawford, Gayle Walley, et al., “MRI versus arthroscopy in the diagnosis of knee pathology, concentrating on meniscal lesions and ACL tears: a systematic review,” British Medical Bulletin , vol. 84, no. 1, pp. 5–23, 2007. [4] Zhihong Zhu, Yunyan Zhang, et al., “Can we trust AI doctors? A survey of medical hallucination in large language and large vision-language models,” in Findings of the Association for Computational Linguistics: ACL 2025 , 2025, pp. 6748–6769. [5] Nicholas Bien, Pranav Rajpurkar, et al., “Deep-learning-assisted diagno-sis for knee MRI: development and retrospective validation of MRNet,” 
+
+PLoS Medicine , vol. 15, no. 11, pp. e1002699, 2018. [6] Jure Zbontar, Florian Knoll, et al., “fastMRI: An open dataset and benchmarks for accelerated MRI,” arXiv preprint arXiv:1811.08839 ,2018. [7] Ruiyang Zhao, Burhaneddin Yaman, et al., “fastMRI+, clinical pathol-ogy annotations for knee and brain fully sampled MRI data,” Scientific Data , vol. 9, no. 1, pp. 152, 2022. [8] Ivan ˇ Stajduhar, Mihaela Mamula, et al., “Semi-automated detection of anterior cruciate ligament injury from MRI,” Computer Methods and Programs in Biomedicine , vol. 140, pp. 151–164, 2017. [9] Shurui Xu, Siqi Yang, et al., “MeniMV: A multi-view benchmark for meniscus injury severity grading,” arXiv preprint arXiv:2505.00000 ,2025. [10] Adhish Prasoon, Kersten Petersen, et al., “Deep feature learning for knee cartilage segmentation using a triplanar CNN,” in Proceedings of the International Conference on Medical Image Computing and Computer-Assisted Intervention (MICCAI) , 2013, pp. 246–253. [11] Fabian Isensee, Paul F Jaeger, et al., “nnU-Net: a self-configuring method for deep learning-based biomedical image segmentation,” Nature Methods , vol. 18, no. 2, pp. 203–211, 2021. [12] Zhenxi Zhang, Jie Li, et al., “Quality-driven deep active learning method for 3D brain MRI segmentation,” Neurocomputing , vol. 446, pp. 106– 117, 2021. [13] Chunyuan Li, Cliff Wong, et al., “Llava-med: Training a large language-and-vision assistant for biomedicine in one day,” in Advances in Neural Information Processing Systems (NeurIPS) , 2023, vol. 36, pp. 28541– 28564. [14] Chaoyi Wu, Xiaoman Zhang, et al., “Towards generalist foundation model for radiology by leveraging web-scale 2d&3d medical data,” 
+
+Nature Communications , vol. 16, no. 1, pp. 7866, 2025. [15] Yang Nan, Huichi Zhou, et al., “Beyond the hype: A dispassionate look at vision-language models in medical scenario,” IEEE Transactions on Neural Networks and Learning Systems , vol. 36, no. 10, pp. 17623– 17634, 2025. [16] Junlong Cheng, Jin Ye, et al., “SAM-Med2D,” arXiv preprint arXiv:2308.16184 , 2023. [17] Zhou Wang, Alan C Bovik, et al., “Image quality assessment: from error visibility to structural similarity,” IEEE Transactions on Image Processing , vol. 13, no. 4, pp. 600–612, 2004. [18] Christoph Feichtenhofer, “X3D: Expanding architectures for efficient video recognition,” in Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) , 2020, pp. 203–213. [19] Anurag Arnab, Mostafa Dehghani, et al., “ViViT: A video vision transformer,” in Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV) , 2021, pp. 6836–6846. [20] Ze Liu, Jia Ning, et al., “Video Swin transformer,” in Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) , 2022, pp. 3202–3211. [21] Bin Lin, Yang Ye, et al., “Video-llava: Learning united visual rep-resentation by alignment before projection,” in Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing (EMNLP) , 2024, pp. 5971–5984. [22] Zhe Chen, Jiannan Wu, et al., “InternVL: Scaling up vision foundation models and aligning for generic visual-linguistic tasks,” in Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recogni-tion (CVPR) , 2024, pp. 24185–24198. [23] Peng Wang, Shuai Bai, et al., “Qwen2-VL: Enhancing vision-language model’s perception of the world at any resolution,” arXiv preprint arXiv:2409.12191 , 2024.

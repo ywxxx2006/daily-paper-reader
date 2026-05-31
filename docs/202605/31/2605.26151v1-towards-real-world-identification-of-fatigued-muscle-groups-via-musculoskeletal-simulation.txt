@@ -1,0 +1,277 @@
+Title: Towards Real-World Identification of Fatigued Muscle Groups via Musculoskeletal Simulation
+
+URL Source: https://arxiv.org/pdf/2605.26151v1
+
+Published Time: Wed, 27 May 2026 00:03:05 GMT
+
+Number of Pages: 8
+
+Markdown Content:
+# Towards Real-World Identification of Fatigued Muscle Groups via Musculoskeletal Simulation 
+
+Jenishkumar Chauhan, Samarth Brahmbhatt, and Vineet Vashista 
+
+> © 2026 IEEE. Personal use of this material is permitted. Permission from IEEE must be obtained for all other uses, in any current or future media, including reprinting/republishing this material for advertising or promotional purposes, creating new collective works, for resale or redistribution to servers or lists, or reuse of any copyrighted component of this work in other works.
+
+Abstract — Contactless diagnosis of musculoskeletal disor-ders can potentially improve population health as well as robot behaviours in collaborative settings. However, current diagnosis methods require an in-person physical examination in which a trained physician senses, through contact, the force applied by various muscles. Simulation tools exist, but their use for diagnosis with real data is under-explored. In this paper, we propose an algorithm for identifying which upper-limb muscle group is fatigued. Our algorithm compares the real-world free-space motion of the subject with that of a simulated musculoskeletal model, and is therefore contactless : preventing the need for invasive sensing or in-person assessment. Our algo-rithm simulates various fatigue conditions using a physics-based musculoskeletal model and extracts diagnostic motion features from both real and simulated data, which are compared for diagnosis. Experimental results on real data demonstrate that the proposed method can reliably distinguish between multiple muscle-groups of fatigue. Additionally, through comprehensive performance comparisons, we show how recent advanced mus-culoskeletal simulators can be properly configured to address the sim-to-real gap in the context of the fatigue diagnosis task. Our approach can potentially spur further research in remote and automated diagnosis, significantly lowering the barrier to large-scale and early detection. 
+
+Index Terms — musculoskeletal disorder, fatigue, diagnosis. 
+
+I. I NTRODUCTION AND RELATED WORK 
+
+Musculoskeletal disorders (MSDs) [1] are a group of con-ditions that affect the muscles, bones, tendons, ligaments, and other parts of the musculoskeletal system. These disorders may arise from a variety of causes, including injury, overuse, repetitive strain, poor posture, and aging. MSDs are among the leading global causes of disability [2], characterized by pain, functional impairment, and reduced mobility due to conditions affecting the muscles, bones, joints, or con-nective tissues. They can affect various regions of the body, leading to stiffness, swelling, and limitations in movement during daily or task-specific activities. Common examples include muscle fatigue, rotator cuff injuries, tendinopathy, osteoarthritis, frozen shoulder, and sarcopenia. Fatigue refers to a reduction in muscle force-generating capacity due to prolonged or repetitive activity. It manifests as decreased joint stability, altered coordination, and compensatory move-               
+
+> Jenishkumar Chauhan is with the Human-Centered Robotics Lab at IIT Gandhinagar, Gujarat, India as aPhD student.
+
+jenishkumar.chauhan@iitgn.ac.in  
+
+> Samarth Brahmbhatt is an independent researcher from Mountain View, California, USA.
+
+samarth.robo@gmail.com                
+
+> Vineet Vashista ∗is with the Human-Centered Robotics Lab at IIT Gandhinagar, Gujarat, India as an associate professor.
+
+vineet.vashista@iitgn.ac.in 
+
+> ∗corresponding author
+
+ments, which can be captured through deviations in joint-space trajectories [3, 4]. Robots collaborating with humans on a shared task can benefit from an accurate assessment of the fatigue location and severity of the human partners. This information can modulate the robot’s action speed, for example. However, current diagnostic methods for MSDs primarily rely on an in-person clinical physical exam, such as range of motion (ROM) tests and manual muscle testing [5]. This motivates the need for sensor-based fatigue diagnosis methods that can operate without physical contact with the subject. Medical imaging (e.g., MRI, X-ray, ultrasound) [6, 7, 8] is useful for structural assessment but often requires bulky equipment and lacks the resolution to detect subtle, func-tional, or early-stage impairments. Surface electromyography (sEMG) is also employed for muscle activation analysis [9], but it is limited by noise, skin-electrode variability, and poor suitability for continuous or naturalistic movement assessments [10]. On the other hand, algorithms like [11, 12] can track upper-limb kinematics from a video stream alone or in conjunction with wearable sensors, and have been used for biomedical motion analysis [13, 14, 15] and even fatigue assessment [16]. Our proposed algorithm operates on sim-ilar kinematic data, but in contrast to broad fatigue level assessment, it predicts which muscle group is fatigued. We source our experimental data in this paper from a 3D motion capture setup. Another alternative is to fit musculoskeletal models to ex-perimentally captured data. Recently works like [17, 18] have demonstrated how models can capture patient-specific mo-tion characteristics and support diagnostic decision-making. Such modeling-based diagnostic frameworks have also been validated in clinical studies [19]. However, these methods often require bespoke instrumentation of the affected body parts. In this work, we leverage a general-purpose muscu-loskeletal simulator called MyoSuite [20]. The upper-limb kinematics data our algorithm uses can be sourced from well-known systems like 3D motion capture or camera-based 3D pose estimation, which do not require as much specialized knowledge to set up. To summarize, we make the following contributions in this paper:  
+
+> •
+
+Simulator setup : We show through diagnosis perfor-mance evaluations how a musculoskeletal simulator can be configured to generate motion data for accurate real-world fatigue identification.  
+
+> •
+
+Diagnostic features : We propose novel features de-          
+
+> arXiv:2605.26151v1 [physics.med-ph] 23 May 2026 Fig. 1. Overview of the simulation-driven diagnosis framework for identifying fatigue in upper-limb muscle groups. (a) Motion Set Representation:
+> A set of 15 representative shoulder–elbow motions performed with a 1 kg weight was used as the basis for both simulation and experimental trials. (b) Musculoskeletal Simulation Process: Desired joint trajectories ( θ, ˙θ) are converted into desired torques via torque estimation [Eq. (3)], followed by static optimization [Eq. (4)] to map torques into muscle activations. Simulations were executed under both healthy and fatigued conditions by modulating muscle-specific parameters (DLT: deltoid, BIC: biceps, TRI: triceps). The simulated joint kinematics ( θh, θ f) were used for diagnosis feature extraction [Eqs. (5–7)]. (c) Experimental Diagnosis Pipeline: Human participants reproduced the same motion set while holding a 1 kg weight. Marker-based motion capture data were processed through inverse kinematics to obtain physiological joint angles (3 shoulder and 1 elbow). Diagnosis feature vectors were extracted from both simulation and experimental data, and classification was performed by feature comparison [Eq. (8)] to predict the most likely fatigued muscle group. (d) Diagnosis Feature Extraction: Example plots show healthy (blue) vs fatigued (orange) joint trajectories across different motions. The deviation between healthy and fatigued simulations was quantified into a normalized diagnosis feature vector (60 dimensions = 15 motions × 4 joints).
+> (e) Full Arm Model: Musculoskeletal model adapted from MyoSuite, comprising 38 joints and 63 muscles. Markers (pink) were attached on anatomical landmarks (e.g., R.Shoulder, R.Elbow, R.Biceps) to align with the experimental motion capture system.
+
+scribing the difference of motion between healthy and fatigued states, which can be compared meaningfully across simulation and reality.  
+
+> •
+
+Experiments : We show that our proposed algorithm can reliably identify the fatigued muscle group through experiments on real participant data. All the data used in this paper and corresponding diagnosis code will be released publicly. II. M ETHOD 
+
+This study aims to establish a simulation-driven frame-work for the contactless diagnosis and monitoring of fatigue in muscle groups of the upper limb and torso. By integrating experimental motion capture with musculoskeletal simula-tions, it provides a means to detect and quantify kinematic deviations caused by localized impairments, such as fatigue. This approach offers potential applications in early screening, rehabilitation feedback, and assistive device design, enabling subject-specific and non-invasive assessment of human mo-tion. The overall simulation-driven diagnosis can be concep-tualized in two levels. The lower-level control focuses on simulating musculoskeletal motion under both healthy and impaired conditions, driven by kinematic data extracted from participants through motion capture. At the higher level, the framework focuses on extracting motion diagnosis features from these simulations and leveraging them to classify experimental motion capture data into impairment-specific categories, such as fatigue in particular muscle groups such as the deltoid (referred to as DLT), which includes anterior, lateral, and posterior deltoid muscles for shoulder elevation and rotation, biceps (BIC) comprising the long and short heads responsible for elbow flexion and forearm supination, and triceps (TRI) including the long, lateral, and medial heads that extend the elbow. 
+
+A. Musculoskeletal Model and Simulation Environment 
+
+The musculoskeletal model employed in this study is implemented using the the MyoSuite framework [21], which uses the MuJoCo physics engine [22] internally. We use the full-arm model, which comprises 38 joints and 63 muscles, providing detailed anatomical representation of the upper limb. MyoSuite provides XML-based models such as MyoArm, which specify detailed skeletal geometry, joint definitions, and muscle-tendon routing based on anatomical fidelity, making it suitable for realistic simulation of arm movements. We disabled the muscle actuators associated with the forearm, wrist, and palm in order to focus the study on the upper arm and torso. Note that theoretically, our proposed algorithm is agnostic to the muscle group being chosen for diagnosis. The forward simulation process in MuJoCo consists of several computational layers, beginning with normalized actuator control signals, which are smoothed into effective muscle activations by MuJoCo activation dynamics. These activations generate muscle forces via gain and bias pa-rameters: the gain represents active force modulated by activation, while the bias accounts for passive contributions from force–length–velocity relationships [23, 20]. The re-sulting muscle forces act on joints and are mapped into torques through moment arms, ultimately producing joint kinematics (angles, velocities, and accelerations) that match musculoskeletal dynamics. Joint torque is expressed as a non-linear function of muscle activation, tendon length, and contraction velocity: 
+
+Fmuscle = gain · activations + bias (1) 
+
+τ = M TA × Fmuscle (2) where total muscle force Fmuscle is the sum of active and passive components. The moment arm matrix M TA , derived from the model configuration, maps muscle forces to joint torques. 
+
+B. Motion Generation and Control Strategy 
+
+As part of the control pipeline, the desired trajectories were used to guide the simulation. These were derived from human arm motions recorded via a Vicon marker-based motion capture system and represented as matrices of joint angles for the shoulder and elbow. A set of 15 representative trajectories was selected (Fig. 1(a)) to evaluate performance across varied musculoskeletal conditions. These motions included coordinated shoulder and elbow activities, chosen to reflect common postures and movement primitives observed in daily activities. Each trajectory served as a refer-ence for both healthy and impaired simulations, providing a standardized set of inputs for comparison. A supplementary video illustrates these motion examples in detail. 
+
+1) Inverse Kinematics: To ensure consistency between the simulated and experimentally recorded motion data, the same motion capture marker template used in experiments (13 markers, as shown in Fig. 1(e)) was applied to the simulation model. From these markers, physiological joint angles (3 shoulder angles and 1 elbow angle) were computed and subsequently used in the motion diagnosis analysis. In addition to these physiological joint angles, the simulation environment operates with joint angles defined according to the MyoSuite model configuration. These simulation-specific joint angles were estimated using a least-squares solver, which iteratively explored forward kinematic combinations in the simulator to ensure that the simulated physiological joint angles matched the experimentally derived values as closely as possible. 
+
+2) Joint Torque Computation: Desired torques were ob-tained using a proportional–derivative (PD) controller that minimized the difference between current and target states: 
+
+τdesired = Kp(θtarget − θcurrent ) + Kd( ˙θtarget − ˙θcurrent ) (3) where τdesired is the desired joint torque, θ is the joint angle, and ˙θ is the joint angular velocity. Kp and Kd are the proportional and derivative gains, tuned heuristically to minimize response time and oscillations in the motion. 
+
+3) Static optimization - Muscle Activation Estimation: 
+
+Desired torques were then mapped to muscle activations (a) through static optimization, formulated as a quadratic programming (QP) problem: 
+
+min 
+
+> a
+
+X
+
+> i
+
+a2 
+
+> i
+
+s/t: F(a, l, v ) = τdesired , 0 ≤ ai ≤ 1 (4) 
+
+ai is muscle activation, F(a, l, v ) represents torque gen-eration through activation dynamics, force–length–velocity relationships [23], and joint moment arms. l, v denote the current muscle length and velocity respectively. This optimization minimizes the sum of squared activa-tions while ensuring torque consistency, subject to anatomi-cal and physiological constraints, following classical static optimization approaches in biomechanics [24]. MuJoCo’s internal solvers handled this mapping by simulating the muscle activation to muscle forces to torque transformation based on anatomical routing and muscle dynamics. The target trajectories, represented through joint angles in the shoulder and elbow, were defined based on human motion capture data as described above. This pipeline ensures biologically plau-sible muscle-driven motion generation aligned with human anatomical and mechanical constraints. The resulting muscle activations are used to drive the simulated model, ensuring that the generated motion accurately reflects the underlying biomechanics. 
+
+4) Simulation stepping durations: By default, the MyoSuite environment steps every 20 ms and the internal MuJoCo physics engine steps every 2 ms. Our motion capture trajectories are captured at 200 Hz. It is crucial for accurate tracking that we decrease the stepping duration of MyoSuite and MuJoCo to 5 ms and 0.5 ms respectively to match the motion capture trajectories, rather than sub-sampling the trajectories. Section III-C shows the impact of this on the overall diagnosis accuracy. The performance of the healthy musculoskeletal model in simulation is illustrated in Fig. 2, where the desired trajec-tories derived from 15 experimental motions are compared against the simulated joint responses for four representative joints, including three shoulder angles and one elbow angle. Each motion lasted for 2 seconds, after which the simulation was reset to its initial state before the subsequent motion. The close alignment between the desired (blue) and simulated (orange) trajectories across all motions demonstrates the model’s ability to accurately reproduce experimental kine-matics under healthy conditions. This provides a validated baseline for subsequent comparisons with impaired simula-Fig. 2. Tracking of 15 representative upper-limb motions in the musculoskeletal simulation. Desired joint trajectories (blue) derived from motion capture were compared with simulated joint responses (orange) across four anatomical angles: elevation angle, shoulder elevation, shoulder rotation, and elbow flexion. Each motion segment (M-1 to M-15) lasted approximately 2 seconds, separated by vertical dashed lines. The close align-ment between desired and simulated trajectories demonstrates the model’s ability to reproduce physiological kinematics under healthy conditions, forming the baseline for subsequent fatigue-induced comparisons. 
+
+tions, where deviations in trajectory tracking are expected to reflect the localized effects of musculoskeletal disorders. 
+
+C. Modeling of Musculoskeletal Disorders 
+
+Various musculoskeletal disorders, such as sarcopenia and neuromuscular fatigue, can be modeled by modifying muscle properties [20], altering the anatomy of the musculoskeletal arrangements, and introducing specific behavioral dynamics in MyoSuite and MuJoCo. In the case of fatigue, localized impairments were simulated by reducing the force production capacity of the targeted muscles. This was implemented as scaling their gains down by a ‘fatigue factor’, which directly influences the ability of the muscle to generate force. Importantly, only muscles belonging to the specific group were altered, thereby isolating the effects of group-specific degradation while preserving the behavior of other muscles in the arm. This study aimed at three primary upper arm muscles, the biceps (BIC), the triceps (TRI), and the deltoids (DLT) [25], to assess the localized impact of impairments. It is impor-tant to set the fatigue factor values such that the motion characteristics in simulation are affected similarly to the real participants. Because it is difficult to measure muscle gains directly in the body, we measured the relevant muscle activations in the healthy and fatigued conditions while a participant was performing a pre-defined motion over aone minute duration. Muscle activation values are readily available in the simulation, while for the real participant we measured them with surface EMG electrodes [26, 27]. We varied the fatigue factor in simulation such that the ratio of healthy and fatigued RMS muscle activations matched as closely as possible between simulation and reality. Note that an exact match is not possible because we used the same fatigue factor value across all muscles in the muscle group. Table I shows the RMS muscle activation ratios for the real participant and simulation, followed by the tuned fatigue factor values.                                   
+
+> Source BIC Group DLT Group TRI Group BIC long BIC short BRA ANT DLT LAT DLT POST DLT TRI long TRI LAT
+> real participant 0.782 0.834 0.767 0.651 0.842 1.302 0.561 0.714 simulation 0.838 0.838 0.838 0.772 0.904 0.982 0.652 0.652 fatigue factor 0.720 0.720 0.720 0.480 0.480 0.480 0.680 0.680
+
+TABLE I RATIO OF RMS MUSCLE ACTIVATIONS ACROSS REAL PARTICIPANT ,
+
+> SIMULATION
+
+, AND THE TUNED FATIGUE FACTORS .A FATIGUE FACTOR OF 1 REPRESENTS THE HEALTHY CONDITION ,
+
+> WHILE LOWER VALUES CORRESPOND TO HIGHER MUSCLE FATIGUE
+
+.
+
+D. Kinematic Comparison and Diagnosis Feature Vector 1) Joint Angle Mapping: Each simulated motion gen-erates 38 joint angles as defined by the MyoSuite full-arm model configuration. Notably, the shoulder joint alone accounts for 14 of these values, which correspond to a detailed internal representation of the 3 anatomical degrees of freedom. For meaningful comparison with experimental mo-tion capture data, simplified anatomical inverse kinematics (IK) template is defined using motion-capture marker-based reconstruction. This reduced model representation includes only 4 joint angles, 3 for the shoulder and 1 for the elbow, which is consistent with standard biomechanical conventions used for analyzing upper-limb motion in experimental set-tings. 
+
+2) Diagnosis Feature: To quantify the deviation between healthy and fatigued motion trajectories, a joint-wise mean squared error (MSE) was computed for each motion task. For the k-th motion and the j-th joint, the MSE is given by: 
+
+E(j) 
+
+> k
+
+= 1
+
+TkTkX
+
+> t=1
+
+
+
+θhj
+
+> (k)
+
+(t) − θij
+
+> (k)
+
+(t)
+
+2
+
+(5) where θhj
+
+> (k)
+
+(t) and θij
+
+> (k)
+
+(t) represent the jth joint angle trajectories under healthy and impaired conditions such as fatigue, respectively, and Tk is the number of time steps in the k-th motion. To ensure comparability across joints, the error values were normalized using Min-Max normalization. 
+
+ˆE(j) 
+
+> k
+
+= E(j) 
+
+> k
+
+− min k E(j)
+
+> k
+
+max k E(j) 
+
+> k
+
+− min k E(j) 
+
+> k
+
++ ε (6) All normalized errors were assembled into a matrix E ∈
+
+RJ×K , where J is the number of joints and K is the number of motions. Finally, this matrix was vectorized column-wise to obtain the diagnosis feature vector: 
+
+fdiag = vec( E) ∈ RJK (7) This feature vector fdiag captures joint-wise kinematic de-viations across all motions and is used for subsequent classification and diagnostic tasks. In this work, it results in a 60-dimensional vector per subject, corresponding to 15 motions across 4 joints. 
+
+E. Contactless Diagnosis 
+
+To evaluate the proposed simulation-based approach, Di-agnosis Feature Vectors generated from simulated disorder cases are compared against those extracted from experi-mental trials involving healthy and fatigued subjects. Aclose match between the simulated and experimental fea-ture vectors indicates that the simulated condition closely reproduces real-world motion deviations. This comparison forms the basis of a contactless diagnostic framework, en-abling scalable and non-invasive detection of musculoskeletal impairments by matching observed motion to pre-simulated fatigue conditions. The predicted disorder class ˆc is identified by selecting the simulation whose diagnosis feature vector is closest (in root-mean-square sense) to the experimental feature vector: 
+
+ˆc = arg min 
+
+> c
+
+r
+
+f exp diag − f sim (c)
+
+> diag
+> 2
+
+(8) here, f exp diag is the Diagnosis Feature Vector obtained from the experimental motion data of a participant, and f sim (c) 
+
+> diag
+
+is the feature vector from the simulation of disorder class ˆc. The disorder class with the smallest discrepancy is considered the most likely underlying impairment for the observed motion. III. E XPERIMENTS 
+
+To validate the fatigue motion behavior observed in simu-lation, a set of 15 representative arm motions was reproduced experimentally by human participants, both under healthy conditions and after inducing fatigue in specific muscle groups. Motion data were recorded using a Vicon motion capture system and analyzed using the same methodology applied in the simulation. 
+
+A. Experiment protocol 
+
+A total of 21 fatigue trials were conducted, with seven trials for each fatigue case (DLT, BIC, and TRI). These trials were performed by nine healthy participants (age: 22 ± 2 years, gender: male, BMI: 23.95 ± 4.01), free from muscu-loskeletal or neurological disorders. Some participants com-pleted all three fatigue conditions, while others completed only two. Thirteen reflective markers were placed on key anatomical landmarks of the upper limb to calculate phys-iological joint angles, similar to the simulation description as per Fig-1(e). The predefined sequence of motions shown to the participant as a video of a musculoskeletal model performing 15 motion sequences as described in Figure-1(a), attached in supplementary material. Throughout the experiment, participants held a constant 1 kg weight in their hand to increase task difficulty. Each subject performed the motion sequence under two conditions: (i) healthy baseline and (ii) after targeted fatiguing exercises for the biceps (BIC), triceps (TRI), or deltoid (DLT). Fatigue was induced through repetitive exercises until maximum voluntary exhaustion, or until at least 100 repetitions were completed. The captured kinematic data were processed to obtain joint angles, which were then compared against simulation benchmarks using the Diagnosis Feature Vector. 
+
+B. Fatigued Muscle-group Identification 
+
+Four joint angles (three at the shoulder and one at the elbow) were analyzed to identify deviations between healthy and fatigued states. Diagnosis Feature Vectors, as described in Eqs. 5, 6, 7, were computed for each trial by comparing baseline (healthy) data against fatigued motion data of the same participant. For each trial, the root mean square difference (RMSD) was computed between the experimental Diagnosis Feature Vector and the simulation-derived feature vectors for each fatigue condition. These RMSD values shows the similarity of experimental diagnosis feature vector to the corresponding fatigue diagnosis feature vector. The closest match, lowest RMSD value is considered as probable case of fatigue, identifying the specific muscle group (biceps, triceps, or deltoid) that was fatigued during the corresponding fatigue-induced sequence.                 
+
+> True Pred DLT group BIC group TRI group Experimental DLT group 502Experimental BIC group 160Experimental TRI group 214
+> TABLE II CONFUSION MATRIX FOR EXPERIMENTAL DIAGNOSIS ACCURACY .CLASSIFICATION OUTCOMES FOR 21 TRIALS (7 PER FATIGUE GROUP )
+> USING SIMULATION -DERIVED DIAGNOSIS FEATURES COMPARED AGAINST EXPERIMENTAL DATA .
+
+Table II summarizes the confusion matrix comparing simulation benchmarks with experimental data. Across 21 fatigue trials (7 each for Deltoid, Biceps, and Triceps), the Diagnosis Feature approach yielded an overall classification precision of 71.43%. Figure 3 presents the overall trend of experimental and simulation-derived Diagnosis Feature values. It illustrates how these values vary across different fatigue cases and how closely the simulated fatigue conditions align with the cor-responding experimental mean values. These results indicate that Diagnosis Feature-based diagnosis achieved an overall macro precision of 71.43% across the study population, underscoring the potential of simulation-driven, contactless diagnosis of muscular fatigue. Fig. 3. Comparison of simulation- and experiment-derived diagnosis feature vectors across fatigue groups. Mean normalized diagnosis feature vectors (60 dimensions: 15 motions × 4 joints) are shown for the deltoid (DLT), biceps (BIC), and triceps (TRI) fatigue cases. The experimental curves (blue) represent the mean across all participants , while the simula-tion curves (orange) denote the corresponding simulated fatigue conditions. The close alignment between experimental means and simulations indicates that the simulated fatigue models capture the primary kinematic deviations observed in participants, supporting the use of simulation-driven features for motion-based fatigue diagnosis. 
+
+C. Ablation Studies and Statistical Validation 1) Fatigue factor tuning: This ablation study varied the fatigue scaling factors across muscle groups (BIC, DLT, TRI). For each configuration, diagnosis feature vectors were computed and matched against experimental data to observe changes in classification outcomes. Results shown in Ta-ble III indicate that very subtle scaling (e.g., 0.9) caused overfitting to a single muscle group, while extreme fatigue scaling (e.g., 0.1) produced more balanced results. A manu-ally tuned non-uniform configuration (e.g., 0.48–0.72–0.68) achieved the best separation, underscoring the importance of realistic, muscle-specific simulation modeling.                                                                             
+
+> (a) Fatigue Rate: 0.9, 0.9, 0.9 (b) Fatigue Rate: 0.75, 0.75, 0.75 (c) Fatigue Rate: 0.48, 0.72, 0.68
+> True Pred DLT BIC TRI DLT 430BIC 070TRI 250True Pred DLT BIC TRI DLT 430BIC 070TRI 250True Pred DLT BIC TRI DLT 502BIC 160TRI 214
+> (d) Fatigue Rate: 0.5, 0.5, 0.5 (e) Fatigue Rate: 0.25, 0.25, 0.25 (f) Fatigue Rate: 0.1, 0.1, 0.1
+> True Pred DLT BIC TRI DLT 151BIC 052TRI 133True Pred DLT BIC TRI DLT 340BIC 160TRI 322True Pred DLT BIC TRI DLT 610BIC 052TRI 214
+
+TABLE III IMPACT OF FATIGUE FACTOR TUNING ON THE OVERALL DIAGNOSIS PERFORMANCE .
+
+2) Statistical significance of diagnostic features: In the second analysis, pairwise t-tests were applied across the 60-dimensional diagnosis feature space to compare fatigue con-ditions. High inter-subject variability meant many features did not reach statistical significance (p ≤ 0.05). To reduce noise, features were progressively filtered using increasing p-value thresholds (e.g., p ≤ 0.1, 0.25, 0.5), and classification performance was recomputed. Using only the most discrim-inative features (2–11 features at p ≤ 0.1–0.25) improved accuracy, especially for BIC and TRI fatigue. In contrast, including all features ( p ≤ 1.0) diluted separability, as shown in Table IV.                                                           
+
+> (a) p-value ≤0.10 (2 features) (b) p-value ≤0.25 (11 features)
+> True Pred DLT BIC TRI DLT 511BIC 070TRI 403True Pred DLT BIC TRI DLT 322BIC 070TRI 115
+> (c) p-value ≤0.50 (30 features) (d) p-value ≤0.75 (47 features)
+> True Pred DLT BIC TRI DLT 511BIC 160TRI 214True Pred DLT BIC TRI DLT 511BIC 160TRI 322
+
+TABLE IV FEATURE SELECTION VIA STATISTICAL SIGNIFICANCE .CONFUSION MATRICES USING DIAGNOSIS FEATURES FILTERED BY P-VALUE THRESHOLDS (≤0.10, ≤0.25, ≤0.50, ≤0.75). FATIGUE RATE IS TAKEN AS 0.48, 0.72, 0.68 FOR DLT, BIC, TRI. 
+
+3) Simulator stepping durations: Table V(a) shows that musculoskeletal simulation with the default larger stepping duration (MyoSuite 20 ms, and MuJoCo 2 ms) significantly reduces the diagnosis performance. This happens because the large step sizes prevent convergence of the static optimization to the target sampled from the motion capture trajectory. 
+
+4) Bell-shaped reference trajectories: As mentioned in Section II-B, we use the real participants’ motion capture trajectories as tracking references for the simulation. In this ablation study, we replaced them with theoretically generated minimum-jerk bell-shaped trajectories. Studies like [28] have shown that humans employ such trajectories for reaching motions. As shown in Table V(b), the diagnosis performance drops only by a small amount, validating the theoretical model. 
+
+D. Na¨ ıve motion comparison 
+
+This experiment is aimed at validating the impact of our proposed diagnostic features II-D.2. Table V(c) shows that na¨ ıve comparison of motion between the fatigued real par-ticipant and fatigued simulated model results in a significant drop in diagnosis performance. This is because normalization by the healthy motion trajectory, as done by the proposed diagnostic fatures, is important to account for the sim-to-real gap.                                       
+
+> (a) MyoSuite @ 50 Hz (b) Bell-shaped Ref. Trajectories (c) Na¨ ıve motion comparison
+> True Pred DLT BIC TRI DLT 340BIC 160TRI 133True Pred DLT BIC TRI DLT 511BIC 142TRI 304True Pred DLT BIC TRI DLT 312BIC 133TRI 124
+
+TABLE V CONFUSION MATRICES FOR (A) LARGE SIMULATOR STEPPING DURATIONS , ( B) BELL -SHAPED REFERENCE TRAJECTORIES , AND (C)
+
+> NA
+
+¨IVE MOTION COMPARISON WITHOUT USE OF OUR PROPOSED DIAGNOSTIC FEATURES .
+
+Overall, these experiments demonstrate that realistic sim-ulation design and careful feature selection are both critical for reliable motion-based fatigue diagnosis. IV. D ISCUSSION 
+
+In summary, this study introduced a simulation-driven framework for analyzing upper-limb motion, demonstrating feasibility with around 70% accuracy in identifying fatigue-specific muscle groups. Unlike prior fatigue assessments that typically focus on overall fatigue levels or rely on EMG signals, our approach highlights novelty by distinguishing which muscle group is fatigued using only kinematic fea-tures. This emphasizes the contribution of simulation-derived metrics in providing more granular insight into fatigue-related impairments. At the control stage, simulations reproduced arm motion with reasonable fidelity, though some discrepancies remain due to limitations of PD-based torque estimation and static optimization. Exploring advanced control strategies such as model predictive control or reinforcement learning could im-prove smoothness, robustness, and adaptability of simulated motion. The diagnostic framework itself also presents challenges, as diagnostic feature based classification currently relies on aggregated metrics across entire motion sequences, which may mask more localized or subtle impairment indicators. Future work should therefore investigate single-sequence or even intra-sequence diagnosis, which could enable earlier detection and finer resolution of classification. In addition, current healthy feature extraction depends mainly on pro-cessed joint angles; incorporating raw kinematic descriptors such as velocity profiles, inter-joint coordination, or trajec-tory synergies could enhance discriminative power. Another limitation is the scope of validation. The frame-work at present serves primarily as a proof of concept to demonstrate that simulation-based feature generation can guide interpretation of experimental motion. Clinical transla-tion will require testing with larger and more diverse subject groups, extending disorder-specific models beyond fatigue, and integrating multi-modal data sources such as EMG or IMU sensors alongside marker-based kinematics. Extension to non-recoverable musculoskeletal disorders will require better sim-to-real alignment because the healthy motion data will not be available for that case. Finally, future work could explore subject-specific per-sonalization of musculoskeletal models, adaptive calibration procedures for marker data, and integration with real-time feedback systems. These additions could increase robustness, improve diagnostic precision, and broaden applicability in both research and clinical contexts. Overall, the results indicate a clear pathway for advanc-ing contactless motion diagnosis: simulations can provide realistic impairment models, while feature extraction and validation against experimental data establish reliability. By refining both the simulation fidelity and feature design, the framework can evolve into a scalable, automated, and contactless diagnostic tool for HRI applications and early detection of musculoskeletal disorders. ACKNOWLEDGMENT 
+
+Financial and infrastructural support for this study was provided by the corresponding author’s institute through sponsored research awards and internal facility funding. REFERENCES 
+
+[1] Sean Gallagher and Mark C Schall. “Musculoskeletal disorders as a fatigue failure process: evidence, im-plications and research needs”. In: New Paradigms in Ergonomics . Routledge, 2020, pp. 105–119. [2] Tiffany K Gill et al. “Global, regional, and national burden of other musculoskeletal disorders, 1990–2020, and projections to 2050: a systematic analysis of the Global Burden of Disease Study 2021”. In: The Lancet Rheumatology 5.11 (2023), e670–e682. [3] Roger M Enoka and Jacques Duchateau. “Muscle fatigue: what, why and how it influences muscle function”. In: The Journal of physiology 586.1 (2008), pp. 11–23. [4] Simon C Gandevia. “Spinal and supraspinal factors in human muscle fatigue”. In: Physiological reviews 81.4 (2001), pp. 1725–1789. [5] Colon H Wilson. “The musculoskeletal examination”. In: Clinical methods: the history, physical, and labora-tory examinations. 3rd edition. Boston: Butterworths 
+
+(1990). [6] Shyamal Patel et al. “A review of wearable sensors and systems with application in rehabilitation”. In: 
+
+Journal of neuroengineering and rehabilitation 9.1 (2012), p. 21. [7] Alberto Leardini et al. “Human movement analysis using stereophotogrammetry: Part 3. Soft tissue arti-fact assessment and compensation”. In: Gait & posture 
+
+21.2 (2005), pp. 212–225. [8] Hannu Luomajoki et al. “Movement control tests of the low back; evaluation of the difference between patients with low back pain and healthy controls”. In: 
+
+BMC musculoskeletal disorders 9.1 (2008), p. 170. [9] Alexandros Pantelopoulos and Nikolaos G Bourbakis. “A survey on wearable sensor-based systems for health monitoring and prognosis”. In: IEEE Trans-actions on Systems, Man, and Cybernetics, Part C (Applications and Reviews) 40.1 (2009), pp. 1–12. [10] Valentina Camomilla et al. “Trends supporting the in-field use of wearable inertial sensors for sport perfor-mance evaluation: A systematic review”. In: Sensors 
+
+18.3 (2018), p. 873. [11] Dushyant Mehta et al. “Vnect: Real-time 3d human pose estimation with a single rgb camera”. In: Acm transactions on graphics (tog) 36.4 (2017), pp. 1–14. [12] Alexander Mathis et al. “DeepLabCut: markerless pose estimation of user-defined body parts with deep learning”. In: Nature neuroscience 21.9 (2018), pp. 1281–1289. [13] Nobuyasu Nakano et al. “Evaluation of 3D markerless motion capture accuracy using OpenPose with multi-ple video cameras”. In: Frontiers in sports and active living 2 (2020), p. 50. [14] Xavier Robert-Lachaine et al. “Validation of a low-cost inertial motion capture system for whole-body motion analysis”. In: Journal of biomechanics 99 (2020), p. 109520. [15] Lars M¨ undermann, Stefano Corazza, and Thomas P Andriacchi. “The evolution of methods for the capture of human movement leading to markerless motion capture for biomechanical applications”. In: Journal of neuroengineering and rehabilitation 3.1 (2006), p. 6. [16] Yantao Yu et al. “An automatic and non-invasive physical fatigue assessment method for construction workers”. In: Automation in construction 103 (2019), pp. 1–12. [17] Ivo Roupa et al. “On the modeling of biomechanical systems for human movement analysis: a narrative review”. In: Archives of Computational Methods in Engineering 29.7 (2022), pp. 4915–4958. [18] Bryce A Killen et al. “In silico-enhanced treatment and rehabilitation planning for patients with muscu-loskeletal disorders: can musculoskeletal modelling and dynamic simulations really impact current clinical practice?” In: Applied Sciences 10.20 (2020), p. 7255. [19] Marjolein Margaretha van der Krogt et al. “Neuro-musculoskeletal simulation of instrumented contrac-ture and spasticity assessment in children with cerebral palsy”. In: Journal of neuroengineering and rehabili-tation 13.1 (2016), p. 64. [20] Vittorio Caggiano et al. “MyoSuite: A Contact-rich Simulation Suite for Musculoskeletal Motor Control”. In: Learning for Dynamics and Control Conference .PMLR. 2022, pp. 492–507. [21] Huawei Wang et al. “MyoSim: Fast and physiolog-ically realistic MuJoCo models for musculoskeletal and exoskeletal studies”. In: 2022 International Con-ference on Robotics and Automation (ICRA) . IEEE. 2022, pp. 8104–8111. [22] Emanuel Todorov, Tom Erez, and Yuval Tassa. “Mu-JoCo: A physics engine for model-based control”. In: 
+
+2012 IEEE/RSJ international conference on intelligent robots and systems . IEEE. 2012, pp. 5026–5033. [23] Matthew Millard et al. “Flexing computational mus-cle: modeling and simulation of musculotendon dy-namics”. In: Journal of biomechanical engineering 
+
+135.2 (2013), p. 021005. [24] Roy D Crowninshield and Richard A Brand. “A phys-iologically based criterion of muscle force prediction in locomotion”. In: Journal of biomechanics 14.11 (1981), pp. 793–801. [25] Daniel M Corcos et al. “Fatigue induced changes in phasic muscle activation patterns for fast elbow flexion movements”. In: Experimental brain research 142.1 (2002), pp. 1–12. [26] QianXiang Zhou et al. “Evaluation of upper limb muscle fatigue based on surface electromyography”. In: Science China Life Sciences 54.10 (2011), pp. 939– 944. [27] Samuel Rota et al. “Influence of fatigue on upper limb muscle activity and performance in tennis”. In: 
+
+Journal of Electromyography and Kinesiology 24.1 (2014), pp. 90–97. [28] Amir Karniel and Gideon F Inbar. “A model for learning human reaching movements”. In: Biological cybernetics 77.3 (1997), pp. 173–183.
