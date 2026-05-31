@@ -170,6 +170,283 @@ subscriptions:
           source: manual
           note: ''
       updated_at: '2026-05-31T15:22:51.220Z'
+    - tag: dance-physio
+      description: 请帮我查找舞蹈训练中的生理反应与适应研究，包括心肺功能、能量代谢、肌肉适应、激素水平、疲劳与恢复等。
+      enabled: true
+      paper_sources:
+        - arxiv
+        - biorxiv
+      keywords:
+        - keyword: cardiorespiratory function
+          keyword_cn: 心肺功能
+          query: cardiorespiratory adaptation in dance training
+        - keyword: energy metabolism
+          keyword_cn: 能量代谢
+          query: energy metabolism during dance exercise
+        - keyword: muscle adaptation
+          keyword_cn: 肌肉适应
+          query: muscle adaptation in dancers
+        - keyword: hormonal response
+          keyword_cn: 激素反应
+          query: hormonal response to dance training
+        - keyword: fatigue recovery
+          keyword_cn: 疲劳与恢复
+          query: fatigue and recovery in dance
+        - keyword: physiological responses
+          keyword_cn: 生理反应
+          query: physiological responses to dance training
+      intent_queries:
+        - query: What are the cardiovascular and respiratory adaptations to dance training?
+          query_cn: 舞蹈训练对心肺功能有哪些适应？
+          enabled: true
+          source: manual
+          note: ''
+        - query: How does dance training affect energy metabolism and muscle adaptation?
+          query_cn: 舞蹈训练如何影响能量代谢和肌肉适应？
+          enabled: true
+          source: manual
+          note: ''
+        - query: What hormonal changes occur in response to dance exercise?
+          query_cn: 舞蹈训练引起哪些激素变化？
+          enabled: true
+          source: manual
+          note: ''
+        - query: How do dancers recover from fatigue and what are the physiological markers?
+          query_cn: 舞者如何从疲劳中恢复，有哪些生理标志？
+          enabled: true
+          source: manual
+          note: ''
+      updated_at: '2026-05-31T15:24:01.999Z'
+    - tag: dance-psych
+      description: 请帮我查找舞蹈表演与训练中的心理学因素，包括表演焦虑、动机、自信心、完美主义、心理韧性及心理技能训练。
+      enabled: true
+      paper_sources:
+        - arxiv
+        - biorxiv
+      keywords:
+        - keyword: dance performance anxiety
+          keyword_cn: 舞蹈表演焦虑
+          query: psychological anxiety in dance performance
+        - keyword: dance motivation
+          keyword_cn: 舞蹈动机
+          query: motivation factors in dance
+        - keyword: dance self-confidence
+          keyword_cn: 舞蹈自信心
+          query: self-confidence in dance training and performance
+        - keyword: dance mental toughness
+          keyword_cn: 舞蹈心理韧性
+          query: mental toughness training for dancers
+        - keyword: psychological skills training
+          keyword_cn: 心理技能训练
+          query: psychological skills training in dance
+        - keyword: dance psychology
+          keyword_cn: 舞蹈心理学
+          query: psychology of dance performance
+      intent_queries:
+        - query: What are the psychological factors affecting dance performance?
+          query_cn: 影响舞蹈表演的心理因素有哪些？
+          enabled: true
+          source: manual
+          note: ''
+        - query: How to build mental toughness in dancers?
+          query_cn: 如何培养舞者的心理韧性？
+          enabled: true
+          source: manual
+          note: ''
+        - query: Techniques for reducing performance anxiety in dance
+          query_cn: 减少舞蹈表演焦虑的技巧
+          enabled: true
+          source: manual
+          note: ''
+        - query: The role of perfectionism in dance training
+          query_cn: 完美主义在舞蹈训练中的作用
+          enabled: true
+          source: manual
+          note: ''
+      updated_at: '2026-05-31T15:27:51.322Z'
+    - tag: dance-neuro
+      description: 请帮我查找舞蹈与神经美学、脑科学交叉的高影响力论文，包括观看或表演舞蹈时的脑成像研究（fMRI、EEG、fNIRS）、镜像神经元系统、动作观察网络及审美体验的神经机制。
+      enabled: true
+      paper_sources:
+        - arxiv
+        - biorxiv
+      keywords:
+        - keyword: dance neuroesthetics
+          keyword_cn: 舞蹈神经美学
+          query: dance neuroesthetics brain studies
+        - keyword: dance functional magnetic resonance imaging
+          keyword_cn: 舞蹈功能磁共振成像
+          query: dance fMRI brain activity
+        - keyword: dance electroencephalography
+          keyword_cn: 舞蹈脑电图
+          query: dance EEG neural correlates
+        - keyword: dance functional near infrared spectroscopy
+          keyword_cn: 舞蹈功能性近红外光谱
+          query: dance fNIRS brain imaging
+        - keyword: mirror neurons dance
+          keyword_cn: 镜像神经元舞蹈
+          query: mirror neuron system dance observation
+        - keyword: action observation network dance
+          keyword_cn: 动作观察网络舞蹈
+          query: action observation network during dance
+      intent_queries:
+        - query: Brain Imaging Study of Aesthetic Experience During Dance Viewing
+          query_cn: 舞蹈观看过程中审美体验的脑成像研究
+          enabled: true
+          source: manual
+          note: ''
+        - query: high impact research on dance neuroesthetics and brain imaging
+          query_cn: 舞蹈神经美学与脑成像的高影响力研究
+          enabled: true
+          source: manual
+          note: ''
+        - query: mirror neuron system and action observation in dance
+          query_cn: 舞蹈中的镜像神经元系统与动作观察
+          enabled: true
+          source: manual
+          note: ''
+        - query: neural correlates of aesthetic experience during dance performance
+          query_cn: 舞蹈表演中审美体验的神经关联
+          enabled: true
+          source: manual
+          note: ''
+      updated_at: '2026-05-31T15:33:34.738Z'
+    - tag: dt
+      description: 请帮我查找舞蹈动作治疗（DMT）在临床与健康人群中的应用效果及机制研究，包括对抑郁症、焦虑症、自闭症谱系、帕金森病、创伤后应激障碍的疗效，以及神经可塑性和情绪调节的作用机制。
+      enabled: true
+      paper_sources:
+        - arxiv
+        - biorxiv
+      keywords:
+        - keyword: dance movement therapy
+          keyword_cn: 舞蹈动作治疗
+          query: dance movement therapy effectiveness
+        - keyword: depression dance therapy
+          keyword_cn: 抑郁症舞蹈治疗
+          query: effect of dance movement therapy on depression
+        - keyword: Parkinson dance therapy
+          keyword_cn: 帕金森病舞蹈治疗
+          query: dance movement therapy for Parkinson's disease
+        - keyword: neuroplasticity dance
+          keyword_cn: 神经可塑性舞蹈治疗
+          query: neuroplasticity mechanisms in dance movement therapy
+        - keyword: emotion regulation dance
+          keyword_cn: 情绪调节舞蹈治疗
+          query: emotion regulation through dance movement therapy
+        - keyword: dance therapy mechanisms
+          keyword_cn: 舞蹈治疗机制
+          query: mechanisms of dance movement therapy
+      intent_queries:
+        - query: The effects of dance therapy on motor and non motor symptoms in patients with Parkinson's disease
+          query_cn: 舞蹈治疗对帕金森病患者运动与非运动症状的效果
+          enabled: true
+          source: manual
+          note: ''
+        - query: What is the effectiveness of dance movement therapy for depression and anxiety?
+          query_cn: 舞蹈动作治疗对抑郁症和焦虑症的疗效如何？
+          enabled: true
+          source: manual
+          note: ''
+        - query: How does dance movement therapy affect neuroplasticity and emotion regulation?
+          query_cn: 舞蹈动作治疗如何影响神经可塑性和情绪调节？
+          enabled: true
+          source: manual
+          note: ''
+        - query: Clinical outcomes of dance movement therapy for autism, Parkinson's disease, and PTSD
+          query_cn: 舞蹈动作治疗对自闭症、帕金森病和创伤后应激障碍的临床结果
+          enabled: true
+          source: manual
+          note: ''
+      updated_at: '2026-05-31T15:30:26.724Z'
+    - tag: dance-health
+      description: 请帮我查找舞蹈作为健康促进手段的研究，包括对心血管健康、代谢疾病、骨密度、肥胖、老年人跌倒预防及生活质量的影响，重点关注普通人群和高危人群。
+      enabled: true
+      paper_sources:
+        - arxiv
+        - biorxiv
+      keywords:
+        - keyword: dance therapy
+          keyword_cn: 舞蹈疗法
+          query: dance as a therapeutic intervention for health promotion
+        - keyword: cardiovascular health
+          keyword_cn: 心血管健康
+          query: effects of dance on cardiovascular fitness
+        - keyword: metabolic disease
+          keyword_cn: 代谢疾病
+          query: dance intervention for metabolic disease prevention
+        - keyword: fall prevention
+          keyword_cn: 跌倒预防
+          query: dance training to prevent falls in older adults
+        - keyword: quality of life
+          keyword_cn: 生活质量
+          query: dance participation and quality of life outcomes
+        - keyword: health promotion
+          keyword_cn: 健康促进
+          query: dance as a health promotion strategy for populations
+      intent_queries:
+        - query: dance as health promotion for cardiovascular disease and metabolic disorders
+          query_cn: 舞蹈作为心血管疾病和代谢紊乱的健康促进
+          enabled: true
+          source: manual
+          note: ''
+        - query: dance intervention for bone density and fall prevention in older adults
+          query_cn: 舞蹈干预对老年人骨密度和跌倒预防的影响
+          enabled: true
+          source: manual
+          note: ''
+        - query: dance for obesity management and quality of life in general and high risk populations
+          query_cn: 舞蹈对普通和高危人群肥胖管理及生活质量的作用
+          enabled: true
+          source: manual
+          note: ''
+      updated_at: '2026-05-31T15:31:39.309Z'
+    - tag: da
+      description: 请帮我查找舞蹈动作分析的方法与应用，以及长期舞蹈训练引发的体能和神经适应，包括拉班动作分析、运动捕捉、力量柔韧平衡训练、舞者体能。
+      enabled: true
+      paper_sources:
+        - arxiv
+        - biorxiv
+      keywords:
+        - keyword: Laban Movement Analysis
+          keyword_cn: 拉班动作分析
+          query: Laban Movement Analysis methods and applications in dance
+        - keyword: motion capture dance
+          keyword_cn: 运动捕捉舞蹈
+          query: motion capture technology for dance movement analysis
+        - keyword: dance training adaptations
+          keyword_cn: 舞蹈训练适应
+          query: long-term dance training induced physical and neural adaptations
+        - keyword: dancer physical fitness
+          keyword_cn: 舞者体能
+          query: physical fitness assessment and training for dancers
+        - keyword: dance movement analysis
+          keyword_cn: 舞蹈动作分析
+          query: dance movement analysis methods and applications
+        - keyword: neural adaptation dance
+          keyword_cn: 神经适应舞蹈
+          query: neural adaptations from long-term dance practice
+      intent_queries:
+        - query: What are the methods for analyzing dance movements?
+          query_cn: 舞蹈动作分析的方法有哪些？
+          enabled: true
+          source: manual
+          note: ''
+        - query: How does long term dance training affect physical fitness and neural adaptations?
+          query_cn: 长期舞蹈训练如何影响体能和神经适应？
+          enabled: true
+          source: manual
+          note: ''
+        - query: Applications of Laban Movement Analysis in dance
+          query_cn: 拉班动作分析在舞蹈中的应用
+          enabled: true
+          source: manual
+          note: ''
+        - query: Motion capture techniques for dance analysis
+          query_cn: 用于舞蹈分析的运动捕捉技术
+          enabled: true
+          source: manual
+          note: ''
+      updated_at: '2026-05-31T15:32:12.484Z'
 source_backends:
   arxiv:
     papers_table: arxiv_papers
