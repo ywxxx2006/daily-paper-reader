@@ -25,3 +25,80 @@ subscriptions:
     stage: A
     diff_threshold_pct: 15
   keyword_recall_mode: or
+  intent_profiles:
+    - tag: ds
+      description: 请帮我查找舞蹈科学相关所有研究领域论文，包括但不限于：舞蹈损伤预防与康复、舞蹈生物力学、舞蹈生理学、舞蹈心理学、神经美学、舞蹈健康促进、舞蹈治疗、舞蹈动作分析、舞蹈训练适应、舞者体能。
+      enabled: true
+      paper_sources:
+        - arxiv
+        - biorxiv
+      keywords:
+        - keyword: dance biomechanics
+          keyword_cn: 舞蹈生物力学
+          query: biomechanical analysis of dance movements
+        - keyword: dance physiology
+          keyword_cn: 舞蹈生理学
+          query: physiological responses and adaptations in dancers
+        - keyword: dance psychology
+          keyword_cn: 舞蹈心理学
+          query: psychological aspects of dance performance and training
+        - keyword: neuroaesthetics
+          keyword_cn: 神经美学
+          query: neural basis of aesthetic experience in dance
+        - keyword: dance health promotion
+          keyword_cn: 舞蹈健康促进
+          query: health promotion through dance interventions
+        - keyword: dance therapy
+          keyword_cn: 舞蹈治疗
+          query: therapeutic applications of dance for physical and mental health
+      intent_queries:
+        - query: mechanisms of dance movement therapy on neuroplasticity and emotional regulation
+          query_cn: 舞蹈治疗对神经可塑性和情绪调节的作用机制
+          enabled: true
+          source: manual
+          note: ''
+        - query: brain imaging studies of dancers vs. non dancers using fMRI, EEG, or NIRS
+          query_cn: 舞者与非舞者的脑成像对比研究（fMRI、EEG、NIRS）
+          enabled: true
+          source: manual
+          note: ''
+        - query: >-
+            dance science research across all subfields including injury, biomechanics, physiology, psychology,
+            neuroaesthetics, health promotion, therapy, movement analysis, training adaptation, and fitness
+          query_cn: 舞蹈科学所有子领域研究，包括损伤、生物力学、生理学、心理学、神经美学、健康促进、治疗、动作分析、训练适应和体能
+          enabled: true
+          source: manual
+          note: ''
+        - query: comprehensive review of scientific studies on dance performance and dancer well being
+          query_cn: 舞蹈表演和舞者福祉的科学综合研究
+          enabled: true
+          source: manual
+          note: ''
+      updated_at: '2026-05-31T15:00:56.388Z'
+source_backends:
+  arxiv:
+    papers_table: arxiv_papers
+    use_vector_rpc: true
+    vector_rpc: match_arxiv_papers
+    vector_rpc_exact: match_arxiv_papers_exact
+    use_bm25_rpc: true
+    bm25_rpc: match_arxiv_papers_bm25
+    sync_table: arxiv_sync_status
+    sync_success_value: success
+    schema: public
+    kind: supabase
+    enabled: true
+    url: https://lyucdwgefyfbmaiopjbk.supabase.co
+    anon_key: sb_publishable_lX-oi64Uxyd7SIVv3_w2Uw_MTOojeKq
+  biorxiv:
+    papers_table: biorxiv_papers
+    use_vector_rpc: true
+    vector_rpc: match_biorxiv_papers_exact
+    vector_rpc_exact: match_biorxiv_papers_exact
+    use_bm25_rpc: true
+    bm25_rpc: match_biorxiv_papers_bm25
+    schema: public
+    kind: supabase
+    enabled: true
+    url: https://lyucdwgefyfbmaiopjbk.supabase.co
+    anon_key: sb_publishable_lX-oi64Uxyd7SIVv3_w2Uw_MTOojeKq
