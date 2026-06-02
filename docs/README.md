@@ -6,46 +6,59 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-05-31
-- 运行时间：2026-05-31 22:58:46 UTC
+- 最新运行日期：2026-06-02
+- 运行时间：2026-06-02 01:03:39 UTC
 - 运行状态：成功
-- 本次总论文数：8
-- 精读区：3
-- 速读区：5
+- 本次总论文数：13
+- 精读区：1
+- 速读区：12
 
 ### 今日简报（AI）
-今日精读聚焦fMRI时间序列合成与膝关节半月板损伤评估，速读涵盖肌肉疲劳、猴脑运动编码及实时追踪。  
-最推荐9分高分论文《FM-fMRI》提出的基于流匹配的静息态到任务态fMRI合成方法；《MeniOmni》构建了膝关节半月板损伤的多模态结构化基准。  
-普通读者可关注脑功能数据合成技术对临床研究的辅助作用，以及结构化数据集在医学AI诊断中的标准化价值。
-- 详情：[/202605/31/README](/202605/31/README)
+今日共精读1篇、速读12篇论文，重点关注认知神经科学与多模态AI交叉领域。最值得关注的是精读论文（8分）揭示动作识别到心理化推理的神经阶段解码机制，速读中《SalsaAgent》的交互式舞蹈生成模型展现了多模态具身智能的新应用。建议普通读者优先阅读精读论文，并追踪步态预测与fNIRS仿真工具在运动康复中的潜在结合。
+- 详情：[/202606/02/README](/202606/02/README)
 
 ### 精读区论文标签
-1. [FM-fMRI: Event Conditioned Flow Matching for Rest-to-Task fMRI Time-Series Synthesis](/202605/31/2605.26423v1-fm-fmri-event-conditioned-flow-matching-for-rest-to-task-fmri-time-series-synthesis)  
-   标签：评分：9.0/10、query:dance-neuro
-   evidence：使用流匹配从静息态fMRI合成任务态fMRI；可应用于舞蹈神经影像研究
-2. [MeniOmni: A Structured Multimodal Benchmark for Holistic Meniscus Injury Assessment](/202605/31/2605.28161v1-meniomni-a-structured-multimodal-benchmark-for-holistic-meniscus-injury-assessment)  
-   标签：评分：8.0/10、query:dance-injury
-   evidence：半月板损伤多模态基准，与舞蹈损伤康复相关
-3. [SalsaAgent: A multimodal embodied language model for interactive dance generation](/202605/31/2605.29219v1-salsaagent-a-multimodal-embodied-language-model-for-interactive-dance-generation)  
-   标签：评分：8.0/10、query:db
-   evidence：使用多模态语言模型生成萨尔萨舞动作；直接相关舞蹈动作生成和生物力学
+1. [Decoding the neural stages from action and object recognition to mentalizing](/202606/02/biorxiv-10-1101-2025-11-25-690412-v2-decoding-the-neural-stages-from-action-and-object-recognition-to-mentalizing)  
+   标签：评分：8.0/10、query:dance-neuro
+   evidence：fMRI解码从动作观察到心理化的神经阶段，与舞蹈动作观察网络相关
 
 ### 速读区论文标签
-1. [Towards Real-World Identification of Fatigued Muscle Groups via Musculoskeletal Simulation](/202605/31/2605.26151v1-towards-real-world-identification-of-fatigued-muscle-groups-via-musculoskeletal-simulation)  
-   标签：评分：7.0/10、query:dance-physio
-   evidence：通过肌肉骨骼模拟识别疲劳肌肉群
-2. [Neural-Behavioral Representation of Natural Whole-body Movement in Monkeys](/202605/31/2605.29355v1-neural-behavioral-representation-of-natural-whole-body-movement-in-monkeys)  
-   标签：评分：7.0/10、query:db
-   evidence：结合运动捕捉和皮层信号的全身运动学记录方法
-3. [TracktorLive: an integrated real-time object tracking and response system](/202605/31/biorxiv-10-64898-2026-03-12-711471-v2-tracktorlive-an-integrated-real-time-object-tracking-and-response-system)  
+1. [SalsaAgent: A multimodal embodied language model for interactive dance generation](/202606/02/2605.29219v1-salsaagent-a-multimodal-embodied-language-model-for-interactive-dance-generation)  
    标签：评分：7.0/10、query:da
-   evidence：提供可用于舞蹈动作分析的运动捕捉实时追踪开源系统
-4. [Impact of age and surface irregularities on intersegmental and inter-joint coordination during gait](/202605/31/biorxiv-10-64898-2026-05-22-727144-v1-impact-of-age-and-surface-irregularities-on-intersegmental-and-inter-joint-coordination-during-gait)  
+   evidence：舞蹈动作分析的运动捕捉技术
+2. [Gait2Hip-60: A Unified Deep Learning Benchmark for Predicting Hip Muscle Forces and Joint Moments from Multi-Cadence Gait Kinematics](/202606/02/2605.30374v1-gait2hip-60-a-unified-deep-learning-benchmark-for-predicting-hip-muscle-forces-and-joint-moments-from-multi-cadence-gait-kinematics)  
    标签：评分：7.0/10、query:db
-   evidence：分析步态中节段间和关节间协调，可迁移至舞蹈动作分析
-5. [NeuroEdge: Real-Time Hand Gesture Recognition with High-Density EMG Using Deep Learning at the Edge](/202605/31/2605.29326v1-neuroedge-real-time-hand-gesture-recognition-with-high-density-emg-using-deep-learning-at-the-edge)  
+   evidence：利用步态运动学预测髋关节力矩和肌肉力，与舞蹈下肢关节负荷的生物力学分析直接相关
+3. [High-Fidelity 3D Simulator for Synthetic fNIRS Data Generation](/202606/02/2605.30552v1-high-fidelity-3d-simulator-for-synthetic-fnirs-data-generation)  
+   标签：评分：7.0/10、query:dance-neuro
+   evidence：提供合成fNIRS数据的3D模拟器，直接有益于舞蹈神经成像研究
+4. [DuoGesture: Neuro-Inspired and Biomechanically Informed Dual-Stream Co-Speech Gesture Generation](/202606/02/2605.26236v1-duogesture-neuro-inspired-and-biomechanically-informed-dual-stream-co-speech-gesture-generation)  
    标签：评分：6.0/10、query:db
-   evidence：高密度EMG手势识别方法可迁移至舞蹈EMG分析
+   evidence：生物力学启发的双流手势生成，与舞蹈技术优化相关
+5. [Visualizing Latent Phase Structures in Locomotion Policies: A Multi-Environment Study with Temporal Feature Extension](/202606/02/2605.28186v1-visualizing-latent-phase-structures-in-locomotion-policies-a-multi-environment-study-with-temporal-feature-extension)  
+   标签：评分：6.0/10、query:da
+   evidence：从运动策略中提取潜在运动相位结构的框架
+6. [VitalAgent: A Tool-Augmented Agent for Reactive and Proactive Physiological Monitoring over Wearable Health Data](/202606/02/2605.29483v1-vitalagent-a-tool-augmented-agent-for-reactive-and-proactive-physiological-monitoring-over-wearable-health-data)  
+   标签：评分：6.0/10、query:dance-physio
+   evidence：提出基于可穿戴数据的生理监测框架，可用于监测舞者训练中的生理反应
+7. [HiERO-StepG @ Ego4D Step Grounding Challenge: hierarchical activity understanding enables zero-shot step grounding](/202606/02/2605.31227v1-hiero-stepg--ego4d-step-grounding-challenge-hierarchical-activity-understanding-enables-zero-shot-step-grounding)  
+   标签：评分：6.0/10、query:da
+   evidence：层次化活动分解与步骤定位方法可应用于舞蹈动作分析
+8. [A Focus of Attention-Based Virtual Training Platform for Pre-Prosthetic Myoelectric Skill Acquisition: A Proof-of-Concept Study](/202606/02/2605.31332v1-a-focus-of-attention-based-virtual-training-platform-for-pre-prosthetic-myoelectric-skill-acquisition-a-proof-of-concept-study)  
+   标签：评分：6.0/10、query:db
+   evidence：基于肌电驱动的虚拟训练平台
+9. [Investigating sensorimotor beta burst dynamics as a robust biomarker for graded force modulation in humans](/202606/02/biorxiv-10-64898-2026-05-07-723396-v3-investigating-sensorimotor-beta-burst-dynamics-as-a-robust-biomarker-for-graded-force-modulation-in-humans)  
+   标签：评分：6.0/10、query:db
+   evidence：感觉运动β爆发动力学用于力调节，与舞蹈肌肉激活模式相关
+10. [Reliability of Spatiotemporal Neuromuscular Activity Patterns in Magnetomyography Across Force Levels](/202606/02/biorxiv-10-64898-2026-05-24-727496-v1-reliability-of-spatiotemporal-neuromuscular-activity-patterns-in-magnetomyography-across-force-levels)  
+   标签：评分：6.0/10、query:db
+   evidence：磁动图用于神经肌肉活动评估
+11. [Using timescale as a state coordinate reveals the metastable geometry of behavior](/202606/02/biorxiv-10-64898-2026-05-25-727718-v1-using-timescale-as-a-state-coordinate-reveals-the-metastable-geometry-of-behavior)  
+   标签：评分：6.0/10、query:da
+   evidence：时频状态空间方法分析行为时间尺度，可应用于舞蹈动作分析
+12. [Neural networks learn forward dynamics when freed from numerical integration](/202606/02/biorxiv-10-64898-2026-05-27-728310-v1-neural-networks-learn-forward-dynamics-when-freed-from-numerical-integration)  
+   标签：评分：6.0/10、query:db
+   evidence：神经网络前向动力学用于肢体，可应用于舞蹈运动预测
 
 
 <div class="dpr-home-promo-card">

@@ -1,0 +1,616 @@
+Title: DuoGesture: Neuro-Inspired and Biomechanically Informed Dual-Stream Co-Speech Gesture Generation
+
+URL Source: https://arxiv.org/pdf/2605.26236v1
+
+Published Time: Wed, 27 May 2026 00:05:39 GMT
+
+Number of Pages: 16
+
+Markdown Content:
+# DuoGesture: Neuro-Inspired and Biomechanically Informed Dual-Stream Co-Speech Gesture Generation 
+
+Ferdinand Paar 
+
+Max Planck Institute for Psycholinguistics Radboud University, Nijmegen 
+
+ferdinand.paar@mpi.nl 
+
+Lanmiao Liu 
+
+Utrecht University Max Planck Institute for Psycholinguistics 
+
+l.liu03@uu.nl 
+
+Aslı Özyürek 
+
+Radboud University, Nijmegen Max Planck Institute for Psycholinguistics 
+
+asli.ozyurek@mpi.nl 
+
+Serge Thill 
+
+Radboud University, Nijmegen 
+
+serge.thill@donders.ru.nl 
+
+Esam Ghaleb 
+
+Max Planck Institute for Psycholinguistics 
+
+esam.ghaleb@mpi.nl 
+
+## Abstract 
+
+Co-speech gesture generation requires both semantic expressivity and biomechan-ically plausible rhythmic motion. Existing holistic gesture models mix lexically grounded semantic gestures with frequent prosody-aligned beat gestures. This lim-its semantic grounding, speech-motion alignment, and kinematic smoothness. We propose DuoGesture , a neuro-inspired and biomechanically informed dual-stream approach that decomposes co-speech gesture synthesis into coupled semantic and beat streams. The two streams are coordinated by a Semantic Variational Information Bottleneck , a stochastic frame-level gate that learns when semantic gestures should override rhythmic beat motion. The semantic stream is controlled by Motion-Grounded Semantic Conditioning , which replaces purely linguistic word embeddings with motion-language representations to provide motion-aligned semantic priors for long-tailed lexical triggers of gestures. The beat stream is fur-ther regularised by an Inertial Beat Prior , an anthropometry-weighted arm-chain module that reduces jitter and improves rhythmic consistency without constraining semantic frames. Objective evaluations and subjective experiments show that Duo-Gesture outperforms strong holistic baselines, while component ablations confirm the complementary roles of semantic grounding, stochastic stream selection, and biomechanical regularisation. Demos and qualitative illustrations are available on the anonymous project page: https://duogesture.github.io/DuoGesture/. 
+
+## 1 Introduction 
+
+Speech and co-speech gestures form an integrated communicative system, yet gesture types play different roles and are processed accordingly. Reliable co-speech gesture generation is therefore important for embodied agents, virtual avatars, and accessible speech-driven animation systems, where gestures affect perceived naturalness, communicative clarity, and user trust. Beat gestures align with prosody and rhythm, supporting turn-taking and the flow of interaction, while semantic gestures (deictic, iconic, metaphoric) are related to lexical content and occur more sparsely [McNeill, 1992]. Cognitive neuroscience further indicates that manual gesture comprehension recruits partially 
+
+> Preprint.
+> arXiv:2605.26236v1 [cs.CV] 25 May 2026 Speaker ID
+
+# 📖    
+
+> Text-to-Motion
+> Embedding
+> Text S-VIB
+> Token
+> Semantic
+> stream
+> Beat Stream
+> IBP
+> .... one the way there ....... Wow , what you doing ... We were MGSC
+> .....
+
+Figure 1: DuoGesture models co-speech gestures as coupled semantic and beat streams coordinated by a stochastic frame-level weight. It integrates motion-grounded semantic conditioning and an 
+
+inertial prior to ensure semantic expressivity and rhythmic smoothness. dissociable but interacting networks: parietal–premotor circuits associated with visuomotor structure, and inferior-frontal/temporal circuits implicated in communicative meaning and gesture–speech integration [Tipper et al., 2015, Arbib, 2012]. We adopt this dual-process view as a computational stance, where co-speech gesture should be modelled as the interaction of two coupled streams rather than as a single motion process. This stance is different from most current holistic generators, which treat gestures as a single homogeneous stream [Zhang et al., 2025, Liu et al., 2025a], resulting in 
+
+three persistent limitations : (i) misalignment between gesture and speech timing, (ii) poor semantic expressivity, and (iii) jittery beat motion that lacks biomechanical principles. We argue that these limitations stem from three modelling drawbacks. First, current architectures rely on a single mechanism to model all gesture frames Liu et al. [2025a, 2024a, 2022, 2025b, 2023], even though beat and semantic gestures are distinct. Second, semantic conditioning is usually derived from linguistic embeddings, which encode what was said rather than what motion should accompany it . This is especially problematic for long-tailed semantic triggers that appear rarely, or never, during training. Third, beat gestures are learned without physical or biomechanical constraints. These choices create gaps: a semantic gap , where text embeddings provide weak priors for what a gesture should look like, and a beat gap , where rhythmically aligned gestures may achieve reasonable average objective metrics but remain prone to over-smoothing and acceleration artefacts. To overcome these limitations and gaps, we propose DuoGesture , a dual-stream model shown in Figure 1, that separates lexically grounded semantic motion from prosody-aligned beat motion while allowing them to interact. Supported by our auxiliary analysis in Sec. A, which shows distinct temporal and kinematic profiles for semantic- and beat gestures, DuoGesture uses stream-specific conditioning and regularisation rather than a single homogeneous generator. The semantic stream is conditioned by Motion-Grounded Semantic Conditioning (MGSC), which leverages a pretrained text-to-motion representation to provide motion-aligned cues for long-tailed lexical triggers of gestures. The beat stream is regularised by an Inertial Beat Prior (IBP), an anthropometry-weighted arm-chain loss that encourages smooth rhythmic motion while remaining inactive on semantic frames. The streams are coupled by a Semantic Variational Information Bottleneck (S-VIB), which learns when semantic motion should override beat motion. Our novel contributions are summarised as follows: • We formulate a dual co-speech gesture generation model that models lexically grounded semantic motion and prosody-aligned beat motion as coupled but distinct processes. • We introduce MGSC , a motion-grounded semantic conditioning module that uses pretrained text-to-motion representations to improve semantic cues for sparse lexical gesture triggers. • We design IBP , an anthropometry-weighted arm-chain regulariser that reduces beat-motion jitter and improves rhythmic consistency without constraining semantic frames. • We introduce S-VIB , a stochastic frame-level gating mechanism that learns when to activate the semantic stream while avoiding deterministic always-on gate collapse. • We show on BEAT2 that DuoGesture improves distributional realism, as measured by Fréchet Gesture Distance (FGD), in both single- and multi-speaker settings, while maintaining a competitive trade-off across beat alignment, diversity, and facial-motion metrics. 22 Related Work 
+
+Holistic Co-speech Gesture Generation. Current work has been shaped by two-stage hierarchical quantisation paradigms. Early architectures, e.g., by TalkSHOW [Yi et al., 2023] and ProbTalk [Liu et al., 2024b], established VAE-based stochastic priors and category-contingent decoding for mul-tifaceted body dynamics. This trajectory toward granularity was extended by EMAGE [Liu et al., 2024a], which proposed a spatially-decoupled tokenisation scheme across facial, manual, and cor-poral streams. SOTA benchmarks are currently defined by PyraMotion [Yin et al., 2025], which leverages a multi-resolution Anchor-based Pyramid VQ-VAE to minimise distributional divergence, yielding a competitive FGD. However, these extant models largely operate under the assumption of 
+
+kinematic homogeneity , treating gesticulation as a singular stochastic process and thereby blurring the functional divergence between rhythmic prosody and semantic morphology. While SemTalk [Zhang et al., 2025] introduced a first-order approximation of this divergence via frame-level soft gating, its efficacy remains bottlenecked by shallow linguistic conditioning and a lack of physical regularisation within its homogeneous motion stream. 
+
+Cross-Modal Semantic Grounding Gesture Generation. A major gap in co-speech gesture generation is the linguistic-kinematic gap , where idiosyncratic word embeddings (e.g., BERT [De-vlin et al., 2019]) are insufficient to encapsulate the morphology of human motion. To solve this, Semantic Gesticulator [Zhang et al., 2024] leverages LLM-based lexical parsing, yet the resulting representations remain inherently decoupled from the physical motion manifold. While GestureDiffu-CLIP [Ao et al., 2023] employs CLIP latents to enforce semantic consistency, it operates within a text-centric latent space, often overlooking the fine-grained temporal dynamics of gesticulation. The RAG-Gesture [Mughal et al., 2025] introduced non-parametric synthesis by retrieving explicit motion exemplars at inference time. However, lookups in high-dimensional spaces incur significant computa-tional latency and memory usage. Our work resolves this; instead of performing an explicit search, we distil the structured knowledge of a motion-aligned encoder (TM [Petrovich et al., 2023]) into our generative pipeline. By anchoring semantics directly within a kinematic manifold, DuoGesture 
+
+achieves the representational richness of retrieval-based methods while maintaining the inference efficiency of purely parametric frameworks, particularly for long-tail lexical distributions. 
+
+Physically-Consistent Motion Synthesis. While physics-based constraints have been explored in character animation via differentiable simulators or post-hoc projections [Peng et al., 2018, Yuan et al., 2023], their integration as inductive biases within gesture models remains under-explored. In this work, we diverge from computationally expensive simulation-based approaches by incorporating 
+
+anthropometric priors directly into the generator’s rhythmic stream. Specifically, we leverage De De Leva’s segment mass distributions [De Leva, 1996] to derive joint-specific exponential moving average time constants. This formulation provides a computationally efficient, training-time-only regularisation that imposes no inference overhead. Crucially, our empirical validation (Sec. 3.2.3) confirms biomechanical literature suggesting that conversational gesticulation is primarily governed by the arm-chain-spine pendulum dynamics. 
+
+## 3 Method 
+
+DuoGesture is a two-stage latent generator. Stage 1 (Sec. 3.1) is a regional RVQ-VAE tokeniser. Stage 2 is the contribution of this paper: a dual-stream generator with a stochastic frame-level weight, motivated by the fact that semantic and beat gestures are statistically and physically distinct, and a single shared network cannot optimise them simultaneously. We address this with three contributions: 
+
+(i) Motion-Grounded Semantic Conditioning (MGSC) (Sec. 3.2.1) grounds semantic conditioning in text-to-motion latent space, decoupling it from the long-tailed word distribution; (ii) Semantic Variational Information Bottleneck (S-VIB) (Sec. 3.2.2) predicts the per-frame weights Ψ via a variational bottleneck, preventing gate collapse; and (iii) Inertial Beat Prior (IBP) (Sec. 3.2.3) is a training-time velocity-consistency regulariser on the proximal arm chain that injects an anthropometric inductive bias into the beat stream. 3Semantic Variational Information Bottleneck    
+
+> Cross-Attn
+> Information-Theoretic
+> Bottleneck Head
+> Latent
+> Sparsity
+> Interpreter
+> Seed Pose
+> N(0,1)
+> Softmax
+> ⊕
+> ⊗
+> HuBERT Encoder
+> ε
+> ⊕⊙
+> ⊗
+> Onset
+> Projection the 😭 😂 ☹😍 "I" : 3.17–3.35s "can " : 3.35-3.52s
+> emotion label the time stamp FastText
+
+📖 “I can share ....”   
+
+> Text-To-
+> Motion
+> Embeddings
+> Motion Grounded Semantic Conditioning Module Token
+> 2-Stream Hierarchical Blender
+> Fine grained gesture decoding a) b) c) (K,V) (Q)
+> κ(z) Motion
+> decoder
+> ^
+> Text-To-
+> Motion
+> Embeddings
+
+Figure 2: DuoGesture pipeline. (a) MGSC fuses lexical semantics, motion-style, and emotion embeddings through cross-attention to produce the motion-grounded semantic representation Sm. (b) S-VIB combines Sm with the HuBERT timing projection ˆea to infer when semantic gestures should be activated and what semantic content they should express. The bottleneck samples zτ ∼ qϕ (zτ )
+
+under Lkl regularisation, and maps it to the semantic gate Ψ with semantic supervision. (c) Fine-grained decoding blends beat codebooks Zb 
+
+> r
+
+(yellow) and semantic codebooks Zs 
+
+> r
+
+(blue) using Ψ.
+
+3.1 Problem Formulation 
+
+A motion sequence of length L is split into four body regions R = {hand , upper , lower , face },
+
+G = {Gr }r∈R with Gr ∈ RL×Jr . Stage 2 conditions on HuBERT audio features ea ∈ RL×1024 ,a speaker identity embedding ID , motion-grounded semantic features Sm ∈ RL×256 the per-frame output of the MGSC module (Sec. 3.2.1) and a 4-frame seed pose ˜p. The target is the discrete latent code Zq = {Zqr }r∈R produced by the Stage 1 quantiser on the ground-truth motion. 
+
+Stage 1: Regional RVQ-VAE Tokeniser. We adopt the regional RVQ-VAE of Liu et al. [2024a], Zhang et al. [2025], Liu et al. [2025a, 2026]: one encoder–quantiser–decoder triple (Er , Qr , Dr )
+
+per region, trained with the standard reconstruction and codebook commitment losses. The stage-1 components are kept frozen once moving to Stage 2, decoupling (Stage 1) from temporal motion synthesis (Stage 2), and enabling the generator to operate in a structured, low-dimensional latent space. 
+
+3.2 DuoGesture 
+
+DuoGesture separates beat and semantic motion and adaptively fuses them via a dedicated module. The beat backbone fb produces per-region latents from audio, speaker identity, and seed pose alone: 
+
+fb :  ea, ID , ˜p; θb
+
+ −→ Zb 
+
+> r
+
+, r ∈ R , (1) where Zb 
+
+> r
+
+is the beat codebook per region. This beat branch is modulated by a semantic branch via a dedicated weighting module, namely S-VIB . First, the MGSC module assembles per-frame lexical (es), motion-style ( em), and emotion ( eε) embeddings into a motion-grounded semantic feature, and 
+
+S-VIB produces per-frame the following: 
+
+fs−vib :  es, e m, e ε, e a; θs−vib 
+
+ −→  Sm, Ψ, Sm ∈ RL×256 , Ψ ∈ [0 , 1] . (2) We then use the semantics features Sm to impose semantics on beat frames’ output through the semantic branch: 
+
+fs :  ea, ID , Ψ, Sm; θs
+
+ −→ Zs 
+
+> r
+
+, r ∈ R ; (3) where the output of the semantic branch Zs 
+
+> r
+
+is then injected into Zb 
+
+> r
+
+via a dedicated module to produce the fused codebook Zr = ff usion 
+
+ Zb 
+
+> r
+
+, Z s 
+
+> r
+
+, Ψ; θf usion ). The resulting codebook is then fed into the Stage-1 decoder Dr , which maps the result to joint space: ˆGr = Dr Zr ).43.2.1 Motion-Grounded Semantic Conditioning (MGSC) 
+
+To bridge the gap between abstract semantic representations and their corresponding kinetic realisa-tions, we propose the MGSC module. Existing gesture-generation methods typically use off-the-shelf text or vision-language encoders, for example FastText Bojanowski et al. [2017], BERT Devlin et al. [2019], or CLIP Radford et al. [2021], whose representations are learned from linguistic or image-text supervision rather than from body-motion dynamics. In contrast, MGSC introduces a motion-grounded conditioning pathway that aligns semantic cues with their kinetic realisations. As illustrated in Fig. 2(a), MGSC produces a per-frame semantic feature Sm ∈ RL×256 that conditions the semantic generator gsem and feeds S-VIB. It assembles three streams, all projected to 256 dimen-sions: (i) es ∈ R256 , a per-frame FastText Bojanowski et al. [2017] embedding of the word spoken at frame l, from BEAT2’s forced-alignment timestamps; (ii) em, an utterance-level motion-style embedding from Text-To-Motion Petrovich et al. [2023]; and (iii) eε, an emotion embedding from Text-To-Motion, using emotion labels provided by BEAT2 Liu et al. [2022]. em and eε are blended by a learned softmax gate into a fused memory m:
+
+α = softmax ( Wα[em; eε]) , m = α(m)em + α(ε)eε. (4) 
+
+es then queries this memory via cross-attention to produce the final semantic feature: Sm =MLP (CrossAttn ( Q = es, K = V = m)) ∈ RL×256 .
+
+3.2.2 Semantic Variational Information Bottleneck (S-VIB) 
+
+We want a gate to select a semantic gesture at the right moment. For this, the gate needs to consider what and when to gesture semantically. At the same time, this bottleneck (gate) should not collapse into a single path: either all semantic or all beat. For this reason, we propose S-VIB. As illustrated in Fig. 2(b), S-VIB operates on two streams: the MGSC output Sm ∈ R256 (what to gesture, derived from es) and a low-capacity HuBERT timing projection ˆea ∈ R64 (when to gesture). ˆea is obtained by passing HuBERT features ea through a convolutional encoder and bottlenecking to 64 dimensions; it is entirely independent of the FastText word embedding es.The Information-Theoretic Bottleneck Head maps Sm and ˆea to two 16-dimensional outputs via separate linear heads: a mean μϕ ∈ R16 and a log-variance log σ2 
+
+> ϕ
+
+∈ R16 . A stochastic sample is drawn via the reparameterisation trick, z = μϕ + exp   12 log σ2
+
+> ϕ
+
+ ⊙ ϵ with ϵ ∼ N (0 , I ), and passed to the Latent Sparsity Interpreter κ (two-layer MLP, κ : R16 → R2), which outputs two-dimensional beat/semantic logits; the semantic probability is the per-frame gate: Ψ = softmax  κ(z) 
+
+> sem
+
+∈ [0 , 1] .The outputs μϕ and log σ2 
+
+> ϕ
+
+are regularised against the standard Gaussian prior N (0 , I ) via a KL divergence Alemi et al. [2017], Kingma et al. [2016]: 
+
+Lkl = DKL 
+
+ N (μϕ, σ2
+
+> ϕ
+
+) ∥ N (0 , I ) = 12
+
+> Z
+
+X
+
+> d=1
+
+
+
+μ2 
+
+> ϕ,d
+
++ elog σ2 
+
+> ϕ,d
+
+− log σ2 
+
+> ϕ,d
+
+− 1
+
+
+
+. (5) In practice, we apply a per-dimension free-bits floor Kingma et al. [2016] ( λfb = 0 .50 nats, Z = 16 ), whose per-dim KL falls below λfb receive no gradient, preventing the optimiser from over-regularising uninformative dimensions while preserving capacity for those that carry semantic signal. The gate Ψ
+
+is trained to predict the per-frame semantic annotations sτ ∈ { 0, 1} via a semantic loss Lsem .
+
+3.2.3 Two-Stream Hierarchical Blender 
+
+The Two-Stream Hierarchical Blender (Fig. 3) produces per-region beat residuals Zb 
+
+> r
+
+and semantic residuals Zs 
+
+> r
+
+, decoded by the frozen Stage-1 decoders. The two streams are structurally parallel but differ in their conditioning and regularisation, reflecting the asymmetry between beat and semantic gesture production established in Sec. A. Beat stream , (top, yellow in Fig. 3) takes as input the masked seed pose ˜p embedding ∈ RT ×768 , where we add speaker identity ID and periodic positional encodings are applied before a self-attention pass. Speech onset projection ( ˆea) is integrated with the resulting embeddings through a cross-attention layer. Three region-specific MLPs then project the refined beat region latents Zb 
+
+> u
+
+, Zb 
+
+> l
+
+, Zb 
+
+> h
+
+. The face latent Zb 
+
+> e
+
+is obtained from a separate face decoder conditioned on the HuBERT audio feature ea.
+
+Inertial Beat Prior (IBP). On beat stream, we apply our proposal to constrain the upper-body and hand movements with biomechanical constraints. For this reason, the beat latents Zb 
+
+> u
+
+, Zb 
+
+> l
+
+, Zb 
+
+> h
+
+are 5face     
+
+> decoder
+> Inertia Module
+> HuBERT
+> Encoder
+> Prior Body
+> Part Mass ^
+> MLP
+> MLP
+> ⊕
+> Onset
+> Projection [K,V]
+> h/e decoder decoder [K,V] decoder [K,V] decoder
+> ^^^^
+> Self Attn
+> Cross Attn  ⊕^Motion
+> decoder
+> MLP
+> MLP
+> Hierarchical Cross Attn (HCA)
+> HCA
+> Seed Pose
+> IBP
+> Audio
+> Beat stream
+> MLP
+> MLP
+> ~
+> Semantic stream
+> ^
+> Self Attn
+> Cross Attn
+
+~[Q] [Q] [Q]   
+
+> ^^^
+> ^
+> ^
+> ^
+> ^
+> ⊕
+> ~
+
+~^^^Motion 
+
+> Encoder
+> Two-Stream Hierarchical Blender
+
+Figure 3: Two-Stream Hierarchical Blender. The beat stream encodes the seed pose ˜p and speaker ID to predict region-wise beat latents, with the face handled by a separate audio-conditioned decoder. Arm-chain beat latents are decoded during training and regularised by IBP through a τj -weighted smoothness loss. The semantic stream conditions parallel region-wise latents on the gated semantic feature. Hierarchical cross-attention refines both streams across body regions. decoded by the frozen Stage-1 decoder into raw (rot6d) poses xj,t and an Inertia Module (fed by body-part masses mj , gate (1 −Ψ) , and VIB posterior variance σ2
+
+> ϕ
+
+) produces per-joint weights τj that scale Lacc . IBP is a training-time regulariser that teaches the beat-stream network θb to produce latents that decode into physically smooth poses. IBP penalises deviation from constant-velocity motion. The loss is the mean squared error against the constant-velocity prediction ˆxj,t = 2 xj,t −1 − xj,t −2,weighted by τj,t : Lacc = Ej,t 
+
+h
+
+τj,t xj,t − ˆxj,t 
+
+> 2
+
+i
+
+. Rather than penalising all joints equally, IBP weights each joint by a smoothing coefficient derived from De Leva’s anthropometric masses De Leva [1996] and the S-VIB gate: 
+
+τj,t = τbase ·
+
+r mj
+
+mmax 
+
+· (1 − Ψt) · (1 + α σ 2
+
+> ϕ,t
+
+), (6) where mj is the De Leva body-segment mass fraction for joint j, mmax is the fraction of the heaviest segment (spine1/abdomen, ≈0.163 of body mass), so pmj /m max ∈ (0 , 1] is a sqrt-compressed relative inertial weight; τbase = 0 .5 is the maximum smoothing applied to the heaviest arm-chain joint on a pure beat frame. Hence, training with this regulariser encourages smoother latents without any explicit physics at inference time. The face latent Zb 
+
+> e
+
+does not pass through the IBP block since facial motion has distinct dynamics that should not be constrained by IBP. 
+
+Semantic stream (bottom, blue in Fig. 3) operates on MGSC output Sm. We first add masked seed pose embeddings ( ˜p) and ID , along with periodic positional encodings, before a self-attention pass. The resulting embeddings are then integrated with Sm through cross attention. Then three region-specific MLPs project these into semantic region latents Zs
+
+> u
+
+, Zs
+
+> h
+
+, Zs 
+
+> l
+
+.Inspired by Zhang et al. [2025], a Hierarchical Cross-Attention (HCA) block refines these latents by allowing each region to attend to its sibling semantic latents: the hands decoder attends to Zs 
+
+> u
+
++ Zs 
+
+> l
+
+as 
+
+[K,V] , the upper decoder attends to Zs 
+
+> h
+
++ Zs 
+
+> l
+
+, and the lower decoder attends to Zs 
+
+> u
+
++ Zs
+
+> h
+
+, producing final semantic latents ˆZs
+
+> u
+
+, ˆZs
+
+> h
+
+, ˆZs 
+
+> l
+
+. HCA is applied similarly on the beat codebooks. Finally, as illustrated in Fig. 2(c), for each of the three body regions r ∈ { h, u, l }, the beat residual Zb 
+
+> r
+
+(yellow token, Ψ ≈ 0) and the semantic residual Zs 
+
+> r
+
+(blue token, Ψ ≈ 1) are blended frame-by-frame via a fusion function. The fused and face latents are then quantised by nearest-neighbour lookup in the RVQ codebook: 
+
+Zr = (1 − Ψ) ˆZbr + Ψ ˆZsr , ˆcr,t = arg min  
+
+> k∈{ 1,...,K }
+
+∥ek − Zr,t ∥22 ,
+
+where ek denotes the k-th codebook vector and ˆcr,t is the selected discrete token for region r at frame 
+
+t. The selected tokens are decoded by the frozen Stage-1 decoder as ˆGr = Dr (ˆ cr ). Finally, our full 
+
+6training objective is: 
+
+L = Llat + Lcls + Lsem + βvib Lkl + βphys Lacc , (7) where: Llat is the MSE between the predicted continuous latents and the Stage-1 VQ targets for all body regions; Lcls is the cross-entropy over the four RVQ codebook levels for each region; Lsem 
+
+(Sec. 3.2.2) is the S-VIB gate supervised against BEAT2 semantic flags; Lkl (Sec. 3.2.2) is the VIB bottleneck KL with a free-bits floor; and Lacc (Sec. 3.2.3) is the IBP inertia residual, active only on beat frames via τj,t . The scalars βvib and βphys are warmup-scheduled weights. 
+
+## 4 Experiments 
+
+Dataset. We evaluate DuoGesture on BEAT2 [Liu et al., 2024a], a standard benchmark for co-speech gesture generation. It contains approximately 76 hours of speech, motion, facial expression, and speaker identity annotations from 30 speakers, covering diverse expressive behaviours. Unlike other datasets, such as TalkSHOW [Yi et al., 2023], BEAT2 provides frame-level annotations of gesture type (including semantic and beat gestures) and eight emotion categories, making it suitable for our study. Following the standard BEAT2 protocol used in prior holistic gesture-generation work [Liu et al., 2024a, Mughal et al., 2025], we report results in two settings: (i) a single-speaker setting on Speaker 2 and (ii) a multi-speaker setting over 25 speakers . Unless otherwise stated, the data are split into training, validation, and test partitions at 85%/7.5%/7.5%. The implementation details are elaborated in Sections B and C of the Appendices. Table 1: Overall comparison on BEAT2 (single-speaker, top; all-speaker, bottom). FGD is the primary metric; BA, Diversity, MSE, and LVD are secondary diagnostics. The table illustrates that high BA or Diversity alone does not imply better perceived gesture quality: several methods obtain strong secondary scores but have substantially worse FGD.                                                                                                     
+
+> Setting Model FGD ×10 −1↓BA ×10 −1↑Diversity ↑MSE ×10 −3↓LVD ×10 −5↓
+> One Speaker
+> DiffStyleGesture [Yang et al., 2023] (IJCAI 2023) 8.866 7.239 11.13 ––AMUSE [Chhatre et al., 2024] (CVPR 2024) 12.11 8.318 14.93 ––SynTalker [Chen et al., 2024a] (ACM MM 2024) 5.366 7.812 13.05 ––HoloGest [Cheng and Huang, 2025] (3DV 2025) 5.341 7.957 14.15 ––RAG-Gesture [Mughal et al., 2025] (CVPR 2025) 8.08 7.34 11.97 ––Habibie et al. [Habibie et al., 2021] (IVA 2021) 9.040 7.716 8.213 8.614 8.043 DiffSHEG [Chen et al., 2024b] (CVPR 2024) 8.986 7.142 11.91 7.665 8.673 ProbTalk [Liu et al., 2024b] (CVPR 2024) 5.040 7.711 13.27 8.617 –MambaTalk [Xu et al., 2024] (NeurIPS 2024) 5.366 7.812 13.95 6.289 6.897
+> SemTalk [Zhang et al., 2025] (ICCV 2025) 4.278 7.770 12.91 7.153 6.938 PyraMotion [Yin et al., 2025] (NeurIPS 2025) 4.612 7.420 13.42 7.176 7.270
+> Ours (DuoGesture) 4.101 7.557 12.34 7.103 7.646 All Speakers  TalkSHOW [Yi et al., 2023] (CVPR 2023) 6.145 6.863 13.12 7.791 7.771 GestureLSM [Liu et al., 2025b] (ICCV 2025) 4.268 5.250 11.20 ––EMAGE [Liu et al., 2024a] (CVPR 2024) 5.643 7.707 12.92 7.694 7.593 SemTalk [Zhang et al., 2025] (ICCV 2025) 5.214 7.689 12.74 7.612 7.498 Ours (DuoGesture) 4.081 7.699 12.83 7.502 7.658
+
+Evaluation Metrics. We evaluate holistic co-speech gestures along four axes: distributional realism, speech–motion synchrony, motion variation, and facial stability. We treat user studies and Fréchet Gesture Distance (FGD) [Yoon et al., 2020] as the primary evaluations, since FGD compares generated and real motion distributions in a learned gesture-feature space, and is the standard metric with the strongest reported perceptual support, where FGD was the only objective metric found to correlate with subjective human-likeness ratings [Kucherenko* et al., 2024]. We report Beat Alignment (BA) [Li et al., 2021b], pairwise L1 Diversity [Li et al., 2021a], facial MSE, and L1 Vertex Difference (LVD) [Xing et al., 2023] as secondary diagnostic metrics. These metrics are informative but not sufficient indicators of perceptual quality. High BA can reflect exaggerated beat-like motion, and high Diversity can reflect large motion variance rather than plausible or semantically appropriate gestures. Accordingly, we use a Pareto criterion : a preferable model should reduce FGD without achieving this gain at the expense of severe degradation in other metrics. 
+
+Comparison Methods. We benchmark DuoGesture against a broad set of representative holistic co-speech gesture generators, covering early speech-to-gesture models, hierarchical and diffusion-based methods, semantic-based approaches, and recent BEAT2 state-of-the-art systems. The comparison 7Naturalness Diversity Alignment with        
+
+> Speech Content and Timing
+> 0.0
+> 0.5
+> 1.0
+> 1.5
+> 2.0
+> 2.5
+> 3.0
+> 3.5
+> 4.0
+> 4.5
+> 5.0
+> Average Score  ***
+> ****
+> Ground Truth Our Model SemTalk EMAGE
+
+Figure 4: User study results comparing Ground Truth, DuoGesture, SemTalk, and EMAGE. Stars show significant differences.                                       
+
+> Variant MGSC S-VIB IBP FGD ↓BA ↑Diversity ↑
+> (a) w/o MGSC (S-VIB + IBP only) –✓✓4.803 7.531 12.61 (b) MGSC only (linear σ-gate) ✓––4.306 7.551 12.52 (c) MGSC + S-VIB (no IBP) ✓✓–4.178 7.446 12.77 (d) MGSC + IBP (linear σ-gate) ✓–✓4.137 7.557 12.65 (e) Full DuoGesture ✓✓✓4.081 7.699 12.83
+
+Table 2: Component-wise ablation of DuoGesture on BEAT2 in the all-speaker setting. includes DiffuseStyleGesture [Yang et al., 2023], AMUSE [Chhatre et al., 2024], SynTalker [Chen et al., 2024a], HoloGest [Cheng and Huang, 2025], RAG-Gesture [Mughal et al., 2025], Habibie et al. [Habibie et al., 2021], DiffSHEG [Chen et al., 2024b], ProbTalk [Liu et al., 2024b], MambaT-alk [Xu et al., 2024], TalkSHOW [Yi et al., 2023], EMAGE [Liu et al., 2024a], SemTalk [Zhang et al., 2025], GestureLSM [Liu et al., 2025b], and PyraMotion [Yin et al., 2025]. 
+
+4.1 Quantitative Results Overall comparison. Table 1 reports the BEAT2 comparison under the single-speaker and all-speaker protocols. We treat FGD as the primary realism metric and the remaining columns as secondary diagnostics; a preferable model should reduce FGD without severely degrading the others. In the single-speaker setting, DuoGesture achieves the lowest FGD ( 4.101 ), improving over SemTalk (4.278 ) and PyraMotion ( 4.612 ). It also improves MSE over PyraMotion ( 7.103 vs. 7.176 ) and is competitive on BA ( 7.557 , between SemTalk’s 7.770 and PyraMotion’s 7.420 ). The trade-off appears on Diversity and LVD, where DuoGesture gives up a small margin to the strongest baselines. Methods that report substantially higher BA or Diversity (e.g., AMUSE, HoloGest) do so at much higher FGD, placing them at a different operating point rather than dominating DuoGesture. The all-speaker setting follows the same pattern. DuoGesture again reaches the best FGD, with the closest competitor, GestureLSM. DuoGesture’s BA is effectively tied with EMAGE’s ( 7.699 vs. 7.707 ), and it achieves the lowest MSE among the reported methods. Diversity ( 12 .83 ) is slightly below EMAGE and above SemTalk, and LVD ( 7.658 ) is slightly above SemTalk’s and EMAGE’s; we view these as small concessions against the substantial FGD reduction. Across both protocols, DuoGesture sits at the most realism-favourable point of the Pareto trade-off: it leads FGD by a clear margin while staying within a small tolerance of the best secondary scores. Methods that surpass it on individual secondary metrics do so at noticeably worse FGD, which prior work has consistently linked to perceptual quality [Kucherenko* et al., 2024]. 
+
+Ablation Study. Table 2 isolates the contribution of each module on BEAT2 (all-speaker setting): each row removes or replaces one component while holding the others fixed. MGSC dominates the FGD gain: replacing motion-grounded semantic representation with standard semantic repre-sentations raises FGD from 4.081 to 4.803 , an effect larger than removing S-VIB ( +0 .056 ) or IBP (+0 .097 ). This is consistent with our hypothesis that motion-grounded semantic conditioning closes the linguistic–kinematic gap left open by purely lexical embeddings. IBP drives beat alignment. E.g., comparing variants (c) and (e), adding IBP on top of MGSC and S-VIB raises BA from 7.446 to 
+
+7.699 , the largest BA delta in the table, confirming that the inertial prior contributes specifically to rhythmic regularity rather than to distributional realism. S-VIB protects diversity: replacing it with the deterministic σ-gate (variants b and d) lowers Diversity to 12 .52 and 12 .65 versus 12 .83 for the full model, matching the design motivation that the variational bottleneck prevents the gate from collapsing to an always-on state and keeps the per-frame motion distribution wider. The ablation, therefore, supports the central design claim that semantic grounding, stochastic stream selection, and biomechanical beat regularisation are individually useful and most effective when combined. 8Ours Semtalk EMAGE  Ground-Truth GestureLSM           
+
+> ... to get ... ... in this way ... ... I can share ... ... more drama ...
+
+Figure 5: Qualitative comparison of co-speech gesture generation across semantic and beat-dominant speech contexts. We visualise motion sequences conditioned on representative phrases, including “to get”, “in this way”, “I can share”, and “more drama”. 
+
+4.2 Subjective and Qualitative Results User study. We conduct a controlled perceptual study using 35-second clips from the BEAT2 test set. The study includes six narrated topics and compares Ground Truth, and representative state-of-the-art methods, namely, EMAGE, SemTalk, and DuoGesture. Thirty native English-speaking participants from the UK, balanced by self-reported gender (male:female = 1:1; mean age 38.6), evaluated 24 randomly ordered videos using a five-point Likert scale. Participants rated each video along three axes: naturalness, motion diversity, and alignment with speech content and timing. The order of methods and clips was randomised for each participant. As shown in Fig. 4, Ground Truth receives the highest scores, as expected. Among the generated visualisations, DuoGesture obtains the strongest overall perceptual ratings, with higher judgments than SemTalk and EMAGE across the evaluated axes. This result is consistent with the quantitative analysis: DuoGesture gives a better perceptual trade-off between realism, synchrony, and expressiveness. The user study, therefore, provides independent evidence that the Pareto-optimal objective profile observed in Table 1 corresponds to motions that users judge as more natural and better aligned with speech. Further details about the user study are provided in Section D of the Appendix. 
+
+4.3 Qualitative Results Qualitative comparison. Figure 5 compares generated motion sequences for speech segments containing semantic and beat-dominant phrases. For semantic phrases such as “to get”, “I can share”, and “more drama”, DuoGesture produces gestures with clearer arm trajectories and more visible phrase-dependent structure than the compared baselines. SemTalk and GestureLSM tend to generate weaker or more ambiguous movements, whereas EMAGE often produces plausible but less semantically differentiated gestures. For the beat-dominant phrase “in this way”, the generated motion remains temporally coherent with the speech rhythm while avoiding excessive smoothing. These examples are consistent with the quantitative trend: DuoGesture improves semantic expressiveness and distributional realism, while maintaining competitive beat synchronisation. 95 Conclusion, Limitations, and Future Work 
+
+We presented DuoGesture , a neuro-inspired and biomechanically informed dual-stream framework for co-speech gesture generation. DuoGesture decomposes generation into a semantic stream for lexically grounded gestures and a beat stream for prosody-aligned rhythmic motion, with a stochastic frame-level gate coordinating their interaction. By combining motion-grounded semantic conditioning, stochastic stream selection, and an inertial beat prior, DuoGesture improves distributional realism on BEAT2 while preserving competitive alignment, diversity, and facial-motion fidelity. Ablations and user studies confirm that the three components provide complementary gains, supporting explicit semantic-beat decomposition as an effective design for co-speech gesture generation. DuoGesture’s generalisation to other languages, cultures, speakers, recording conditions, and interac-tion settings has not been tested due to a lack of dataset availability in the co-speech gesture generation domain. MGSC depends on the coverage and biases of a pretrained text-to-motion representation, while IBP uses a biomechanical prior that may not capture full-body gestures, object interaction, or contact-rich motion. Future work should evaluate cross-dataset and multilingual generalisation, develop metrics that better capture communicative meaning, and extend the biomechanical prior beyond arm-chain beat motion. 
+
+## References 
+
+Alexander A Alemi, Ian Fischer, Joshua V Dillon, and Kevin Murphy. Deep variational information bottleneck. In International Conference on Learning Representations , 2017. Tenglong Ao, Zeyi Zhang, and Libin Liu. Gesturediffuclip: Gesture diffusion model with clip latents. 
+
+ACM Transactions on Graphics (TOG) , 42(4):1–18, 2023. Michael A Arbib. How the brain got language: The mirror system hypothesis , volume 16. Oxford University Press, 2012. Piotr Bojanowski, Edouard Grave, Armand Joulin, and Tomas Mikolov. Enriching word vectors with subword information. Transactions of the Association for Computational Linguistics , 5:135–146, 2017. doi: 10.1162/tacl_a_00051. Bohong Chen, Yumeng Li, Yao-Xiang Ding, Tianjia Shao, and Kun Zhou. Enabling synergistic full-body control in prompt-based co-speech motion generation. In Proceedings of the 32nd ACM International Conference on Multimedia , pages 6774–6783, 2024a. Junming Chen, Yunfei Liu, Jianan Wang, Ailing Zeng, Yu Li, and Qifeng Chen. Diffsheg: A diffusion-based approach for real-time speech-driven holistic 3d expression and gesture generation. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition , pages 7352–7361, 2024b. Yongkang Cheng and Shaoli Huang. Hologest: Decoupled diffusion and motion priors for generating holisticly expressive co-speech gestures. In 2025 International Conference on 3D Vision (3DV) ,pages 748–757. IEEE, 2025. Kiran Chhatre, Radek Danecek, Nikos Athanasiou, Giorgio Becherini, Christopher Peters, Michael J Black, and Timo Bolkart. Emotional speech-driven 3d body animation via disentangled latent dif-fusion. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition ,pages 1942–1953, 2024. Paolo De Leva. Adjustments to zatsiorsky-seluyanov’s segment inertia parameters. Journal of biomechanics , 29(9):1223–1230, 1996. Jacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova. Bert: Pre-training of deep bidirectional transformers for language understanding. In Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies , pages 4171–4186, 2019. doi: 10.18653/v1/N19-1423. Ikhsanul Habibie, Weipeng Xu, Dushyant Mehta, Lingjie Liu, Hans-Peter Seidel, Gerard Pons-Moll, Mohamed Elgharib, and Christian Theobalt. Learning speech-driven 3d conversational gestures from video. In Proceedings of the 21st ACM international conference on intelligent virtual agents ,pages 101–108, 2021. 10 Durk P Kingma, Tim Salimans, Rafal Jozefowicz, Xi Chen, Ilya Sutskever, and Max Welling. Improved variational inference with inverse autoregressive flow. Advances in neural information processing systems , 29, 2016. Taras Kucherenko*, Pieter Wolfert*, Youngwoo Yoon*, Carla Viegas, Teodor Nikolov, Mihail Tsakov, and Gustav Eje Henter. Evaluating gesture generation in a large-scale open challenge: The genea challenge 2022. ACM Transactions on Graphics , 43(3):1–28, 2024. Jing Li, Di Kang, Wenjie Pei, Xuefei Zhe, Ying Zhang, Zhenyu He, and Linchao Bao. Audio2gestures: Generating diverse gestures from speech audio with conditional variational autoencoders. In 
+
+Proceedings of the IEEE/CVF International Conference on Computer Vision , pages 11293–11302, 2021a. Ruilong Li, Shan Yang, David A Ross, and Angjoo Kanazawa. Ai choreographer: Music conditioned 3d dance generation with aist++. In Proceedings of the IEEE/CVF international conference on computer vision , pages 13401–13412, 2021b. Haiyang Liu, Zihao Zhu, Naoya Iwamoto, Yichen Peng, Zhengqing Li, You Zhou, Elif Bozkurt, and Bo Zheng. Beat: A large-scale semantic and emotional multi-modal dataset for conversational gestures synthesis. In European conference on computer vision , pages 612–630. Springer, 2022. Haiyang Liu, Zihao Zhu, Giorgio Becherini, Yichen Peng, Mingyang Su, You Zhou, Xuefei Zhe, Naoya Iwamoto, Bo Zheng, and Michael J Black. Emage: Towards unified holistic co-speech gesture generation via expressive masked audio gesture modeling. In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition , pages 1144–1154, 2024a. Lanmiao Liu, Chuang Yu, Siyang Song, Zhidong Su, and Adriana Tapus. Human gesture recognition with a flow-based model for human robot interaction. In Companion of the 2023 ACM/IEEE International Conference on Human-Robot Interaction , pages 548–551, 2023. Lanmiao Liu, Esam Ghaleb, Asli Ozyurek, and Zerrin Yumak. Semges: Semantics-aware co-speech gesture generation using semantic coherence and relevance learning. In Proceedings of the IEEE/CVF International Conference on Computer Vision , pages 13963–13973, 2025a. Lanmiao Liu, Esam Ghaleb, Aslı Özyürek, and Zerrin Yumak. Holisticsemges: Semantic ground-ing of holistic co-speech gesture generation with contrastive flow-matching. arXiv preprint arXiv:2603.26553 , 2026. Pinxin Liu, Luchuan Song, Junhua Huang, Haiyang Liu, and Chenliang Xu. Gesturelsm: Latent shortcut based co-speech gesture generation with spatial-temporal modeling. In Proceedings of the IEEE/CVF International Conference on Computer Vision , pages 10929–10939, 2025b. Yifei Liu, Qiong Cao, Yandong Wen, Huaiguang Jiang, and Changxing Ding. Towards variable and coordinated holistic co-speech motion generation. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition , pages 1566–1576, 2024b. David McNeill. Hand and mind: What gestures reveal about thought . University of Chicago press, 1992. Hamza Mughal, Rishabh Dabral, Merel CJ Scholman, Vera Demberg, and Christian Theobalt. Retrieving semantics from the deep: an rag solution for gesture synthesis. In Proceedings of the Computer Vision and Pattern Recognition Conference , pages 16578–16588, 2025. Xue Bin Peng, Pieter Abbeel, Sergey Levine, and Michiel Van de Panne. Deepmimic: Example-guided deep reinforcement learning of physics-based character skills. ACM Transactions On Graphics (TOG) , 37(4):1–14, 2018. Mathis Petrovich, Michael J Black, and Gül Varol. Tmr: Text-to-motion retrieval using contrastive 3d human motion synthesis. In Proceedings of the IEEE/CVF International Conference on Computer Vision , pages 9488–9497, 2023. 11 Alec Radford, Jong Wook Kim, Chris Hallacy, Aditya Ramesh, Gabriel Goh, Sandhini Agarwal, Girish Sastry, Amanda Askell, Pamela Mishkin, Jack Clark, Gretchen Krueger, and Ilya Sutskever. Learning transferable visual models from natural language supervision. In Proceedings of the 38th International Conference on Machine Learning , volume 139 of Proceedings of Machine Learning Research , pages 8748–8763, 2021. Christine M. Tipper, Giulia Signorini, and Scott T. Grafton. Body language in the brain: constructing meaning from expressive movement. Frontiers in Human Neuroscience , Volume 9 - 2015, 2015. ISSN 1662-5161. doi: 10.3389/fnhum.2015.00450. URL https://www.frontiersin.org/ journals/human-neuroscience/articles/10.3389/fnhum.2015.00450 .Jinbo Xing, Menghan Xia, Yuechen Zhang, Xiaodong Cun, Jue Wang, and Tien-Tsin Wong. Codetalker: Speech-driven 3d facial animation with discrete motion prior. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition , pages 12780–12790, 2023. Zunnan Xu, Yukang Lin, Haonan Han, Sicheng Yang, Ronghui Li, Yachao Zhang, and Xiu Li. Mambatalk: Efficient holistic gesture synthesis with selective state space models. Advances in Neural Information Processing Systems , 37:20055–20080, 2024. Sicheng Yang, Zhiyong Wu, Minglei Li, Zhensong Zhang, Lei Hao, Weihong Bao, Ming Cheng, and Long Xiao. Diffusestylegesture: stylized audio-driven co-speech gesture generation with diffusion models. In Proceedings of the Thirty-Second International Joint Conference on Artificial Intelligence , pages 5860–5868, 2023. Hongwei Yi, Hualin Liang, Yifei Liu, Qiong Cao, Yandong Wen, Timo Bolkart, Dacheng Tao, and Michael J Black. Generating holistic 3d human motion from speech. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition , pages 469–480, 2023. Zhizhuo Yin, Yuk Hang Tsui, and Pan Hui. Pyramotion: Attentional pyramid-structured motion inte-gration for co-speech 3d gesture synthesis. In The Thirty-ninth Annual Conference on Neural Infor-mation Processing Systems , 2025. URL https://openreview.net/forum?id=QJSrgYcf4b .Youngwoo Yoon, Bok Cha, Joo-Haeng Lee, Minsu Jang, Jaeyeon Lee, Jaehong Kim, and Geehyuk Lee. Speech gesture generation from the trimodal context of text, audio, and speaker identity. ACM Transactions on Graphics (TOG) , 39(6):1–16, 2020. Ye Yuan, Jiaming Song, Umar Iqbal, Arash Vahdat, and Jan Kautz. Physdiff: Physics-guided human motion diffusion model. In Proceedings of the IEEE/CVF international conference on computer vision , pages 16010–16021, 2023. Xiangyue Zhang, Jianfang Li, Jiaxu Zhang, Ziqiang Dang, Jianqiang Ren, Liefeng Bo, and Zhigang Tu. Semtalk: Holistic co-speech motion generation with frame-level semantic emphasis. In 
+
+Proceedings of the IEEE/CVF International Conference on Computer Vision , pages 13761–13771, 2025. Zeyi Zhang, Tenglong Ao, Yuyao Zhang, Qingzhe Gao, Chuan Lin, Baoquan Chen, and Libin Liu. Semantic gesticulator: Semantics-aware co-speech gesture synthesis. ACM Transactions on Graphics (TOG) , 43(4):1–17, 2024. 
+
+## A Motion Analysis: Beat vs. Semantic Motion on BEAT2 
+
+Setup and controlled sampling. We analyse BEAT2 [Liu et al., 2022, 2024a] test-split motion (≥ 15 -frame windows, all 25 speakers) using the dataset’s per-frame semantic annotation flags to segment sequences into contiguous beat windows (flag = 0 ) and semantic windows (flag = 1 ). To ensure a fair, balanced comparison, we draw a matched sample: for each speaker we randomly draw the same number of beat and semantic windows (capped at the smaller set), yielding ≈ 1,870 
+
+windows per class from 265 clips. All metrics are duration-weighted and accompanied by 95% CIs from hierarchical bootstrap (speaker → clip → window). The matched windows are representative of typical gesture production for each class (short rhythmic repetitions for beat, and clear lexical stroke events for semantic), and the class balance removes any confound from the natural 12% semantic sparsity. 12 Results. The two classes show clearly distinct kinematics (Table 3 and Fig. 6). Beat motion peaks at 1.12 Hz with moderate inter-joint coupling (PLV = 0 .31 ), indicating that shoulder and forearm oscillate at partially independent rhythms, consistent with a damped-pendulum model. A constant-velocity (inertial) oscillator explains R2 = 0 .41 of beat variance, and this improves by ∆R2 = +0 .84 
+
+when the mass grouping covers arm + core joints, but degrades by ∆R2 = −0.95 when all 55 joints are included, directly motivating IBP’s arm-chain-only mask (Sec. 3.2.3). Semantic motion peaks at 1.69 Hz with strongly higher inter-joint coupling (PLV = 0 .53 , ∆PLV = +0 .22 ), indicating holistic co-activation of the arm during a lexical stroke, a pattern better captured by shape-conditioned generation than by a mass-weighted smoother. Arm-swing PSD (Fig. 6) further shows that beat spectra have a narrow, peaked structure (half-BW 0.46 Hz, prominence 4.6×) while semantic spectra are 1.9× broader and less tonal, confirming that beat motion is rhythmically regular and semantic motion is not. Table 3: Kinematic statistics for matched beat and semantic windows (BEAT2 test split, 25 speakers; hierarchical bootstrap 95% CI in brackets). 
+
+Metric Beat Semantic 
+
+Shoulder peak (Hz) 1.12 [1.02, 1.23] 1.69 [1.56, 1.86] PLV (shoulder ↔ forearm) 0.308 [0.268, 0.349] 0.525 [0.487, 0.557] Oscillator R2 0.406 [0.388, 0.427] 0.509 [0.493, 0.524] 
+
+∆R2: arm+core vs. shoulder +0 .84 —
+
+∆R2: all joints vs. shoulder −0.95 —Arm-swing half-BW (Hz) 0.46 0.89 
+
+Figure 6: Arm-swing spectral analysis for bilateral shoulder/elbow/wrist joints (SMPL-X joints 16–21), matched beat and semantic windows (BEAT2 test split, ≈ 1,870 windows each, 25 speakers). 
+
+(a) Mean normalised PSD decay from the spectral peak (shaded = IQR): beat spectra (blue) have a half-bandwidth of 0.46 Hz; semantic spectra (red) are 1.9× broader ( 0.89 Hz), indicating diffuse rather than tonal energy. (b) Peak prominence (max/mean PSD in band): 43% of beat windows have a clear dominant peak ( > 5×) versus only 29% of semantic windows, confirming that rhythmic regularity is a beat-specific property. 
+
+## B Technical Implementation 
+
+Data. BEAT2 [Liu et al., 2024a], 85%/7.5%/7.5% split, 64-frame clips at 30 fps (stride 20), 4-frame seed pose. 
+
+Training. Adam ( lr = 10 −4, no weight decay), step LR decay ( γ = 0 .3), 200 epochs. Stage 2 trained on 4 GPUs A100 via PyTorch DDP, effective batch size 256. 13 Representations. Motion: 55 SMPL-X joints in rot6d (330-dim). Audio: HuBERT (1024-dim). Text: FastText [Bojanowski et al., 2017] (300-dim). All streams projected to 256-dim. 
+
+Stage 1. Regional RVQ-VAE [Liu et al., 2024a], codebook C = 256 , 4 RVQ levels, frozen during Stage 2. 
+
+Stage 2. Transformer backbone: hidden size 768, 1 self-attention layer; 3 decoder layers and 1 codebook head per region. MGSC embeddings ( em, eε) from TM [Petrovich et al., 2023] (256-dim). S-VIB: bottleneck Z = 16 , timing projection 64-dim, KL warmup epochs 20–100 ( βtarget = 0 .01 ), free-bits λfb = 0 .5 nats, semantic boost ρ = 3 .0. IBP: physics warmup epochs 30–80 ( λ = 0 .01 ), 
+
+τbase = 0 .5, α = 1 .0, arm-chain mask only. 
+
+## C Architecture Details 
+
+Table 4 summarises the key dimensions of each Stage-2 component. Table 4: Stage-2 architecture summary. All transformer layers use H = 4 heads, dropout 0.1, and batch-first layout. Stage-1 weights are frozen. 
+
+Component Details Dims 
+
+Inputs 
+
+HuBERT encoder 2× Conv1d (k=3, p=1), BN, GELU 1024 → 256 
+
+Onset/amplitude 2-layer MLP 3 → 256 
+
+FastText Linear 300 → 256 
+
+Seed pose VQEncoderV6 (3 layers, frozen) 337 → 768 
+
+Speaker ID Embedding table (25 entries) → 768 
+
+Shared backbone (both streams) 
+
+Self-attention TransformerEncoder, 1 layer, dff =1536 d = 768 
+
+Audio cross-attention TransformerDecoder, 8 layers, dff =1536 d = 768 
+
+MGSC 
+
+TM projections [Petrovich et al., 2023] Linear ( em, eε) 256 → 256 
+
+Softmax memory gate 2× Linear 256 → 1
+
+Semantic cross-attention TransformerDecoder, 1 layer, dff =512 d = 256 
+
+Output MLP 2-layer 256 → 256 
+
+S-VIB 
+
+Timing projection Linear + LN + GELU 256 → 64 
+
+Bottleneck heads 2× Linear (mean, log-var) 320 → 16 
+
+Latent Sparsity Interpreter 2-layer MLP + softmax 16 → 2
+
+Region decoders (beat & semantic, per region r ∈ { h, u, l })
+
+Region MLP 2-layer 768 → 256 
+
+Temporal downsample Conv1d, k=2, s=2 L → L/ 2
+
+HCA (3 decoders) TransformerDecoder, 1 layer, dff =512 d = 256 
+
+Face (beat only) 
+
+Face decoder TransformerDecoder, 4 layers, dff =1536 d = 768 
+
+Downsample Linear + 2× Conv1d (k=2,s=2) + MLP 768 → 256 
+
+Codebook prediction heads (per region, 5 levels) 
+
+Autoregressive decoder TransformerDecoder, 3 layers, H = 8 , dff =1024 d = 256 
+
+Level classifier 2-layer MLP 256 → 256 
+
+Total Stage-2 params ≈ 122 M14 Figure 7: User study interface developed using Qualtrics. Participants were instructed to watch a co-speech gesture animation video and to evaluate the generated motions using a five-point Likert scale across three aspects: naturalness, diversity, and alignment with speech content and timing. 
+
+Fusion. For r ∈ { h, u, l }: Zr = (1 −Ψ) ˆZbr + Ψ ˆZsr , quantised as ˆcr = arg min k ∥ek − Zr ∥2. The face region uses Zbe directly (no semantic stream). All regions decoded by frozen Dr : ˆGr = Dr (ˆ cr ).
+
+## D User Studies Interface and Details 
+
+Figure 7 presents the evaluation interface used in our user study, which was developed in Qualtrics. During the evaluation, participants were required to first watch a co-speech gesture animation video and subsequently assess the quality of the generated gestures using a five-point Likert scale. The evaluation focused on three aspects: Naturalness , Diversity , and Alignment with Speech Content and Timing . In total, the questionnaire consisted of 24 video samples for evaluation. To minimise potential ordering effects and subjective bias, all videos were displayed in a randomised order for each participant. Participant recruitment and study administration were conducted through the Prolific platform, targeting participants from English-speaking countries. To further ensure the reliability and validity of the collected responses, we incorporated additional attention-check questions throughout the evaluation process, as illustrated in Figure 8. In these questions, participants were asked to identify the topic of the narrated speech from several candidate options, such as career , helping a friend , or internet . Responses from participants who failed the attention-check questions were excluded from the final analysis. These quality-control measures were introduced to verify that participants carefully watched the videos and adequately understood the accompanying speech content during the evaluation. 15 Figure 8: Attention-check interface employed during the user study to verify participant engagement and comprehension of the narrated content. 16

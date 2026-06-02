@@ -1,0 +1,673 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-06-02T00:59:44.707085+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 8,
+    "deep_divecandidates": 1,
+    "deep_cap": 13,
+    "deep_selected": 1,
+    "quick_candidates": 12,
+    "quick_skim_target": 18,
+    "quick_selected": 12
+  },
+  "deep_dive": [
+    {
+      "id": "biorxiv-10-1101-2025-11-25-690412-v2",
+      "source": "biorxiv",
+      "title": "Decoding the neural stages from action and object recognition to mentalizing",
+      "abstract": "Higher-level action interpretation, such as inferring underlying intentions and predicting future actions, requires the integration of conceptual action information (e.g. \"opening\") with semantic knowledge about persons and objects (e.g. \"my friend Anna\", \"pizza box\"). However, how the neural systems for action and object recognition and memory interact with each other to form the basis for inferring higher-level mental states remains unclear. Here we use fMRI-based crossmodal multiple regression representational similarity analysis in human female and male participants to elucidate the processing stages from basic action and object recognition to mentalizing. We show that inferring intentions from observed actions or written sentences involves a modality-general network of lateral and medial frontoparietal and temporal brain regions associated with conceptual action and object representation and mentalizing. The representational profiles in these regions are explained by models capturing different types of conceptual information, revealing distinct but partially overlapping networks for action, object, and mental state representation. There was no strict separation of networks for action, object, and mental state representations, arguing against a sequential bottom-up hierarchy from action and object understanding pathways to the mentalizing network. Rather, left-hemispheric regions, specifically ventrolateral prefrontal, inferior parietal and anterior lateral occipitotemporal cortex, showed strong representational overlap, pointing towards a core network for making meaning of action-object structures at a conceptual level. We argue that this core network represents a distributional semantic hub between classic networks for action and object understanding and the mentalizing network.\n\nSignificance StatementHow does the human brain integrate information from actions, e.g., \"open a pizza box\", to understand the actions underlying intentions? To do so, the brain needs to combine information from different neural networks--for action and object recognition--and pass them to the mentalizing network for inferring intentions, such as \"satisfying hunger\". We characterize the interplay of networks using fMRI-based crossmodal multivariate analyses and find that a left-lateralized core network in inferior frontal and parietal cortex and lateral occipitotemporal cortex represents all critical ingredients--conceptual action and object information as well as higher-level mental state representation simultaneously in an overlapping manner. This suggests that this core network is essential for semantic interpretation and functions as bridge between recognition pathways and the mentalizing system.",
+      "authors": [
+        "Wurm, M. F.",
+        "Lee, S."
+      ],
+      "primary_category": "neuroscience",
+      "categories": [
+        "neuroscience"
+      ],
+      "published": "2026-05-27T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.1101/2025.11.25.690412v2.full.pdf",
+      "tags": [
+        "keyword:da",
+        "keyword:dance-health",
+        "keyword:dance-neuro",
+        "keyword:dance-physio",
+        "keyword:dance-psych",
+        "keyword:db",
+        "keyword:dt",
+        "query:da",
+        "query:dance-injury",
+        "query:dance-neuro",
+        "query:dance-psych",
+        "query:db",
+        "query:dt"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "fMRI decoding of action observation to mentalizing, relevant to action observation network in dance",
+      "llm_evidence_cn": "fMRI解码从动作观察到心理化的神经阶段，与舞蹈动作观察网络相关",
+      "llm_evidence": "fMRI解码从动作观察到心理化的神经阶段，与舞蹈动作观察网络相关",
+      "canonical_evidence": "fMRI解码从动作观察到心理化的神经阶段，与舞蹈动作观察网络相关",
+      "llm_tldr_en": "Uses fMRI to decode neural stages from action and object recognition to mentalizing, directly relevant to action observation network in dance.",
+      "llm_tldr_cn": "该研究通过fMRI跨模态多重回归表征相似性分析，揭示了从动作/物体识别到心理推断的神经阶段。结果支持动作观察网络在舞蹈观赏中的关键作用。",
+      "llm_tldr": "该研究通过fMRI跨模态多重回归表征相似性分析，揭示了从动作/物体识别到心理推断的神经阶段。结果支持动作观察网络在舞蹈观赏中的关键作用。",
+      "llm_tags": [
+        "query:dance-neuro"
+      ],
+      "matched_query_tag": "query:dance-neuro",
+      "matched_query_text": "action observation network during dance",
+      "matched_requirement_id": "req-46",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2605.29219v1",
+      "source": "arxiv",
+      "title": "SalsaAgent: A multimodal embodied language model for interactive dance generation",
+      "abstract": "Interaction between humanoids involves bidirectional and nonverbal reactivity, coordination and synchrony. Toward socially aware robots and interactive virtual agents, we present SalsaAgent, a language model that generates expressive, full-body salsa dance motions in reaction to a human leader and against a contextual music backdrop. We formulate interaction as nonverbal motion token passing, extending the vocabulary of a large language model (LLM) to process discrete motion tokens, pairwise relation tokens, and audio. Our contributions include new tokens for full-body and motion relations, LLM fine-tuning using automatically derived text descriptions of skeleton dynamics for token grounding, and a two-stage token-to-diffusion pipeline. Subjective and objective evaluations demonstrate the effectiveness of our approach in terms of motion quality, music and partner coordination, and consistent two-person spatial behavior, with significant improvements over baselines.",
+      "authors": [
+        "Payam Jome Yazdian",
+        "Zoe Stanley",
+        "Angelica Lim"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-05-28T01:08:27+00:00",
+      "link": "https://arxiv.org/pdf/2605.29219v1",
+      "tags": [
+        "keyword:da",
+        "keyword:dance-health",
+        "keyword:dance-injury",
+        "keyword:dance-neuro",
+        "keyword:dance-physio",
+        "keyword:dance-psych",
+        "keyword:db",
+        "keyword:dt",
+        "query:da",
+        "query:dance-health",
+        "query:dance-injury",
+        "query:dance-neuro",
+        "query:dance-physio",
+        "query:dance-psych",
+        "query:db",
+        "query:dt"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "motion capture technology for dance movement analysis",
+      "llm_evidence_cn": "舞蹈动作分析的运动捕捉技术",
+      "llm_evidence": "舞蹈动作分析的运动捕捉技术",
+      "canonical_evidence": "舞蹈动作分析的运动捕捉技术",
+      "llm_tldr_en": "SalsaAgent is a multimodal language model that generates expressive salsa dance motions in response to a human leader and music, using motion tokens and a diffusion pipeline, demonstrating interactive dance generation.",
+      "llm_tldr_cn": "现有舞蹈生成方法多缺乏交互性和非语言反应能力。本文提出SalsaAgent，一种多模态具身语言模型，将舞蹈交互视为非语言运动令牌传递，通过扩展大语言模型处理离散运动令牌、配对关系令牌和音频，结合两阶段令牌到扩散管道生成全身萨尔萨舞动作。实验表明该方法能生成与领舞者同步、符合音乐节奏的舞蹈动作。该工作为社交机器人及虚拟交互代理提供了新的舞蹈生成框架。",
+      "llm_tldr": "现有舞蹈生成方法多缺乏交互性和非语言反应能力。本文提出SalsaAgent，一种多模态具身语言模型，将舞蹈交互视为非语言运动令牌传递，通过扩展大语言模型处理离散运动令牌、配对关系令牌和音频，结合两阶段令牌到扩散管道生成全身萨尔萨舞动作。实验表明该方法能生成与领舞者同步、符合音乐节奏的舞蹈动作。该工作为社交机器人及虚拟交互代理提供了新的舞蹈生成框架。",
+      "llm_tags": [
+        "query:da"
+      ],
+      "matched_query_tag": "query:da",
+      "matched_query_text": "motion capture technology for dance movement analysis",
+      "matched_requirement_id": "req-71",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2605.26236v1",
+      "source": "arxiv",
+      "title": "DuoGesture: Neuro-Inspired and Biomechanically Informed Dual-Stream Co-Speech Gesture Generation",
+      "abstract": "Co-speech gesture generation requires both semantic expressivity and biomechanically plausible rhythmic motion. Existing holistic gesture models mix lexically grounded semantic gestures with frequent prosody-aligned beat gestures. This limits semantic grounding, speech-motion alignment, and kinematic smoothness. We propose \\emph{DuoGesture}, a neuro-inspired and biomechanically informed dual-stream approach that decomposes co-speech gesture synthesis into coupled semantic and beat streams. The two streams are coordinated by a \\emph{Semantic Variational Information Bottleneck}, a stochastic frame-level gate that learns when semantic gestures should override rhythmic beat motion. The semantic stream is controlled by \\emph{Motion-Grounded Semantic Conditioning}, which replaces purely linguistic word embeddings with motion-language representations to provide motion-aligned semantic priors for long-tailed lexical triggers of gestures. The beat stream is further regularised by an \\emph{Inertial Beat Prior}, an anthropometry-weighted arm-chain module that reduces jitter and improves rhythmic consistency without constraining semantic frames. Objective evaluations and subjective experiments show that DuoGesture outperforms strong holistic baselines, while component ablations confirm the complementary roles of semantic grounding, stochastic stream selection, and biomechanical regularisation.",
+      "authors": [
+        "Ferdinand Paar",
+        "Lanmiao Liu",
+        "Aslı Özyürek",
+        "Serge Thill",
+        "Esam Ghaleb"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.SD"
+      ],
+      "published": "2026-05-25T18:03:41+00:00",
+      "link": "https://arxiv.org/pdf/2605.26236v1",
+      "tags": [
+        "keyword:da",
+        "keyword:dance-health",
+        "keyword:dance-injury",
+        "keyword:dance-neuro",
+        "keyword:dance-physio",
+        "keyword:dance-psych",
+        "keyword:db",
+        "keyword:dt",
+        "query:da",
+        "query:dance-health",
+        "query:dance-injury",
+        "query:dance-neuro",
+        "query:dance-physio",
+        "query:dance-psych",
+        "query:db",
+        "query:dt"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "biomechanically informed dual-stream gesture generation, relevant to optimization of dance technique",
+      "llm_evidence_cn": "生物力学启发的双流手势生成，与舞蹈技术优化相关",
+      "llm_evidence": "生物力学启发的双流手势生成，与舞蹈技术优化相关",
+      "canonical_evidence": "生物力学启发的双流手势生成，与舞蹈技术优化相关",
+      "llm_tldr_en": "Proposes DuoGesture for biomechanically plausible co-speech gesture generation, with methodology transferable to dance technique optimization.",
+      "llm_tldr_cn": "DuoGesture采用神经启发和生物力学约束的双流架构，通过语义变分信息瓶颈协调语义手势与节拍手势，生成更平滑、语义对齐的动作。其方法可用于舞蹈技术优化中的生物力学反馈。",
+      "llm_tldr": "DuoGesture采用神经启发和生物力学约束的双流架构，通过语义变分信息瓶颈协调语义手势与节拍手势，生成更平滑、语义对齐的动作。其方法可用于舞蹈技术优化中的生物力学反馈。",
+      "llm_tags": [
+        "query:db"
+      ],
+      "matched_query_tag": "query:db",
+      "matched_query_text": "optimization of dance technique",
+      "matched_requirement_id": "req-16",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2605.30374v1",
+      "source": "arxiv",
+      "title": "Gait2Hip-60: A Unified Deep Learning Benchmark for Predicting Hip Muscle Forces and Joint Moments from Multi-Cadence Gait Kinematics",
+      "abstract": "Estimating hip muscle forces and joint moments during gait typically relies on musculoskeletal simulation, which is informative but time-consuming and difficult to apply in clinical settings. This study developed a deep learning framework to predict these hip dynamics parameters directly from lower-limb gait kinematics and compared three representative sequence models under a unified protocol. Gait data were collected from 60 healthy adults under three metronome-guided cadence conditions. Ten bilateral lower-limb joint angles were used as inputs, and OpenSim-derived hip muscle forces and hip joint moments were used as reference outputs. Three deep learning models of LSTM, Transformer, and Mamba were trained and evaluated using the same subject-level split, preprocessing pipeline, and metrics. The best model was then directly tested on an external cohort of 9 patients with osteonecrosis of the femoral head (ONFH) without retraining. In the healthy-subject benchmark, Transformer achieved the best subject-level mean performance for both hip muscle force prediction (RMSE = 1.33 N/kg, MAE = 0.57 N/kg, R2 = 0.819) and hip joint moment prediction (RMSE = 0.11 Nm/kg, MAE = 0.07 Nm/kg, R2 = 0.862), with similar advantages across walking cadences. In zero-shot external validation, Transformer retained moderate predictive ability in ONFH for hip muscle force prediction (RMSE = 1.51 N/kg, MAE = 0.70 N/kg, R2 = 0.537) and hip joint moment prediction (RMSE = 0.17 Nm/kg, MAE = 0.12 Nm/kg, R2 = 0.569). These findings support the feasibility of estimating hip dynamics from gait kinematics, identify Transformer as a strong baseline, and highlight the need for broader pathological validation and improved generalization before clinical application.",
+      "authors": [
+        "Jiaqi Zhang",
+        "Ji Hou",
+        "Qing Sun",
+        "Xianzhi Gao",
+        "Bo Huo"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-05-24T14:00:42+00:00",
+      "link": "https://arxiv.org/pdf/2605.30374v1",
+      "tags": [
+        "keyword:da",
+        "keyword:dance-health",
+        "keyword:dance-injury",
+        "keyword:dance-neuro",
+        "keyword:dance-physio",
+        "keyword:dance-psych",
+        "keyword:db",
+        "keyword:dt",
+        "query:da",
+        "query:dance-health",
+        "query:dance-injury",
+        "query:dance-neuro",
+        "query:dance-physio",
+        "query:dance-psych",
+        "query:db",
+        "query:dt"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "uses gait kinematics to predict hip joint moments and muscle forces, directly relevant to biomechanical analysis of dance lower extremity joint loads",
+      "llm_evidence_cn": "利用步态运动学预测髋关节力矩和肌肉力，与舞蹈下肢关节负荷的生物力学分析直接相关",
+      "llm_evidence": "利用步态运动学预测髋关节力矩和肌肉力，与舞蹈下肢关节负荷的生物力学分析直接相关",
+      "canonical_evidence": "利用步态运动学预测髋关节力矩和肌肉力，与舞蹈下肢关节负荷的生物力学分析直接相关",
+      "llm_tldr_en": "Deep learning models predict hip joint moments and muscle forces from gait kinematics, providing a rapid alternative to musculoskeletal simulation; applicable to assessing joint loads in dance.",
+      "llm_tldr_cn": "传统的肌肉骨骼模拟计算耗时且临床不易应用。本文开发基于深度学习的框架，使用LSTM、Transformer和Mamba模型，从下肢运动学直接预测髋部肌肉力和关节力矩。实验表明，这些模型可快速准确预测，为舞蹈动作中关节负荷分析提供了高效工具。",
+      "llm_tldr": "传统的肌肉骨骼模拟计算耗时且临床不易应用。本文开发基于深度学习的框架，使用LSTM、Transformer和Mamba模型，从下肢运动学直接预测髋部肌肉力和关节力矩。实验表明，这些模型可快速准确预测，为舞蹈动作中关节负荷分析提供了高效工具。",
+      "llm_tags": [
+        "query:db"
+      ],
+      "matched_query_tag": "query:db",
+      "matched_query_text": "joint loads in dance",
+      "matched_requirement_id": "req-15",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2605.28186v1",
+      "source": "arxiv",
+      "title": "Visualizing Latent Phase Structures in Locomotion Policies: A Multi-Environment Study with Temporal Feature Extension",
+      "abstract": "Deep reinforcement learning (DRL) has been shown to achieve high performance on locomotion control tasks in MuJoCo benchmarks such as HalfCheetah, Ant, and Walker2D. However, visualizing the motion structures internally obtained by a trained policy function implemented as a deep neural network remains challenging. It is known from biomechanics and related fields that locomotion control is realized through the repetition of motion phases such as the stance phase and swing phase. In this study, we propose a framework for uncovering latent motion phase structures from trajectories generated by locomotion control policies through interaction with the environment. The proposed method extends the clustering features from state observations alone to augmented features including actions, next states, and next actions, and introduces a method for determining the number of clusters that suppresses self-transitions. Applying the proposed method to three environments -- Ant-v5, HalfCheetah-v5, and Walker2D-v5 -- we successfully identified phase structures with clearer and more regular transition rules than those obtained by the existing method.",
+      "authors": [
+        "Daisuke Yasui",
+        "Toshitaka Matuki",
+        "Hiroshi Sato"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI"
+      ],
+      "published": "2026-05-27T09:09:09+00:00",
+      "link": "https://arxiv.org/pdf/2605.28186v1",
+      "tags": [
+        "keyword:da",
+        "keyword:dance-health",
+        "keyword:dance-injury",
+        "keyword:dance-neuro",
+        "keyword:dance-physio",
+        "keyword:dance-psych",
+        "keyword:db",
+        "keyword:dt",
+        "query:da",
+        "query:dance-health",
+        "query:dance-injury",
+        "query:dance-neuro",
+        "query:dance-physio",
+        "query:dance-psych",
+        "query:db",
+        "query:dt"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "framework for uncovering latent motion phase structures in locomotion policies",
+      "llm_evidence_cn": "从运动策略中提取潜在运动相位结构的框架",
+      "llm_evidence": "从运动策略中提取潜在运动相位结构的框架",
+      "canonical_evidence": "从运动策略中提取潜在运动相位结构的框架",
+      "llm_tldr_en": "This paper proposes a framework to visualize latent motion phase structures from locomotion control policies using temporal feature extension and clustering, applied to MuJoCo benchmarks.",
+      "llm_tldr_cn": "深度强化学习在运动控制中表现优异，但其内部运动结构难以可视化。本文提出一个框架，通过时序特征扩展和聚类方法，从策略与环境交互生成的轨迹中揭示潜在的运动相位结构（如支撑相、摆动相）。在HalfCheetah等基准上的实验证明了方法的有效性。该技术可迁移至舞蹈动作分析中的运动阶段识别。",
+      "llm_tldr": "深度强化学习在运动控制中表现优异，但其内部运动结构难以可视化。本文提出一个框架，通过时序特征扩展和聚类方法，从策略与环境交互生成的轨迹中揭示潜在的运动相位结构（如支撑相、摆动相）。在HalfCheetah等基准上的实验证明了方法的有效性。该技术可迁移至舞蹈动作分析中的运动阶段识别。",
+      "llm_tags": [
+        "query:da"
+      ],
+      "matched_query_tag": "query:da",
+      "matched_query_text": "What are the methods for analyzing dance movements?",
+      "matched_requirement_id": "req-76",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2605.30552v1",
+      "source": "arxiv",
+      "title": "High-Fidelity 3D Simulator for Synthetic fNIRS Data Generation",
+      "abstract": "Functional near-infrared spectroscopy (fNIRS) provides a noninvasive window into brain activity by measuring task-related changes in oxygenated and deoxygenated hemoglobin in the cortex. A key advantage of fNIRS is its promise of use with mobile participants in complex, real-world environments, such as walking, sports, classroom learning, driving simulations, or social interactions. However, analyzing fNIRS data is challenging because of motion artifacts, physiological noise, and other confounding factors. This challenge is further compounded by the limited availability of annotated datasets, which hinders the development and validation of new analysis pipelines, particularly given the growing use of AI methods. Recognizing these challenges, we introduce a 3D fNIRS simulator that uses mesh-based Monte Carlo simulations to create physiologically realistic, full-head synthetic recordings with high spatiotemporal fidelity. Our simulator combines anatomically accurate sensitivity profiles with parameterized models of hemodynamic responses, systemic physiology, and nonsystematic artifacts. As a result, users can generate virtually unlimited labeled datasets for testing denoising algorithms, data augmentation, mechanistic modeling, or \\textit{in silico} experimentation. We validate the simulator using experimental fNIRS data from open-source finger-tapping, pain-assessment, and surgical-skill datasets and provide an open-source implementation to support reproducibility and broad adoption.",
+      "authors": [
+        "Condell Eastmond",
+        "Niels Bracher",
+        "Xavier Intes",
+        "Stefan T. Radev"
+      ],
+      "primary_category": "q-bio.NC",
+      "categories": [
+        "q-bio.NC"
+      ],
+      "published": "2026-05-28T20:34:27+00:00",
+      "link": "https://arxiv.org/pdf/2605.30552v1",
+      "tags": [
+        "keyword:dance-health",
+        "keyword:dance-neuro",
+        "keyword:dance-physio",
+        "keyword:dt",
+        "query:dance-health",
+        "query:dance-neuro",
+        "query:dance-physio",
+        "query:dt"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "provides a 3D simulator for synthetic fNIRS data, directly beneficial for dance neuroimaging research using fNIRS",
+      "llm_evidence_cn": "提供合成fNIRS数据的3D模拟器，直接有益于舞蹈神经成像研究",
+      "llm_evidence": "提供合成fNIRS数据的3D模拟器，直接有益于舞蹈神经成像研究",
+      "canonical_evidence": "提供合成fNIRS数据的3D模拟器，直接有益于舞蹈神经成像研究",
+      "llm_tldr_en": "A 3D simulator generates synthetic fNIRS data with realistic noise and artifacts, enabling development of analysis pipelines for dance neuroscience studies using fNIRS.",
+      "llm_tldr_cn": "fNIRS具备在移动环境中监测脑活动的优势，但运动伪影和有限标注数据阻碍了分析流程开发。本文提出高保真3D模拟器，能生成包含真实噪声和伪影的合成fNIRS数据。该工具可支持舞蹈神经美学等场景下fNIRS分析方法的验证与AI模型的训练。",
+      "llm_tldr": "fNIRS具备在移动环境中监测脑活动的优势，但运动伪影和有限标注数据阻碍了分析流程开发。本文提出高保真3D模拟器，能生成包含真实噪声和伪影的合成fNIRS数据。该工具可支持舞蹈神经美学等场景下fNIRS分析方法的验证与AI模型的训练。",
+      "llm_tags": [
+        "query:dance-neuro"
+      ],
+      "matched_query_tag": "query:dance-neuro",
+      "matched_query_text": "dance fNIRS brain imaging",
+      "matched_requirement_id": "req-44",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2605.29483v1",
+      "source": "arxiv",
+      "title": "VitalAgent: A Tool-Augmented Agent for Reactive and Proactive Physiological Monitoring over Wearable Health Data",
+      "abstract": "Wearable devices enable continuous monitoring of physiological signals such as ECG and PPG, but existing mHealth systems are largely limited to task-specific prediction pipelines or reactive question answering over static summaries. They lack the ability to support temporal reasoning, persistent physiological context, and proactive monitoring over long-term signal streams. We propose VitalAgent, a tool-augmented agentic framework for ECG/PPG-based mHealth that supports both reactive question answering and proactive monitoring. VitalAgent is built on a longitudinal physiological memory and a tool-augmented reasoning interface that enables dynamic computation over raw signals. We further introduce VitalBench, a longitudinal physiological monitoring benchmark dataset comprising 1,862 QA pairs for reactive question answering and 90.2 hours of continuous ECG/PPG recordings for proactive monitoring, covering cardiac, physical activity, and stress-related tasks. Experiments demonstrate that VitalAgent achieves over 30% improvement over prompt-based and ReAct baselines in reactive evaluation and supports proactive alert monitoring over long-term physiological signals, highlighting the importance of dynamic tool use and long-term physiological monitoring.",
+      "authors": [
+        "Di Zhu",
+        "Yu Yvonne Wu",
+        "Hong Jia",
+        "Aaqib Saeed",
+        "Vassilis Kostakos",
+        "Ting Dang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-05-28T07:10:14+00:00",
+      "link": "https://arxiv.org/pdf/2605.29483v1",
+      "tags": [
+        "keyword:da",
+        "keyword:dance-health",
+        "keyword:dance-injury",
+        "keyword:dance-neuro",
+        "keyword:dance-physio",
+        "keyword:dance-psych",
+        "keyword:db",
+        "keyword:dt",
+        "query:da",
+        "query:dance-health",
+        "query:dance-injury",
+        "query:dance-neuro",
+        "query:dance-physio",
+        "query:db",
+        "query:dt"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "proposes a framework for physiological monitoring over wearable data, applicable to monitoring dancers' physiological responses during training",
+      "llm_evidence_cn": "提出基于可穿戴数据的生理监测框架，可用于监测舞者训练中的生理反应",
+      "llm_evidence": "提出基于可穿戴数据的生理监测框架，可用于监测舞者训练中的生理反应",
+      "canonical_evidence": "提出基于可穿戴数据的生理监测框架，可用于监测舞者训练中的生理反应",
+      "llm_tldr_en": "VitalAgent is an agentic framework for ECG/PPG-based mHealth that supports reactive Q&A and proactive monitoring with longitudinal memory; useful for dance physiology monitoring.",
+      "llm_tldr_cn": "现有移动健康系统缺乏时间推理和主动监测能力。本文提出VitalAgent框架，构建纵向生理记忆和工具增强推理接口，支持对ECG/PPG信号的动态计算和主动监测。该框架可应用于舞蹈训练中的心肺功能与疲劳恢复的持续监测与预警。",
+      "llm_tldr": "现有移动健康系统缺乏时间推理和主动监测能力。本文提出VitalAgent框架，构建纵向生理记忆和工具增强推理接口，支持对ECG/PPG信号的动态计算和主动监测。该框架可应用于舞蹈训练中的心肺功能与疲劳恢复的持续监测与预警。",
+      "llm_tags": [
+        "query:dance-physio:composite"
+      ],
+      "matched_query_tag": "query:dance-physio:composite",
+      "matched_query_text": "Papers central to 请帮我查找舞蹈训练中的生理反应与适应研究，包括心肺功能、能量代谢、肌肉适应、激素水平、疲劳与恢复等。, especially work that connects or combines: cardiorespiratory adaptation in dance training; energy metabolism during dance exercise; muscle adaptation in dancers; hormonal response to dance training; fatigue and recovery in dance; physiological responses to dance training; What are the cardiovascular and respiratory adaptations to dance training?; How does dance training affect energy metabolism and muscle adaptation?; What hormonal changes occur in response to dance exercise?; How do dancers recover from fatigue and what are the physiological markers?.",
+      "matched_requirement_id": "req-composite-dance-physio",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2605.31227v1",
+      "source": "arxiv",
+      "title": "HiERO-StepG @ Ego4D Step Grounding Challenge: hierarchical activity understanding enables zero-shot step grounding",
+      "abstract": "Procedural activities follow well-defined structures: whether we consider a cooking recipe or a mechanic repairing a car, these activities naturally decompose in a hierarchy of steps and sub-steps. Traditional approaches for step grounding require extensive annotations and scale poorly. Instead, we argue that such hierarchical structure can emerge naturally from uncurated videos of human activities through recurring patterns of co-occurring actions and activities. Our approach builds on HiERO, a weakly-supervised representation learning approach that maps close in the feature space actions that are functionally related to each other, leveraging only fine-grained action-level narrations. In this feature space, procedure steps can be detected by a simple clustering, with no additional task-specific fine-tuning. For the Ego4D Step Grounding challenge, we augment this approach by ensuring fine and coarse level agreement in step assignments, enforcing strict temporal monotonicity of the grounded steps and post-processing the detected steps to reduce the impact of noisy predictions. We call this approach HiERO-StepG and it achieves 56.27 % on the R@1 (IoU = 0.3) metric on the global leaderboard at submission time, ranking second while being completely zero-shot and not requiring procedure-specific annotations. Project page: https://github.com/andreazenotto/HiERO-StepG.",
+      "authors": [
+        "Andrea Zenotto",
+        "Simone Alberto Peirone",
+        "Francesca Pistilli",
+        "Giuseppe Averta"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-05-29T12:30:53+00:00",
+      "link": "https://arxiv.org/pdf/2605.31227v1",
+      "tags": [
+        "keyword:da",
+        "keyword:dance-health",
+        "keyword:dance-injury",
+        "keyword:dance-neuro",
+        "keyword:dance-physio",
+        "keyword:dance-psych",
+        "keyword:db",
+        "keyword:dt",
+        "query:da",
+        "query:dance-health",
+        "query:dance-injury",
+        "query:dance-neuro",
+        "query:dance-physio",
+        "query:dance-psych",
+        "query:db",
+        "query:dt"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "hierarchical activity decomposition and step grounding method applicable to dance movement analysis",
+      "llm_evidence_cn": "层次化活动分解与步骤定位方法可应用于舞蹈动作分析",
+      "llm_evidence": "层次化活动分解与步骤定位方法可应用于舞蹈动作分析",
+      "canonical_evidence": "层次化活动分解与步骤定位方法可应用于舞蹈动作分析",
+      "llm_tldr_en": "Proposes HiERO-StepG for zero-shot step grounding using hierarchical activity understanding from video, applicable to analyzing dance sequences.",
+      "llm_tldr_cn": "该论文提出HiERO-StepG方法，利用弱监督学习从无标注视频中学习活动的层次结构，实现零样本步骤定位。该方法可应用于舞蹈动作的自动分解与识别，有助于舞蹈动作分析的研究。",
+      "llm_tldr": "该论文提出HiERO-StepG方法，利用弱监督学习从无标注视频中学习活动的层次结构，实现零样本步骤定位。该方法可应用于舞蹈动作的自动分解与识别，有助于舞蹈动作分析的研究。",
+      "llm_tags": [
+        "query:da"
+      ],
+      "matched_query_tag": "query:da",
+      "matched_query_text": "What are the methods for analyzing dance movements?",
+      "matched_requirement_id": "req-76",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2605.31332v1",
+      "source": "arxiv",
+      "title": "A Focus of Attention-Based Virtual Training Platform for Pre-Prosthetic Myoelectric Skill Acquisition: A Proof-of-Concept Study",
+      "abstract": "Advances in myoelectric prosthetic technology have substantially increased the functional potential of modern devices. Accordingly, heightened control demands have led to the acknowledgement of pre-prosthetic training as a key stage in the acquisition of myoelectric skills. Existing training paradigms largely emphasize internal muscle activation while external, goal-directed outcomes required for effective real-world use are often neglected. We address this gap by introducing a virtual pre-prosthetic training platform that integrates EMG-driven cursor with animated hand gestures, enabling the delivery of both muscle-level and functional-level feedback. In this proof-of-concept study, participants were assigned to one of two focus of attention (FoA) protocols, each incorporating both feedback types but differing in whether internal or external FoA was emphasised. Participants successfully acquired and retained myoelectric skill across both protocols, but distinct performance characteristics and learning strategies emerged, indicating that both FoAs contribute meaningfully to learning and that their timing may play an important role. External FoA was positively associated with retention, suggesting that it may strengthen the link between training and skill acquisition. Together, the results demonstrate the feasibility of an FoA-based virtual training platform for pre-prosthetic applications and indicate that it can provide a foundation for designing training protocols that better prepare users for prosthetic use.",
+      "authors": [
+        "Xiaochen Zhang",
+        "Sigrid Dupan"
+      ],
+      "primary_category": "cs.HC",
+      "categories": [
+        "cs.HC"
+      ],
+      "published": "2026-05-29T14:10:07+00:00",
+      "link": "https://arxiv.org/pdf/2605.31332v1",
+      "tags": [
+        "keyword:da",
+        "keyword:dance-health",
+        "keyword:dance-injury",
+        "keyword:dance-neuro",
+        "keyword:dance-physio",
+        "keyword:dance-psych",
+        "keyword:db",
+        "keyword:dt",
+        "query:da",
+        "query:dance-health",
+        "query:dance-injury",
+        "query:dance-neuro",
+        "query:dance-physio",
+        "query:dance-psych",
+        "query:db",
+        "query:dt"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "EMG-driven virtual training platform",
+      "llm_evidence_cn": "基于肌电驱动的虚拟训练平台",
+      "llm_evidence": "基于肌电驱动的虚拟训练平台",
+      "canonical_evidence": "基于肌电驱动的虚拟训练平台",
+      "llm_tldr_en": "This paper introduces a virtual training platform integrating EMG-driven cursor with animated hand gestures for myoelectric skill acquisition, providing both muscle-level and functional-level feedback.",
+      "llm_tldr_cn": "现有假肢训练多强调内部肌肉激活，忽视外部目标导向结果。本文提出一个虚拟训练平台，将肌电驱动光标与手部动画结合，同时提供肌肉层面和功能层面的反馈。初步实验显示该平台能有效提升肌电技能习得效率。该方法可迁移至舞蹈损伤康复中的肌电生物反馈训练，为康复干预提供新工具。",
+      "llm_tldr": "现有假肢训练多强调内部肌肉激活，忽视外部目标导向结果。本文提出一个虚拟训练平台，将肌电驱动光标与手部动画结合，同时提供肌肉层面和功能层面的反馈。初步实验显示该平台能有效提升肌电技能习得效率。该方法可迁移至舞蹈损伤康复中的肌电生物反馈训练，为康复干预提供新工具。",
+      "llm_tags": [
+        "query:db"
+      ],
+      "matched_query_tag": "query:db",
+      "matched_query_text": "EMG analysis in dance",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "biorxiv-10-64898-2026-05-07-723396-v3",
+      "source": "biorxiv",
+      "title": "Investigating sensorimotor beta burst dynamics as a robust biomarker for graded force modulation in humans",
+      "abstract": "The most prominent signature associated with motor execution and motor imagery is the event-related desynchronisation and synchronisation (ERD/S) in the mu and beta bands (8-30 Hz). In the context of brain-computer interfaces (BCI), this ERD/S signature is helpful for binary decisions, such as left vs. right imagery, but it is not a robust biomarker for continuous prediction, such as precisely decoding different levels of force application. This is essential for developing better BCI applications with precise dynamic force outputs. Recent studies have revealed that sensorimotor beta bursts have a stronger relationship with motor control, even at a single-trial level, than beta band power. We, therefore, investigated whether the transient nature of beta bursts provide an alternative, but robust biomarker for BCI force decoding. Here, we designed an experiment where human participants (N = 16) performed both motor execution (ME) at four force levels (10%, 25%, 50%, and 75% of maximum voluntary contraction) and imagined exerting the same, i.e. a motor imagery (MI) task, as their electroencephalogram was recorded. We observed a clear and classical ERD pattern in the motor cortex during the ME task, whereas it was less pronounced during the MI task. After extracting sensorimotor beta bursts, we observed differences in spectral burst features between motor execution and imagery including burst amplitude, spectral width, and temporal width. Moreover, different force levels were correlated with changes in the burst amplitude and burst spectral width, specifically during motor execution. Interestingly, we found that different beta burst waveforms are associated with the different force levels and conditions. This suggests that the bursts-level features could be driven by changes in the underlying beta burst waveforms. Overall, our study shows that sensorimotor beta burst can be an important piece of the puzzle to implementing precise force control in brain-computer interface-based prosthetics.",
+      "authors": [
+        "Perwez, M. S.",
+        "Bonaiuto, J. J.",
+        "Suthar, B.",
+        "Muralidharan, V."
+      ],
+      "primary_category": "neuroscience",
+      "categories": [
+        "neuroscience"
+      ],
+      "published": "2026-05-29T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.64898/2026.05.07.723396v3.full.pdf",
+      "tags": [
+        "keyword:da",
+        "keyword:dance-health",
+        "keyword:dance-injury",
+        "keyword:dance-neuro",
+        "keyword:dance-physio",
+        "keyword:dance-psych",
+        "keyword:db",
+        "keyword:dt",
+        "query:da",
+        "query:dance-health",
+        "query:dance-injury",
+        "query:dance-neuro",
+        "query:dance-physio",
+        "query:dance-psych",
+        "query:db",
+        "query:dt"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "sensorimotor beta burst dynamics for force modulation, relevant to muscle activation in dance",
+      "llm_evidence_cn": "感觉运动β爆发动力学用于力调节，与舞蹈肌肉激活模式相关",
+      "llm_evidence": "感觉运动β爆发动力学用于力调节，与舞蹈肌肉激活模式相关",
+      "canonical_evidence": "感觉运动β爆发动力学用于力调节，与舞蹈肌肉激活模式相关",
+      "llm_tldr_en": "Shows sensorimotor beta bursts are robust biomarkers for graded force modulation, relevant to understanding muscle control in dance.",
+      "llm_tldr_cn": "该研究发现感觉运动β爆发相比于传统频带功率能更可靠地解码连续力输出，为理解舞蹈中精细肌肉控制和力调节提供了神经生理学基础。",
+      "llm_tldr": "该研究发现感觉运动β爆发相比于传统频带功率能更可靠地解码连续力输出，为理解舞蹈中精细肌肉控制和力调节提供了神经生理学基础。",
+      "llm_tags": [
+        "query:db"
+      ],
+      "matched_query_tag": "query:db",
+      "matched_query_text": "muscle activation patterns during dance jumps and turns",
+      "matched_requirement_id": "req-17",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "biorxiv-10-64898-2026-05-24-727496-v1",
+      "source": "biorxiv",
+      "title": "Reliability of Spatiotemporal Neuromuscular Activity Patterns in Magnetomyography Across Force Levels",
+      "abstract": "BackgroundMagnetomyography (MMG) using an optically pumped magnetometer (OPM) provides a contactless and non-invasive approach to assess neuromuscular activity. However, given the limited studies using optically pumped magnetometer magnetomyography (OPM-MMG) and that those primarily used a single OPM, it remains to be characterized how stable individual neuromuscular activity patterns are over time and across different force levels when using multiple OPMs, specifically an array-based MMG.\n\nMethods12 healthy subjects performed ramped isometric contractions at 10, 20, 40, 60, and 80% maximal voluntary contraction (MVC), while a 2x3 OPM array recorded MMG signals from the tibialis anterior (TA). For the test-retest reliability, ramps at 20% and 60% MVC were each repeated once. For each subject, Spearmans rank correlation was computed across all OPM sensors between force conditions to assess consistency of feature rankings, and within-subject spatial repeatability between repeated 20% and 60% MVC ramps was quantified using ICC (3,1) (two-way mixed-effects, single-measure, absolute agreement).\n\nResultsIn 9 of 12 subjects, Spearmans rank analyses showed generally high correlations across force levels ({rho} = 0.37 to 0.91, p<0.05), whereas in the remaining 3 subjects, spatial patterns were less stable ({rho} = -0.73 to 0.58, p<0.05). ICC (3,1) between repeated ramps indicated high within-subject spatial repeatability of the array pattern in 9 out of 12 subjects, with ICC > 0.75 at 20% MVC (5 out of 9 subjects) and 60% MVC (6 out of 9 subjects), respectively. In contrast, the remaining 3 subjects showed lower ICCs (20% MVC: -0.28 to 0.51; 60% MVC: 0.22 to 0.80).\n\nConclusionArray-based OPM-MMG shows high within-subject stability of spatial patterns across force levels and strong test-retest repeatability in the majority of subjects (9 out of 12), supporting its use for characterizing force-dependent neuromuscular activity while acknowledging inter-subject variability.",
+      "authors": [
+        "Yang, H.",
+        "Senay, B.",
+        "Kleiser, B.",
+        "Marquetand, J."
+      ],
+      "primary_category": "neuroscience",
+      "categories": [
+        "neuroscience"
+      ],
+      "published": "2026-05-27T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.64898/2026.05.24.727496v1.full.pdf",
+      "tags": [
+        "keyword:da",
+        "keyword:dance-health",
+        "keyword:dance-injury",
+        "keyword:dance-neuro",
+        "keyword:dance-physio",
+        "keyword:dance-psych",
+        "keyword:db",
+        "keyword:dt",
+        "query:da",
+        "query:dance-health",
+        "query:dance-injury",
+        "query:dance-neuro",
+        "query:dance-physio",
+        "query:dance-psych",
+        "query:db",
+        "query:dt"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "magnetomyography for neuromuscular activity assessment",
+      "llm_evidence_cn": "磁动图用于神经肌肉活动评估",
+      "llm_evidence": "磁动图用于神经肌肉活动评估",
+      "canonical_evidence": "磁动图用于神经肌肉活动评估",
+      "llm_tldr_en": "This study assesses test-retest reliability of spatiotemporal neuromuscular activity patterns using an array-based OPM magnetomyography across five force levels in tibialis anterior.",
+      "llm_tldr_cn": "磁动图（MMG）提供非接触式神经肌肉评估，但阵列MMG的可靠性未知。本研究在12名健康受试者中，利用2x3 OPM阵列记录胫骨前肌在不同力量水平下的MMG信号，发现个体神经肌肉活动模式具有良好的跨时间和力量水平稳定性。该方法可应用于舞蹈训练中肌肉激活模式的评估。",
+      "llm_tldr": "磁动图（MMG）提供非接触式神经肌肉评估，但阵列MMG的可靠性未知。本研究在12名健康受试者中，利用2x3 OPM阵列记录胫骨前肌在不同力量水平下的MMG信号，发现个体神经肌肉活动模式具有良好的跨时间和力量水平稳定性。该方法可应用于舞蹈训练中肌肉激活模式的评估。",
+      "llm_tags": [
+        "query:db"
+      ],
+      "matched_query_tag": "query:db",
+      "matched_query_text": "EMG analysis in dance",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "biorxiv-10-64898-2026-05-25-727718-v1",
+      "source": "biorxiv",
+      "title": "Using timescale as a state coordinate reveals the metastable geometry of behavior",
+      "abstract": "Animal behavior unfolds across many timescales, from fast movement patterns to slow changes in internal states such as hunger, arousal, and circadian phase. These slow variables are rarely measured directly and must instead be inferred from their effects on the faster movements that can be observed. Here we propose treating timescale itself as an explicit coordinate of the state representation, constructing a time-frequency state space where fast movements and slow modulations appear simultaneously. We find that slow modes emerge as linear arms radiating from a stationary-weighted hub in the leading non-trivial eigenvectors of the transfer operator, with one arm per metastable basin across three systems of increasing complexity. In a synthetic system, the framework recovers a hidden bistable driver across nearly three decades of dwell time, while a fixed-timescale analysis of the same trajectory finds no separable slow modes. In nematode locomotion, it reproduces the canonical run-pirouette organization. In freely moving fruit flies, where fast leg kinematics are orders of magnitude faster than the behavioral states they compose, the multi-timescale operator identifies four metastable behavioral basins directly from the postural time series, without first decomposing into a sequence of stereotyped actions. We further find that these basins exhibit a broad, heavy-tailed distribution of residence times. Treating timescale as a state coordinate thus exposes a predictable geometric form for the slow organization of behavior, providing a general route for extracting collective modes from partially observed biological time series without first organizing the dynamics into discrete events.",
+      "authors": [
+        "Kaur, R.",
+        "Jain, K.",
+        "Berman, G. J."
+      ],
+      "primary_category": "animal behavior and cognition",
+      "categories": [
+        "animal behavior and cognition"
+      ],
+      "published": "2026-05-28T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.64898/2026.05.25.727718v1.full.pdf",
+      "tags": [
+        "keyword:da",
+        "keyword:dance-health",
+        "keyword:dance-neuro",
+        "keyword:dance-physio",
+        "keyword:dance-psych",
+        "keyword:db",
+        "keyword:dt",
+        "query:da",
+        "query:dance-neuro",
+        "query:dance-psych",
+        "query:db"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "time-frequency state space method for behavioral timescales; applicable to dance movement analysis",
+      "llm_evidence_cn": "时频状态空间方法分析行为时间尺度，可应用于舞蹈动作分析",
+      "llm_evidence": "时频状态空间方法分析行为时间尺度，可应用于舞蹈动作分析",
+      "canonical_evidence": "时频状态空间方法分析行为时间尺度，可应用于舞蹈动作分析",
+      "llm_tldr_en": "This paper introduces a time-frequency state space representation to uncover metastable geometry of behavior across timescales, which can be transferred to analyze hierarchical structure of dance movements linking fast steps to slow choreographic patterns.",
+      "llm_tldr_cn": "本研究针对行为多时间尺度特性，提出将时间尺度作为状态坐标，构建时频状态空间，通过传输算子本征向量识别亚稳态几何。在合成系统和动物行为上验证表明，慢速模式呈现线性辐射臂结构。该方法可转移至舞蹈动作分析，用于同时表征快速步伐与慢速编排模式，揭示舞蹈的分层组织。",
+      "llm_tldr": "本研究针对行为多时间尺度特性，提出将时间尺度作为状态坐标，构建时频状态空间，通过传输算子本征向量识别亚稳态几何。在合成系统和动物行为上验证表明，慢速模式呈现线性辐射臂结构。该方法可转移至舞蹈动作分析，用于同时表征快速步伐与慢速编排模式，揭示舞蹈的分层组织。",
+      "llm_tags": [
+        "query:da:composite"
+      ],
+      "matched_query_tag": "query:da:composite",
+      "matched_query_text": "Papers central to 请帮我查找舞蹈动作分析的方法与应用，以及长期舞蹈训练引发的体能和神经适应，包括拉班动作分析、运动捕捉、力量柔韧平衡训练、舞者体能。, especially work that connects or combines: Laban Movement Analysis methods and applications in dance; motion capture technology for dance movement analysis; long-term dance training induced physical and neural adaptations; physical fitness assessment and training for dancers; dance movement analysis methods and applications; neural adaptations from long-term dance practice; What are the methods for analyzing dance movements?; How does long term dance training affect physical fitness and neural adaptations?; Applications of Laban Movement Analysis in dance; Motion capture techniques for dance analysis.",
+      "matched_requirement_id": "req-composite-da",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "biorxiv-10-64898-2026-05-27-728310-v1",
+      "source": "biorxiv",
+      "title": "Neural networks learn forward dynamics when freed from numerical integration",
+      "abstract": "Seamless interaction between humans and machines requires interfaces that remain robust to the variability inherent in biological signals and physical environments. Advanced human-machine interfaces (HMIs) increasingly rely on machine learning to predict or control limb dynamics. These systems must learn input-to-output mappings between control variables and limb state, such as the mapping from muscle forces or joint torques acting about segmented arm joints to limb posture over time. Such statistical input-to-output transformations can result in numerical instability of predicted musculoskeletal kinematics and dynamics. Achieving the robustness of biological motor control requires solving both forward and inverse dynamics problems; however, these problems are computationally asymmetric because they entail opposing operations-integration and differentiation. Since we have previously shown that neural networks solve the inverse dynamics problem when trained to map kinematic to dynamic signals during reaching, we hypothesized that representing separately the approximation of equations of motion (EOM) and their temporal numerical integration may capture the relevant computational structure of the forward dynamics problem. We tested this hypothesis by comparing a conventional direct-mapping recurrent neural network (RNN) with a two-stage model, the artificial physics engine (APE). When predicting the state of a two-segment system under external perturbations not encountered during training, the direct-mapping, monolithic model produced large prediction errors inconsistent with the expected interaction torque, whereas the APE maintained low error and remained stable under novel initial conditions and perturbations. Mapping system dynamics in the terms of the EOM improves robustness against intrinsic and extrinsic sources of variability by imposing a causal, physics-based structure on HMI design.",
+      "authors": [
+        "Bahdasariants, S.",
+        "Yakovenko, S."
+      ],
+      "primary_category": "neuroscience",
+      "categories": [
+        "neuroscience"
+      ],
+      "published": "2026-06-01T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.64898/2026.05.27.728310v1.full.pdf",
+      "tags": [
+        "keyword:da",
+        "keyword:dance-health",
+        "keyword:dance-injury",
+        "keyword:dance-neuro",
+        "keyword:dance-physio",
+        "keyword:dance-psych",
+        "keyword:db",
+        "keyword:dt",
+        "query:da",
+        "query:dance-health",
+        "query:dance-injury",
+        "query:dance-neuro",
+        "query:dance-physio",
+        "query:dance-psych",
+        "query:db",
+        "query:dt"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "neural network forward dynamics for limb, applicable to dance movement prediction",
+      "llm_evidence_cn": "神经网络前向动力学用于肢体，可应用于舞蹈运动预测",
+      "llm_evidence": "神经网络前向动力学用于肢体，可应用于舞蹈运动预测",
+      "canonical_evidence": "神经网络前向动力学用于肢体，可应用于舞蹈运动预测",
+      "llm_tldr_en": "Proposes neural networks that learn forward dynamics of limb without numerical integration, enabling robust prediction of musculoskeletal kinematics, relevant to dance biomechanics.",
+      "llm_tldr_cn": "针对传统数值积分在预测肢体动力学中的不稳定性，提出神经网络方法直接学习从肌肉力或关节力矩到肢体姿态的前向映射，避免了积分误差。方法在模拟中展现出鲁棒性，可应用于舞蹈动作的实时预测和生物力学分析。",
+      "llm_tldr": "针对传统数值积分在预测肢体动力学中的不稳定性，提出神经网络方法直接学习从肌肉力或关节力矩到肢体姿态的前向映射，避免了积分误差。方法在模拟中展现出鲁棒性，可应用于舞蹈动作的实时预测和生物力学分析。",
+      "llm_tags": [
+        "query:db:composite"
+      ],
+      "matched_query_tag": "query:db:composite",
+      "matched_query_text": "Papers central to 请帮我查找舞蹈动作的生物力学研究，包括运动学、动力学、肌电分析、地面反作用力、关节负荷及舞蹈技术优化等。, especially work that connects or combines: biomechanics of dance movements; kinematic analysis of dance motion; EMG analysis in dance; ground reaction forces during dance; joint loads in dance; optimization of dance technique; muscle activation patterns during dance jumps and turns; Biomechanical analysis of dance movements using kinematics and EMG; Joint loading and ground reaction forces during dance techniques; Optimization of dance technique through biomechanical feedback.",
+      "matched_requirement_id": "req-composite-db",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

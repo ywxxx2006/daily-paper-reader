@@ -1,0 +1,160 @@
+Title: HiERO-StepG @ Ego4D Step Grounding Challenge: hierarchical activity understanding enables zero-shot step grounding
+
+URL Source: https://arxiv.org/pdf/2605.31227v1
+
+Published Time: Mon, 01 Jun 2026 01:10:04 GMT
+
+Number of Pages: 5
+
+Markdown Content:
+# HiERO-StepG @ Ego4D Step Grounding Challenge: hierarchical activity understanding enables zero-shot step grounding 
+
+## Andrea Zenotto Politecnico di Torino 
+
+> s327473@studenti.polito.it
+
+## Simone Alberto Peirone Politecnico di Torino 
+
+> simone.peirone@polito.it
+
+## Francesca Pistilli Politecnico di Torino 
+
+> francesca.pistilli@polito.it
+
+## Giuseppe Averta Politecnico di Torino 
+
+> giuseppe.averta@polito.it
+
+## Abstract 
+
+Procedural activities follow well-defined structures: whether we consider a cooking recipe or a mechanic repairing a car, these activities naturally decompose in a hierarchy of steps and sub-steps. Traditional approaches for step ground-ing require extensive annotations and scale poorly. Instead, we argue that such hierarchical structure can emerge nat-urally from uncurated videos of human activities through recurring patterns of co-occurring actions and activities. Our approach builds on HiERO, a weakly-supervised repre-sentation learning approach that maps close in the feature space actions that are functionally related to each other, leveraging only fine-grained action-level narrations. In this feature space, procedure steps can be detected by a sim-ple clustering, with no additional task-specific fine-tuning. For the Ego4D Step Grounding challenge, we augment this approach by ensuring fine and coarse level agreement in step assignments, enforcing strict temporal monotonicity of the grounded steps and post-processing the detected steps to reduce the impact of noisy predictions. We call this ap-proach HiERO-StepG and it achieves 56.27% on the R@1 (IoU = 0.3) metric on the global leaderboard at submission time, ranking second while being completely zero-shot and not requiring procedure-specific annotations. Project page: github.com/andreazenotto/HiERO-StepG 
+
+## 1. Introduction 
+
+Several human activities have a strong procedural structure, as they unfold though a hierarchy of steps and substeps. Cooking is a clear example, as recipes decompose into indi-vidual steps that must be executed in a precise order. Pro-cedure understanding covers a broad range of tasks, whose goal is to understand such hierarchical structure, reasoning about how steps and substeps interact and contribute toward the overall goal. Recently, Ego4D GoalStep [ 12 ] introduced a large scale set of annotations for Ego4D [ 5 ], with a hierar-chical taxonomy of goal-oriented activity labels. Here, we focus on the Step Grounding task [ 12 ] which aims at local-izing the temporal boundaries of a given procedural step, given its free-form textual description. The task is closely related to moment localization [14 ], where the goal is to temporally locate a textual query in a long video. Previous works addressed this task from a fully supervised perspec-tive, using annotated step boundaries to train a localization model [4, 9, 11]. Beyond relying on procedural annotations, procedural steps can emerge as action clusters across different videos depicting the same high-level activity [ 1, 2, 6]. However, these approaches assume that videos are from the same task and share the same steps, which limits generalization to un-seen procedures. StepFormer [ 3] leverages a set of learnable queries to model the latent procedural steps in instructional videos, using only narrations as supervision. However, the learned representation captures procedures at a single tempo-ral granularity, limiting its ability to model the hierarchical structure of human activities. HiERO [ 10 ] introduces a more flexible approach which learns an embedding space where distances between embeddings reflect the functional simi-larity of their corresponding narrations. Narrations provide a cheap form of supervision [ 8], enabling procedural steps to emerge from clusters of actions sharing similar narra-tions. HiERO is trained on approx. 3.8M clip-text pairs from EgoClip [ 7] and exploits the natural co-occurrence of similar actions to learn context-aware embeddings. In this feature space, steps and substeps emerge as clusters of actions sharing similar narrations, which enables zero-shot step grounding. Here, we present HiERO-StepG which extends the zero-shot step grounding pipeline proposed in HiERO by impos-1              
+
+> arXiv:2605.31227v1 [cs.CV] 29 May 2026 Figure 1. Overview of the HiERO-StepG inference pipeline. The video input is processed through a Graph Branch to extract fine-grained temporal nodes ( T) and coarse-grained clusters ( K), while Nprocedural text queries are encoded via a Text Branch . Node- and cluster-level similarity matrices are computed via dot product with the textual queries and linearly combined using a weighting parameter αto construct the Hybrid Similarity matrix. Finally, a Viterbi decoding algorithm is applied to extract the optimal monotonic path, enforcing strict chronological ordering of the step assignments.
+
+ing additional constraints in the grounding phase to: (i) en-sure strict temporal monotonicity in the predicted steps, (ii) encourage assignments consistency across different temporal granularities, and (iii) adaptively refine the step boundaries to better capture the true temporal extent of the steps. Unlike other approaches that leverage annotated step boundaries, our approach for step grounding is completely zero-shot 
+
+and has no access to any form of step annotations. HiERO-StepG achieves 56.27% on the R@1 (IoU = 0.3) metric on the global leaderboard at submission time, ranking second. 
+
+## 2. Background: the HiERO architecture 
+
+An input video V is first split into T non-overlapping clips and clip-level embeddings are extracted from each clip us-ing a video feature extractor (L AVILA [15 ]). The video is then encoded as a video graph G = ( X, E, p), where 
+
+X ∈ RT ×D represents the node embeddings extracted from the video clips, edges (i, j ) ∈ E connects the nodes i and 
+
+j if their temporal distance is below a threshold τ and p
+
+encodes the temporal timestamp corresponding to each node. Each video is accompanied by an ordered list of narrations 
+
+N = {(ni, t i)}, where ni is a free-form fine-grained cap-tion from the video at timestamp ti. The video graph G and its associated narrations N are then processed with a dual branch structure. The graph branch Fg maps the original graph to a set of L temporally coarsened graph representations: G 7 →{G (0) , G(1) , . . . , G(L)}, obtained by halving the temporal resolution of the graphs at each stage. This branch follows an encoder-decoder structure. The temporal encoder imple-ments local temporal reasoning, hierarchically aggregating information between close segments with progressively more coarse temporal granularity. The function-aware decoder 
+
+extends temporal reasoning to nodes that may be tempo-rally distant but functionally similar. Nodes are first clus-tered based on features similarity and the connectivity of the graph is updated to reflect the clusters. Spectral clus-tering [ 13 ] is used at this stage to model action clusters as densely connected regions of the graph based on their func-tional similarity ( functional threads ). Temporal reasoning is then performed inside each thread separately and the updated nodes are propagated back to the original graph. The text branch maps each narration to an embedding ni ∈ RD , that is aligned with node embeddings space through a video-text contrastive objective. 
+
+Training and inference with HiERO. HiERO is trained with a video-text contrastive alignment objective Lvna that encourages the node embeddings to be close to the narration embeddings that fall within a predefined window around the node’s timestamp. The functional threads clustering objec-tive, Lf t , promotes feature similarity among nodes assigned to the same cluster while pushing apart nodes belonging to different clusters. HiERO is trained with a combination of the two objectives. At inference time, procedural steps are obtained by clustering the node embeddings through spectral clustering, as done in the function-aware decoder .
+
+## 3. The HiERO-StepG inference pipeline 
+
+We extend the zero-shot inference pipeline from HiERO to make the process more robust to textual ambiguities, overly generic step descriptions, and highly repetitive queries. Specifically, we introduce a structured decoding process that ensures the correct temporal order of the grounded steps in the video. This approach is inspired by Bayesian-VSLNet [ 11 ], which introduces a temporal prior to tempo-rally shift the predictions of steps that appear more than once in the video. 
+
+3.1. Feature extraction 
+
+Given a video and a set of n textual step queries, which are assumed to be temporally ordered according to their occur-rence in the video, we proceed as follows. First, we extract 2the input graph G from the video and compute the hierar-chical graphs {G (0) , G(1) , . . . , G(L)}. We then compute the cosine similarity between the node embeddings from the hi-erarchical graphs and the ℓ2-normalized query embeddings. To improve robustness against visual noise, we compute a hybrid similarity score by linearly combining the local similarity obtained from node embeddings in G(0) with the global similarity from corresponding coarse cluster in G(L)
+
+(Figure 1). The resulting similarity matrix S ∈ RN ×T stores in sij the similarity score between the i-th query and the j-th temporal node. 
+
+3.2. In-order step grounding 
+
+We then proceed assigning each segment from the video to a different step query, while enforcing a strict temporal ordering of the steps, i.e ., step i cannot occur before step 
+
+i − 1 has completed. We model this behavior by finding the optimal temporal sequence of nodes P = ( p1, p 2, . . . , p N )
+
+that maximizes the joint similarity across all queries, subject to a strict monotonicity constraint: 
+
+max 
+
+> PN
+
+X
+
+> i=1
+
+Si,p i subject to t(pi−1) ≤ t(pi) + τ, 
+
+where t(pi) represents the timestamp (in seconds) at which step i occurs, and τ is a minimal temporal tolerance window to account for slight overlap of the steps. We then apply the 
+
+Viterbi decoding algorithm to assign the steps. Specifically, the algorithm iteratively builds the best assignment plan at time t by considering the best plan up to t − 1 and selecting the best assignment at time t. We define a score accumulation matrix D ∈ RN ×T and a backpointer matrix B ∈ NN ×T .The entry Di,t represents the maximum accumulated score obtainable by aligning the i-th query exactly to the t-th temporal node, provided that all preceding steps (from 1
+
+to i − 1) have been optimally aligned, while B tracks the optimal assignments. For the first query ( i = 1 ), the best scores are given directly by the scores of the similarity map: 
+
+D1,t = S1,t for every t. For each subsequent query i and for each temporal node t, the score is calculated recursively by searching for the best node t′ to which the previous query (i − 1) was assigned: 
+
+Di,t = Si,t + max  
+
+> t′
+
+(Di−1,t ′ + ϕ(t′, t )) 
+
+In this equation, the index t′ iterates over all possible previ-ous temporal candidate nodes for query i − 1. ϕ(t′, t ) is a temporal masking function that enforces the chronological constraint between the previous node t′ and the current node 
+
+t. Specifically, ϕ(t′, t ) = 0 if the transition is temporally valid ( t′ ≤ t + τ ), whereas ϕ(t′, t ) = −10 9 otherwise. This extreme penalty excludes non-monotonic paths from the so-lution space. At the end, we perform a backtracking pass to reconstruct the optimal path P .To expand the set of candidate steps, we propose a two-stage approach: point-level candidate generation followed by a dynamic, query-conditioned boundary expansion. In addition to the steps predicted through the Viterbi decod-ing algorithm, we extract additional candidates by taking the nodes with highest similarity in each candidate step and across the entire video. We then convert these candidate nodes into continuous segments by iteratively expanding their boundaries left and right until the local cosine simi-larity falls below a dynamic stopping threshold, defined as a relative fraction of the peak’s maximum similarity. To capture varying temporal extents, we apply a predefined set of distinct expansion ratios to each peak, producing a concentric set of candidate segments. Finally, all segments are padded to guarantee a minimum duration, and an IoU-based NMS is applied to discard highly redundant segments, yielding the final Top-5 diverse predictions. 
+
+## 4. Experiments 
+
+4.1. Implementation details 
+
+We validate our approach on the Ego4D Step Grounding task [ 12 ], using pre-extracted features from EgoVLP [ 7]and L AVILA [ 15 ]. HiERO-StepG is trained on EgoClip [ 7], a curated subset of approx. 3.8M clip-text pairs sourced from Ego4D [ 5 ]. For the structured decoding and expansion phases, we set the hybrid similarity weighting parameter 
+
+α = 0 .7 and the Viterbi temporal tolerance τ = 1 .0 second. To generate the concentric Top-5 predictions, we employ three relative expansion thresholds ( 0.6, 0.5, and 0.4), pad the segments to a minimum duration of 2 seconds, and apply an NMS filter with an IoU threshold of 0.65 . We report the results in terms of Recall at different Intersection over Union (IoU) thresholds, using R1@IoU=0.3 as the main metric. 
+
+4.2. Challenge results 
+
+We report the final results at submission time on the Step Grounding challenge in Table 1, showing significant im-provements for all methods compared to the last year chal-lenge. Our approach, named andreazenotto on the global leaderboard ranks second, despite being completely 
+
+zero-shot not being specifically trained for the step ground-ing task. 
+
+4.3. Ablations 
+
+In the HiERO baseline configuration, each query step is grounded separately through spectral clustering of the fine-grained node embeddings. Each step is assigned to a candi-date cluster based solely on cosine similarity, and the pre-dicted temporal boundaries are strictly constrained to the start and end times of that specific cluster. To overcome the limitations of this approach, we evaluate our method by incrementally integrating the following proposed modules: 3Table 1. Step Grounding performance on Ego4D Goal-Step [ 12 ] (test set) . We report the results from the official leaderboard after the submission deadline. Our approach ranks second, despite being completely zero-shot. We report results for the L AVILA version of HiERO-StepG.                                                           
+
+> Rank Team Year R1 @ IoU = 0.30 R1 @ IoU = 0.50 R5 @ IoU = 0.30 R5 @ IoU = 0.50
+> 1. yisen feng 2026 63.02 54.21 80.12 74.93 2. andreazenotto (ours) 2026 56.27 40.20 77.39 61.38 3. kaname06 2026 53.39 45.43 79.91 73.59 4. yuki11 2026 52.41 44.55 79.09 72.64 5. willy06 2026 36.47 22.65 64.28 45.61 -OSGNet [4] 2025 42.02 32.83 ---BayesianVSLNet [11] 2025 35.18 20.49 ---EgoVideo [9] 2025 34.06 26.97 --
+
+Table 2. Impact of different components on the Ego4D Goal-Step [ 12 ] validation split . We compare two versions of our approach using EgoVLP [7] and L AVILA [15] embeddings.                                                                 
+
+> (a) EgoVLP features
+> Model configuration R1@0.3 R1@0.5 R5@0.3 R5@0.5
+> Raw features 12.65 8.85 29.93 20.28 HiERO baseline 13.98 9.89 33.38 23.08
+> +Viterbi decoding 33.95 23.41 42.00 28.70
+> +Hybrid similarity 39.63 27.40 45.95 31.39
+> +Query-cond. exp. + NMS 45.40 32.33 62.51 46.99
+> +Dynamic expansion 45.40 32.33 64.64 50.68
+> (b) L AVILA-L features
+> Model configuration R1@0.3 R1@0.5 R5@0.3 R5@0.5
+> Raw features 14.96 10.88 33.65 23.23 HiERO baseline 15.70 11.27 36.37 25.44
+> +Viterbi decoding 35.28 24.90 44.49 31.00
+> +Hybrid similarity 41.00 28.81 48.65 33.74
+> +Query-cond. exp. + NMS 48.51 34.58 65.06 49.34
+> +Dynamic expansion 48.51 34.58 67.74 53.53
+
+• Viterbi decoding : tests the effectiveness of enforcing a globally coherent, monotonic temporal path for the step queries, compared to selecting the most similar segment for each query independently. • Hybrid similarity : evaluates the impact of fusing fine-grained local similarities with coarse-level cluster predic-tions, rather than relying exclusively on the base level. • Query-conditioned expansion : analyzes the benefit of adaptively refining segment boundaries outward from the peak nodes to handle local noise, as opposed to relying on static cluster boundaries. • Dynamic expansion : measures the performance gain of generating a diverse, concentric set of predictions using multiple relative thresholds, rather than returning a single expanded window per grounded step. We present a detailed comparison of all this variations in the following in Table 2, analyzing their impact on the step grounding task. The introduction of the temporal constraints through the Viterbi decoding algorithm brings a substantial improvement in performance ( +19 .58% on R1@IoU=0.3). Enforcing strict temporal ordering allows to better disam-biguate between repeated steps across the videos and to ensure that the steps are predicted following the correct pro-cedural order. The hybrid similarity captures both local and global context from the ongoing activities, making the step assignments more robust to visual noise. This results in a +5 .72% on R1@IoU=0.3 improvement when using the LAVILA features. The query-conditioned expansion further improves lo-calization performance by relaxing the predicted step bound-aries. To prevent multiple candidate segments from col-lapsing into the same highly responsive temporal region, which would severely penalize Recall@5 metrics through redundant predictions, we also introduce an IoU-based Non-Maximum Suppression ( NMS ) step, ensuring that the top 5 predictions remain temporally diverse and do not excessively overlap. These two modifications bring the R1@IoU=0.3 metric to 48 .51% . Overall, our inference pipeline signifi-cantly improves over the baseline on all the recall metrics. 
+
+## 5. Conclusions 
+
+In this work, we presented HiERO-StepG, an inference pipeline specifically designed for zero-shot step grounding. Our approach demonstrates that procedural steps and sub-steps can emerge from the natural co-occurrence of similar actions in unscripted videos of human activities, without requiring procedure-specific annotations. HiERO-StepG pro-vides a robust pipeline for step grounding that ensures the grounded steps respect the correct procedural order, while accounting for visual noise in the videos. Our approach ranks second on the Ego4D Step Grounding challenge 2026 while being completely zero-shot. 
+
+## References 
+
+[1] Siddhant Bansal, Chetan Arora, and CV Jawahar. My view is the best view: Procedure learning from egocentric videos. In 
+
+ECCV , 2022. 1 [2] Sayeed Shafayet Chowdhury, Soumyadeep Chandra, and 
+
+4Kaushik Roy. Opel: Optimal transport guided procedure learning. In NeurIPS , 2024. 1 [3] Nikita Dvornik, Isma Hadji, Ran Zhang, Konstantinos G Der-panis, Richard P Wildes, and Allan D Jepson. Stepformer: Self-supervised step discovery and localization in instruc-tional videos. In CVPR , 2023. 1 [4] Yisen Feng, Haoyu Zhang, Qiaohui Chu, Meng Liu, Weili Guan, Yaowei Wang, and Liqiang Nie. Osgnet@ ego4d episodic memory challenge 2025. arXiv preprint arXiv:2506.03710 , 2025. 1, 4 [5] Kristen Grauman, Andrew Westbury, Eugene Byrne, Zachary Chavis, Antonino Furnari, Rohit Girdhar, Jackson Hamburger, Hao Jiang, Miao Liu, Xingyu Liu, et al. Ego4d: Around the world in 3,000 hours of egocentric video. In CVPR , 2022. 1, 3[6] Anna Kukleva, Hilde Kuehne, Fadime Sener, and Jurgen Gall. Unsupervised learning of action classes with continuous temporal embedding. In CVPR , 2019. 1 [7] Kevin Qinghong Lin, Jinpeng Wang, Mattia Soldan, Michael Wray, Rui Yan, Eric Z XU, Difei Gao, Rong-Cheng Tu, Wen-zhe Zhao, Weijie Kong, et al. Egocentric video-language pretraining. In NeurIPS , 2022. 1, 3, 4 [8] Xudong Lin, Fabio Petroni, Gedas Bertasius, Marcus Rohrbach, Shih-Fu Chang, and Lorenzo Torresani. Learning to recognize procedural activities with distant supervision. In 
+
+CVPR , 2022. 1 [9] Baoqi Pei, Guo Chen, Jilan Xu, Yuping He, Yicheng Liu, Kanghua Pan, Yifei Huang, Yali Wang, Tong Lu, Limin Wang, et al. Egovideo: Exploring egocentric foundation model and downstream adaptation. arXiv preprint arXiv:2406.18070 ,2024. 1, 4 [10] Simone Alberto Peirone, Francesca Pistilli, and Giuseppe Averta. Hiero: understanding the hierarchy of human behavior enhances reasoning on egocentric videos. In ICCV , 2025. 1 [11] Carlos Plou, Lorenzo Mur-Labadia, Ruben Martinez-Cantin, and Ana C Murillo. Carlor@ ego4d step grounding challenge: Bayesian temporal-order priors for test time refinement. arXiv preprint arXiv:2406.09575 , 2024. 1, 2, 4 [12] Yale Song, Eugene Byrne, Tushar Nagarajan, Huiyu Wang, Miguel Martin, and Lorenzo Torresani. Ego4d goal-step: Toward hierarchical understanding of procedural activities. In 
+
+NeurIPS , 2024. 1, 3, 4 [13] Ulrike Von Luxburg. A tutorial on spectral clustering. Statis-tics and computing , 17:395–416, 2007. 2 [14] Hao Zhang, Aixin Sun, Wei Jing, and Joey Tianyi Zhou. Span-based localizing network for natural language video localization. In Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics , 2020. 1 [15] Yue Zhao, Ishan Misra, Philipp Kr¨ ahenb¨ uhl, and Rohit Gird-har. Learning video representations from large language models. In CVPR , 2023. 2, 3, 4 
+
+5
