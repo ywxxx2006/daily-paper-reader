@@ -1,0 +1,54 @@
+{
+  "label": "2026-06-03",
+  "date": "2026-06-03",
+  "generated_at": "2026-06-03T01:03:47",
+  "count": 3,
+  "papers": [
+    {
+      "paper_id": "202606/03/2606.02301v1-quantitative-movement-testing-measuring-patient-movements-from-a-single-smartphone-video",
+      "section": "quick",
+      "title_en": "Quantitative Movement Testing: Measuring Patient Movements from a Single Smartphone Video",
+      "authors": "Pranav Mahajan, Amanda Wall, Eleonora Maria Camerone, Julie Stebbins, Eoin Kelleher, Shuangyi Tong, Annina Schmid, Katja Wiech, Anushka Irani, Ben Seymour",
+      "date": "2026-06-01",
+      "pdf": "https://arxiv.org/pdf/2606.02301v1",
+      "score": "7.0",
+      "evidence": "利用智能手机视频进行运动捕捉和运动学分析",
+      "tldr": "慢性疼痛降低患者功能能力，但客观测量困难。本文提出定量运动测试（QMT），利用深度学习从单摄像头手机视频提取3D运动生物标志物。实验室验证与金标准光学捕捉高度一致（r>0.85），在纤维肌痛患者中显示高重测信度（r>0.86），并在慢性坐骨神经痛家庭监测中区分患者与健康对照。QMT提供可扩展的客观生物标志物，但家庭环境可靠性需进一步优化。",
+      "tags": "query:da",
+      "abstract_en": "Chronic pain diminishes quality of life by decreasing functional ability, yet objectively measuring this functional impact remains challenging in real-world settings. While optical motion capture provides high precision for assessing altered movement quality, it is costly and restricted to laboratory environments. We aimed to develop and validate Quantitative Movement Testing (QMT), a computer vision pipeline extracting 3D kinematic biomarkers from standard monocular smartphone video, balancing clinical accessibility with biomechanical accuracy. We validated the QMT pipeline, utilising deep learning-based 3D pose-estimation, against gold-standard optical motion capture in healthy controls (N=13). Following leave-one-subject-out calibration to correct systematic bias, we deployed QMT in two prospective clinical cohorts to assess real-world utility: a pre- and post-intervention trial for fibromyalgia patients, and a 30-day longitudinal at-home monitoring study of chronic sciatica patients and healthy controls. In laboratory validation, QMT extracted clinical kinematic metrics with high agreement to optical motion capture, yielding strong correlations (r > 0.85) and low mean absolute errors. QMT demonstrated high test-retest reliability (r > 0.86) in fibromyalgia patients and successfully tracked day-to-day movement fluctuations in chronic sciatica. While real-world home settings introduced higher measurement variance than lab settings, QMT found group-level differences between healthy controls and sciatica patients based entirely on remote recordings. Monocular 3D pose estimation offers a scalable alternative to traditional assessments. QMT provides an objective, accessible biomarker for tracking disease progression and treatment response in clinical trials, though further research is needed to optimise reliability in home environments.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202606/03/biorxiv-10-64898-2026-05-27-728208-v1-a-growth-based-framework-for-scaling-infant-anthropometry-in-motion-capture-studies",
+      "section": "quick",
+      "title_en": "A Growth-Based Framework for Scaling Infant Anthropometry in Motion Capture Studies",
+      "authors": "Inamdar, K., Koli, N. T., Gamal, S., Gritsenko, V.",
+      "date": "2026-06-01",
+      "pdf": "https://www.biorxiv.org/content/10.64898/2026.05.27.728208v1.full.pdf",
+      "score": "7.0",
+      "evidence": "提供了运动捕捉中身体缩放方法，适用于舞蹈动作分析",
+      "tldr": "婴儿运动生物力学分析因快速生长和个体差异而困难。本文提出生长调整的缩放框架，结合CDC生长图表与运动捕捉，估计2-6月龄婴儿人体测量学参数。通过体重百分位数推断身长，按婴儿比例缩放身体节段，验证显示头部和躯干宽度误差约3cm。该框架提高了解剖保真度，支持不同生长轨迹婴儿的运动数据标准化。",
+      "tags": "query:da",
+      "abstract_en": "Biomechanical analysis of infant motor behavior is complicated by rapid growth and large inter-subject variability in body size and segment proportions. We present a growth-adjusted anthropometric scaling framework that integrates Centers for Disease Control and Prevention (CDC) growth charts with three-dimensional motion capture to estimate subject-specific infant biomechanics during prone play. Nineteen infants aged 2 - 6 months were recorded during spontaneous prone movement. Weight-for-age percentiles were computed using CDC LMS parameters and used to infer body length from length-for-age references, ensuring internal consistency between weight and length estimates. Body segments were scaled using published infant proportions and validated against head and shoulder widths measured from motion capture. Infant head and trunk proportions were substantially larger than adult values, whereas limb proportions were similar. Estimated and measured dimensions of head and trunk width showed good agreement, with mean root mean squared errors of approximately 3 cm. Adult-based scaling produced head and trunk length errors of up to 6 cm. This growth-adjusted framework improves anatomical fidelity and enables normalization of biomechanical measures across infants with differing growth trajectories.",
+      "source": "biorxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202606/03/biorxiv-10-64898-2026-05-27-728295-v1-physical-activity-promotes-longitudinal-white-matter-brain-adaptations-that-support-fluid-intelligence-with-age",
+      "section": "quick",
+      "title_en": "Physical activity promotes longitudinal white matter brain adaptations that support fluid intelligence with age",
+      "authors": "Neudorf, J.",
+      "date": "2026-05-29",
+      "pdf": "https://www.biorxiv.org/content/10.64898/2026.05.27.728295v1.full.pdf",
+      "score": "6.0",
+      "evidence": "纵向fMRI研究身体活动与白质适应",
+      "tldr": "老龄化伴随大脑白质退化，但部分老年人认知保持良好。本研究利用人类连接组项目纵向MRI数据，通过多变量偏最小二乘和相关追踪术分析白质连接变化，发现白质网络中特定连接的强化或修剪与流体智力提升相关，且身体活动可促进这种适应性重组。该发现揭示了大脑网络的可塑性，并提出了身体活动作为改善老年认知的干预手段。",
+      "tags": "query:ds",
+      "abstract_en": "The aging population continues to grow, and along with it the need to better understand the unique characteristics of the aging brain. Despite the cortical thinning and myelin degeneration that occurs in later life, many individuals are resilient to these changes and are relatively spared from cognitive decline (so called \"super-agers\"). Longitudinal magnetic resonance imaging data from the Human Connectome Project allowed us to probe the underlying white matter connections that are strengthened or pruned to support fluid intelligence in younger and older adults, while also investigating physical activity as a potential behavioural intervention to promote these network reorganizations. Multivariate partial least squares analysis and the recent method of correlational tractography identified parts of the white matter structural connectivity network, measured with diffusion magnetic resonance imaging, where strengthening or pruning were associated with positive fluid intelligence trajectories and promoted by physical activity. This research improves our understanding of how the brain network adapts in later life, identifies physical activity as an accessible intervention to promote this adaptation, and enriches our fundamental models of what the brains neural network is capable of.",
+      "source": "biorxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

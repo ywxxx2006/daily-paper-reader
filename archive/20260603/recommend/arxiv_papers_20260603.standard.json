@@ -1,0 +1,174 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-06-03T01:02:38.248609+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 8,
+    "deep_divecandidates": 0,
+    "deep_cap": 13,
+    "deep_selected": 0,
+    "quick_candidates": 3,
+    "quick_skim_target": 18,
+    "quick_selected": 3
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2606.02301v1",
+      "source": "arxiv",
+      "title": "Quantitative Movement Testing: Measuring Patient Movements from a Single Smartphone Video",
+      "abstract": "Chronic pain diminishes quality of life by decreasing functional ability, yet objectively measuring this functional impact remains challenging in real-world settings. While optical motion capture provides high precision for assessing altered movement quality, it is costly and restricted to laboratory environments. We aimed to develop and validate Quantitative Movement Testing (QMT), a computer vision pipeline extracting 3D kinematic biomarkers from standard monocular smartphone video, balancing clinical accessibility with biomechanical accuracy. We validated the QMT pipeline, utilising deep learning-based 3D pose-estimation, against gold-standard optical motion capture in healthy controls (N=13). Following leave-one-subject-out calibration to correct systematic bias, we deployed QMT in two prospective clinical cohorts to assess real-world utility: a pre- and post-intervention trial for fibromyalgia patients, and a 30-day longitudinal at-home monitoring study of chronic sciatica patients and healthy controls. In laboratory validation, QMT extracted clinical kinematic metrics with high agreement to optical motion capture, yielding strong correlations (r > 0.85) and low mean absolute errors. QMT demonstrated high test-retest reliability (r > 0.86) in fibromyalgia patients and successfully tracked day-to-day movement fluctuations in chronic sciatica. While real-world home settings introduced higher measurement variance than lab settings, QMT found group-level differences between healthy controls and sciatica patients based entirely on remote recordings. Monocular 3D pose estimation offers a scalable alternative to traditional assessments. QMT provides an objective, accessible biomarker for tracking disease progression and treatment response in clinical trials, though further research is needed to optimise reliability in home environments.",
+      "authors": [
+        "Pranav Mahajan",
+        "Amanda Wall",
+        "Eleonora Maria Camerone",
+        "Julie Stebbins",
+        "Eoin Kelleher",
+        "Shuangyi Tong",
+        "Annina Schmid",
+        "Katja Wiech",
+        "Anushka Irani",
+        "Ben Seymour"
+      ],
+      "primary_category": "cs.HC",
+      "categories": [
+        "cs.HC",
+        "cs.AI",
+        "cs.CV"
+      ],
+      "published": "2026-06-01T14:23:17+00:00",
+      "link": "https://arxiv.org/pdf/2606.02301v1",
+      "tags": [
+        "keyword:da",
+        "keyword:dance-health",
+        "keyword:dance-injury",
+        "keyword:dance-neuro",
+        "keyword:dance-physio",
+        "keyword:dance-psych",
+        "keyword:db",
+        "keyword:dt",
+        "query:da",
+        "query:dance-health",
+        "query:dance-injury",
+        "query:dance-neuro",
+        "query:dance-physio",
+        "query:dance-psych",
+        "query:db",
+        "query:dt"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "motion capture from smartphone video for kinematic analysis",
+      "llm_evidence_cn": "利用智能手机视频进行运动捕捉和运动学分析",
+      "llm_evidence": "利用智能手机视频进行运动捕捉和运动学分析",
+      "canonical_evidence": "利用智能手机视频进行运动捕捉和运动学分析",
+      "llm_tldr_en": "QMT extracts 3D kinematic biomarkers from monocular smartphone video using deep learning pose-estimation, validated against optical motion capture, enabling accessible clinical movement assessment.",
+      "llm_tldr_cn": "本研究针对慢性疼痛患者功能能力客观评估困难的问题，提出了定量运动测试（QMT）方法。该方法基于深度学习3D姿态估计，从单摄像头智能手机视频中提取3D运动学生物标志物，并以光学运动捕捉为金标准进行验证。结果显示QMT能够提供与金标准一致的生物力学测量精度，为临床和家庭环境中的运动分析提供了低成本、易部署的解决方案，可推广至舞蹈等专业运动的动作分析。",
+      "llm_tldr": "本研究针对慢性疼痛患者功能能力客观评估困难的问题，提出了定量运动测试（QMT）方法。该方法基于深度学习3D姿态估计，从单摄像头智能手机视频中提取3D运动学生物标志物，并以光学运动捕捉为金标准进行验证。结果显示QMT能够提供与金标准一致的生物力学测量精度，为临床和家庭环境中的运动分析提供了低成本、易部署的解决方案，可推广至舞蹈等专业运动的动作分析。",
+      "llm_tags": [
+        "query:da"
+      ],
+      "matched_query_tag": "query:da",
+      "matched_query_text": "motion capture technology for dance movement analysis",
+      "matched_requirement_id": "req-71",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "biorxiv-10-64898-2026-05-27-728295-v1",
+      "source": "biorxiv",
+      "title": "Physical activity promotes longitudinal white matter brain adaptations that support fluid intelligence with age",
+      "abstract": "The aging population continues to grow, and along with it the need to better understand the unique characteristics of the aging brain. Despite the cortical thinning and myelin degeneration that occurs in later life, many individuals are resilient to these changes and are relatively spared from cognitive decline (so called \"super-agers\"). Longitudinal magnetic resonance imaging data from the Human Connectome Project allowed us to probe the underlying white matter connections that are strengthened or pruned to support fluid intelligence in younger and older adults, while also investigating physical activity as a potential behavioural intervention to promote these network reorganizations. Multivariate partial least squares analysis and the recent method of correlational tractography identified parts of the white matter structural connectivity network, measured with diffusion magnetic resonance imaging, where strengthening or pruning were associated with positive fluid intelligence trajectories and promoted by physical activity. This research improves our understanding of how the brain network adapts in later life, identifies physical activity as an accessible intervention to promote this adaptation, and enriches our fundamental models of what the brains neural network is capable of.",
+      "authors": [
+        "Neudorf, J."
+      ],
+      "primary_category": "neuroscience",
+      "categories": [
+        "neuroscience"
+      ],
+      "published": "2026-05-29T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.64898/2026.05.27.728295v1.full.pdf",
+      "tags": [
+        "keyword:da",
+        "keyword:dance-health",
+        "keyword:dance-injury",
+        "keyword:dance-neuro",
+        "keyword:dance-physio",
+        "keyword:dance-psych",
+        "keyword:db",
+        "keyword:dt",
+        "query:da",
+        "query:dance-health",
+        "query:dance-injury",
+        "query:dance-neuro",
+        "query:dance-physio",
+        "query:dance-psych",
+        "query:db",
+        "query:dt"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "longitudinal fMRI study of physical activity and white matter adaptations",
+      "llm_evidence_cn": "纵向fMRI研究身体活动与白质适应",
+      "llm_evidence": "纵向fMRI研究身体活动与白质适应",
+      "canonical_evidence": "纵向fMRI研究身体活动与白质适应",
+      "llm_tldr_en": "This longitudinal fMRI study reveals that physical activity promotes white matter brain adaptations supporting fluid intelligence with age, providing a model for studying dance-induced neuroplasticity.",
+      "llm_tldr_cn": "本研究利用纵向fMRI数据，探究身体活动对老化大脑白质连接的影响，发现体力活动可通过促进白质可塑性来维持流体智力。研究采用多元偏最小二乘方法分析人类连接组项目数据，结果揭示了活动促进白色质适应支持认知的机制，为理解舞蹈训练诱导的神经可塑性提供了方法论参考。",
+      "llm_tldr": "本研究利用纵向fMRI数据，探究身体活动对老化大脑白质连接的影响，发现体力活动可通过促进白质可塑性来维持流体智力。研究采用多元偏最小二乘方法分析人类连接组项目数据，结果揭示了活动促进白色质适应支持认知的机制，为理解舞蹈训练诱导的神经可塑性提供了方法论参考。",
+      "llm_tags": [
+        "query:ds:composite"
+      ],
+      "matched_query_tag": "query:ds:composite",
+      "matched_query_text": "Papers central to 请帮我查找舞蹈科学相关所有研究领域论文，包括但不限于：舞蹈损伤预防与康复、舞蹈生物力学、舞蹈生理学、舞蹈心理学、神经美学、舞蹈健康促进、舞蹈治疗、舞蹈动作分析、舞蹈训练适应、舞者体能。, especially work that connects or combines: biomechanical analysis of dance movements; physiological responses and adaptations in dancers; psychological aspects of dance performance and training; neural basis of aesthetic experience in dance; health promotion through dance interventions; therapeutic applications of dance for physical and mental health; mechanisms of dance movement therapy on neuroplasticity and emotional regulation; brain imaging studies of dancers vs. non dancers using fMRI, EEG, or NIRS; dance science research across all subfields including injury, biomechanics, physiology, psychology, neuroaesthetics, health promotion, therapy, movement analysis, training adaptation, and fitness; comprehensive review of scientific studies on dance performance and dancer well being.",
+      "matched_requirement_id": "req-composite-ds",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "biorxiv-10-64898-2026-05-27-728208-v1",
+      "source": "biorxiv",
+      "title": "A Growth-Based Framework for Scaling Infant Anthropometry in Motion Capture Studies",
+      "abstract": "Biomechanical analysis of infant motor behavior is complicated by rapid growth and large inter-subject variability in body size and segment proportions. We present a growth-adjusted anthropometric scaling framework that integrates Centers for Disease Control and Prevention (CDC) growth charts with three-dimensional motion capture to estimate subject-specific infant biomechanics during prone play. Nineteen infants aged 2 - 6 months were recorded during spontaneous prone movement. Weight-for-age percentiles were computed using CDC LMS parameters and used to infer body length from length-for-age references, ensuring internal consistency between weight and length estimates. Body segments were scaled using published infant proportions and validated against head and shoulder widths measured from motion capture. Infant head and trunk proportions were substantially larger than adult values, whereas limb proportions were similar. Estimated and measured dimensions of head and trunk width showed good agreement, with mean root mean squared errors of approximately 3 cm. Adult-based scaling produced head and trunk length errors of up to 6 cm. This growth-adjusted framework improves anatomical fidelity and enables normalization of biomechanical measures across infants with differing growth trajectories.",
+      "authors": [
+        "Inamdar, K.",
+        "Koli, N. T.",
+        "Gamal, S.",
+        "Gritsenko, V."
+      ],
+      "primary_category": "bioengineering",
+      "categories": [
+        "bioengineering"
+      ],
+      "published": "2026-06-01T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.64898/2026.05.27.728208v1.full.pdf",
+      "tags": [
+        "keyword:da",
+        "keyword:dance-health",
+        "keyword:dance-injury",
+        "keyword:dance-physio",
+        "keyword:dance-psych",
+        "keyword:db",
+        "keyword:dt",
+        "query:dance-health",
+        "query:dance-injury",
+        "query:dance-physio",
+        "query:dance-psych",
+        "query:db"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "provides a motion capture scaling method for anthropometry, relevant to dance movement analysis",
+      "llm_evidence_cn": "提供了运动捕捉中身体缩放方法，适用于舞蹈动作分析",
+      "llm_evidence": "提供了运动捕捉中身体缩放方法，适用于舞蹈动作分析",
+      "canonical_evidence": "提供了运动捕捉中身体缩放方法，适用于舞蹈动作分析",
+      "llm_tldr_en": "A growth-adjusted anthropometric scaling framework using CDC growth charts and motion capture enables subject-specific infant biomechanics estimation, adaptable for personalized scaling in dance motion capture.",
+      "llm_tldr_cn": "该论文针对婴儿运动捕捉中因快速生长导致的身体尺寸变异问题，提出了一种融合CDC生长图表与三维运动捕捉的生长调整身体缩放框架。通过19名婴儿俯卧运动实验，验证了该框架能有效估计个体化的身体节段参数。该方法可迁移至舞蹈动作分析，为不同体型舞者提供精确的运动学模型，提升舞蹈生物力学分析的准确性。",
+      "llm_tldr": "该论文针对婴儿运动捕捉中因快速生长导致的身体尺寸变异问题，提出了一种融合CDC生长图表与三维运动捕捉的生长调整身体缩放框架。通过19名婴儿俯卧运动实验，验证了该框架能有效估计个体化的身体节段参数。该方法可迁移至舞蹈动作分析，为不同体型舞者提供精确的运动学模型，提升舞蹈生物力学分析的准确性。",
+      "llm_tags": [
+        "query:da"
+      ],
+      "matched_query_tag": "query:da",
+      "matched_query_text": "motion capture technology for dance movement analysis",
+      "matched_requirement_id": "req-71",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}

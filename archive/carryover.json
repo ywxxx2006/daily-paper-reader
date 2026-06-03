@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-02T00:59:44.708319+00:00",
-  "updated_date": "20260602",
+  "generated_at": "2026-06-03T01:02:38.249364+00:00",
+  "updated_date": "20260603",
   "carryover_days": 9,
   "tag_states": {
     "ds": {
@@ -9,42 +9,42 @@
       "items": []
     },
     "dance-injury": {
-      "updated_date": "20260602",
+      "updated_date": "20260603",
       "carryover_days": 9,
       "items": []
     },
     "db": {
-      "updated_date": "20260602",
+      "updated_date": "20260603",
       "carryover_days": 9,
       "items": []
     },
     "dance-physio": {
-      "updated_date": "20260602",
+      "updated_date": "20260603",
       "carryover_days": 9,
       "items": []
     },
     "dance-psych": {
-      "updated_date": "20260602",
+      "updated_date": "20260603",
       "carryover_days": 9,
       "items": []
     },
     "dance-neuro": {
-      "updated_date": "20260602",
+      "updated_date": "20260603",
       "carryover_days": 9,
       "items": []
     },
     "dt": {
-      "updated_date": "20260602",
+      "updated_date": "20260603",
       "carryover_days": 9,
       "items": []
     },
     "dance-health": {
-      "updated_date": "20260602",
+      "updated_date": "20260603",
       "carryover_days": 9,
       "items": []
     },
     "da": {
-      "updated_date": "20260602",
+      "updated_date": "20260603",
       "carryover_days": 9,
       "items": []
     }
